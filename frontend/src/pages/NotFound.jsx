@@ -1,5 +1,5 @@
 import React from "react"
-import Codeswer from "../layout/Codeswer";
+import Codeswer from "../layouts/Codeswer";
 
 export default function NotFound() {
     const status = null;

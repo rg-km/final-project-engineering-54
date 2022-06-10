@@ -1,0 +1,13 @@
+@import "../base/_variable.scss";
+@import "../component/_btnCustom.scss";
+
+#nav_noauth_item {
+    display: flex;
+    align-items: center;
+
+    li {
+      &:nth-child(2) {
+        @include btnCustom;
+    }
+  }
+}

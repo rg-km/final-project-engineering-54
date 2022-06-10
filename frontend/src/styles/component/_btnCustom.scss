@@ -1,0 +1,13 @@
+@import "../base/_variable.scss";
+
+@mixin btnCustom($tb: .5rem, $lr: 1.25rem, $radius: .25rem, $bg: $orange-code) {
+    color: white;
+    padding: $tb $lr;
+    border-radius: $radius;
+    background-color: $bg;
+    @include transition(all, .3s);
+    
+    &:hover {
+      transform: translateY(-3px);
+    }
+}

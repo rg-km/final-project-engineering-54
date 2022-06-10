@@ -1,0 +1,190 @@
+@import "../base/_variable.scss";
+
+  #navbar_component {
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    height: 5.5rem;
+    display: flex;
+    padding: 0 2.5rem;
+    position: sticky;
+    align-items: center;
+    background-color: #fff;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    @include transition(box-shadow, .3s);
+    @media only screen and (max-width: 919px) {
+      justify-content: start;
+    }
+    @media only screen and (max-width: 639px) {
+      padding: 0 1.5rem;
+    }
+    #nav_brand {
+      h1 {
+        font-weight: 700;
+        font-size: 1.75rem;
+        letter-spacing: 1px;
+      }
+      @media only screen and (max-width: 919px) {
+        margin-right: auto;
+      }
+    }
+    #nav_icon {
+      width: 2rem;
+      height: 1.5rem; 
+      cursor: pointer;
+      position: relative;
+      @include transition(all, .5s);
+      -webkit-transform: rotate(0);
+      -moz-transform: rotate(0);
+      -o-transform: rotate(0);
+      transform: rotate(0);
+      span {
+        opacity: 1;
+        width: 2rem;
+        height: 2px;
+        display: block;
+        position: absolute;
+        background: #d3531a;
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -o-transform: rotate(0);
+        transform: rotate(0);
+        @include transition(all, .25s);
+        &:nth-child(1) {
+          top: 0px;
+          }
+        &:nth-child(2) {
+          top: 3px;
+        }
+        &:nth-child(3) {
+          top: 3px;
+        }
+        &:nth-child(4) {
+          bottom: 0px;
+        }
+      }
+      &.open {
+        span {
+          &:nth-child(1) {
+            top: 10px;
+            opacity: 0;
+          }
+          &:nth-child(2) {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+          &:nth-child(3) {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+          }
+          &:nth-child(4) {
+            opacity: 0;
+            bottom: 10px;
+          }
+        }
+        & + #nav_links {
+          opacity: 1;
+          height: 100vh;
+          overflow: visible;
+        }
+      }
+      @media only screen and (min-width: 920px) {
+        display: none;
+      }
+    }
+    #nav_links {
+      @media only screen and (max-width: 919px) {
+        left: 0;
+        height: 0;
+        opacity: 0;
+        width: 100%;
+        top: 5.5rem;
+        position: fixed;
+        overflow: hidden;
+        @include transition(all, .3s);
+        background: rgba( 51, 110, 238, 0.25 );
+        backdrop-filter: blur( 2rem );
+        -webkit-backdrop-filter: blur( 2rem );
+      }
+      #nav_links_item {
+        display: flex;
+        align-items: center;
+        @media only screen and (max-width: 919px) {
+          padding-top: 3rem;
+          flex-direction: column;
+          @include transition(all, .3s);
+        }
+        > * {
+          & + * {
+            @media only screen and (max-width: 919px) {
+              margin-top: calc(4rem * calc(1 - 0));
+              margin-bottom: calc(4rem * 0);
+            }
+          }
+        }
+        li {
+          font-size: 1rem;
+          a {
+            @include transition(color, .2s);
+            &.router-link-exact-active {
+              text-underline-offset: 4px;
+              text-decoration: underline;
+              text-decoration-style: solid;
+              -moz-text-decoration-style: solid;
+              text-decoration-color: $blue-code;
+              -moz-text-decoration-color: $blue-code;
+              &:hover {
+                text-decoration-color: $orange-code;
+                -moz-text-decoration-color: $orange-code;
+              }
+            }
+            @media only screen and (max-width: 919px) {
+              font-size: 1.25rem;
+            }
+          }
+        }
+        li {
+          font-weight: 500;
+          margin-right: 2.5rem;
+          &:hover {
+            color: $blue-code;
+          }
+          @media only screen and (max-width: 919px) {
+            margin-right: 0;
+          }
+        }
+        .noauth-links {
+          display: flex;
+          @media only screen and (min-width: 481px) {
+            display: none;
+          }
+        }
+        .auth-links {
+          @media only screen and (min-width: 321px) {
+            display: none;
+          }
+        }  
+      }
+    }
+
+    #nav_autentikasi {
+      @media only screen and (max-width: 919px) {
+        margin-left: 1rem;
+      }
+      .noauth-nav {
+        @media only screen and (max-width: 480px) {
+          display: none;
+        }
+      }
+      .auth-nav {
+        @media only screen and (max-width: 320px) {
+          display: none;
+        }
+      }
+    }
+  }

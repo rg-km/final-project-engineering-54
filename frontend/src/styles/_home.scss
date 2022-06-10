@@ -1,5 +1,111 @@
-div {
-    h1 {
-        font-size: 2rem;
+@import "../styles/base/variable";
+@import "../styles/animation/bounce";
+@import "../styles/component/_btnCustom";
+
+@mixin text-head($color, $size, $weight) {
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.home-component {
+    #container_home {
+        .section-child {
+            padding: 3.5rem 2.5rem;
+            @media only screen and (max-width: 639px) {
+                padding: 3.5rem 1.5rem;
+            }          
+        }
+        #part_one {
+            @include flex-center;
+
+            #one_left {
+                display: flex;
+                h1 {
+                    @include text-head($gray-100, 2.5rem, 700);
+                }
+                h3 {
+                    line-height: 1.75rem;
+                    @include text-head($gray-200, auto, 300);
+                }
+                button {
+                    @include btnCustom;
+                    @include text-head(auto, 1.25rem, 600);
+                }
+            }
+            #one_right {
+                @include movebounce;
+                -webkit-animation: movebounce 5s linear infinite;
+                animation: movebounce 5s linear infinite;
+
+                img {
+                    margin: 0 auto;
+                }
+            }
+        }
+        #part_two {
+            h1 {
+                text-align: center;
+                @include text-head($gray-800, 1.75rem, 700);
+            }
+            div {
+                display: flex;
+                #two_left {
+                    img {
+                        margin: 0 auto;
+                    }
+                }
+                #two_right {
+                    display: flex;
+                    flex-direction: column;
+                    h2 {
+                        @include text-head($gray-800, 1.5rem, 600);
+                    }
+                    button {
+                        @include btnCustom;
+                        @include text-head(auto, 1.25rem, 600);
+                    }
+                }
+            }
+        }
+        #part_three {
+            @include flex-center;
+
+            #three_left {
+                display: flex;
+                h5 {
+                    color: $gray-800
+                }
+                h1 {
+                    @include text-head($gray-800, 1.75rem, 700);
+                }
+                h3 {
+                    line-height: 1.75rem;
+                    @include text-head($gray-800, auto, 300);
+                }
+                button {
+                    @include text-head(auto, 1.25rem, 600);
+                }
+            }
+            #three_right {
+                img {
+                    margin: 0 auto;
+                }
+            }
+        }
+        #part_four {
+            h1 {
+                text-align: center;
+                @include text-head($gray-800, 1.75rem, 700);
+            }
+            #container-card {
+                display: flex;
+            }
+        }
     }
 }

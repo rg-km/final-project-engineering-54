@@ -1,0 +1,58 @@
+@import "../base/_variable.scss";
+@import "../component/_btnCustom.scss";
+
+@mixin text-head() {
+    font-size: 1.5rem;
+    color: $gray-100;
+    font-weight: 600;
+}
+
+footer {
+    background-color: $blue-code;
+
+    section {
+        padding: 0 2.5rem;
+        @media (max-width: 639px) {
+            padding: 0 1.5rem;
+        }
+
+        #links {
+            display: flex;
+
+            #nav_brand {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                @media only screen and (max-width: 320px) {
+                    align-items: center;
+                }
+
+                h1 {
+                    @include text-head;
+                }
+                #nav_links_item {
+                    font-weight: 300;
+                }
+                button {
+                    @include btnCustom;
+                }
+            }
+            #nav_links {
+                .nav-links-list {
+                    h1 {
+                        @include text-head;
+                    }
+                }
+            }
+        }
+        #copyright {
+            div {
+                p {
+                    @media only screen and (max-width: 583px) {
+                        line-height: 2;
+                    }
+                }
+            }
+        }
+    }
+}
