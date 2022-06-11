@@ -3,13 +3,19 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+## Masuk ke folder "frontend"
 
-In the project directory, you can run:
+Jika pertama kali menggunakan frontend, ketik perintah
+### `yarn install` 
+
+Ketik perintah tersebut di terminal powershell atau gitbash dan didalam folder frontend.
+
+Setelah di yarn terinstall, jalankan program dengan perintah:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Runs that script in the frontend folder.
+And then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
