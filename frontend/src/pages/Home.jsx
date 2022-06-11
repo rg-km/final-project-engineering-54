@@ -3,8 +3,9 @@ import React from "react"
 import "../styles/_home.scss";
 import { Link } from "react-router-dom"
 import Codeswer from "../layouts/Codeswer";
-import ListLanpage2 from "../components/ListLanpage2";
+import BtnCustom from "../components/BtnCustom";
 import CardCustom from "../components/CardCustom";
+import ListLanpage2 from "../components/ListLanpage2";
 
 export default function Home() {
 
@@ -30,14 +31,14 @@ export default function Home() {
                         <h3>
                             Tanyakan dan konseling bersama mentor-mentor yang sudah ahlinya dan berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu.
                         </h3>
-                        <button className="poppins mt-2">
-                            <Link to="/">
-                                Mulai Sekarang
-                            </Link>
-                        </button>
+                        <Link to="/mentoring">
+                            <BtnCustom classname="poppins mt-2">
+                                    Mulai Sekarang
+                            </BtnCustom>
+                        </Link>
                     </div>
                     <div id="one_right" className="md:w-[45%] w-full">
-                        <img src="/asset/img/lanpage1.1.webp" width={400} alt="Landing Page 1" />
+                        <img src="/asset/img/lanpage3.1.webp" width={400} alt="Landing Page 1" />
                     </div>
                 </article>
                 <article id="part_two" className="section-child space-y-16">
@@ -59,11 +60,11 @@ export default function Home() {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
                                 </ListLanpage2>
                             </ul>
-                            <button className="poppins mt-2">
-                                <Link to="/">
+                            <Link to="/mentor">
+                                <BtnCustom classname="poppins mt-2">
                                     Cari Mentormu
-                                </Link>
-                            </button>
+                                </BtnCustom>
+                            </Link>
                         </div>
                     </div>
                 </article>
@@ -74,15 +75,15 @@ export default function Home() {
                         <h3>
                             Kami menyediakan berbagai macam blog seputar teknologi dan berbagai macam blog bahasa pemrograman yang menarik.
                         </h3>
-                        <button className="poppins mt-2 flex items-center space-x-2 text-purple-code">
-                            <Link to="/">
+                        <Link to="/blogs">
+                            <button className="poppins mt-2 flex items-center gap-x-2 text-purple-code">
                                 Lihat blog terbaru
-                            </Link>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
-                        </button>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+                            </button>
+                        </Link>
                     </div>
                     <div id="three_right" className="md:w-[45%] w-full">
-                        <img src="/asset/img/lanpage3.1.webp" width={400} alt="Landing Page 1" />
+                        <img src="/asset/img/lanpage1.2.svg" width={400} alt="Landing Page 1" />
                     </div>
                 </article>
                 <article id="part_four" className="section-child space-y-16">

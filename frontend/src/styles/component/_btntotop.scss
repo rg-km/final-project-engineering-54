@@ -1,0 +1,5 @@
+@import "../base/_variable.scss";
+
+#button_scroll_top {
+    @include transition(all, 0.3s);
+}

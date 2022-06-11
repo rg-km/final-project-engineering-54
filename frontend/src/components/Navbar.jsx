@@ -1,6 +1,6 @@
 import React from "react"
 // import AuthBtn from "./AuthBtn";
-import NoAuthBtn from "./NoAuthBtn";
+import NoAuthBtn from "./auth/NoAuthBtn";
 import { classes } from "../utils/Utils"
 import { Link } from 'react-router-dom';
 import "../styles/component/_navbar.scss";
@@ -37,7 +37,7 @@ export default function Navbar() {
                     <ul id="nav_links_item" className="poppins">
                         <li><Link to="/mentor">Find Mentor</Link></li>
                         <li><Link to="/docs">How It Works</Link></li>
-                        <li><Link to="/blog">Blog</Link></li>
+                        <li><Link to="/blogs">Blog</Link></li>
                         <NoAuthBtn classname="noauth-links" />
                         {/* <AuthBtn classname="auth-links">
                             <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>

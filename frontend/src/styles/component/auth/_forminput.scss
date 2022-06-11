@@ -1,0 +1,13 @@
+.form-control {
+    .form-input {
+        &:invalid[focus="true"] {
+            border: 1px solid red;
+        }
+        &:invalid[focus="true"] ~ .error-message{
+            display: block;
+        }
+    }
+    .error-message {
+        display: none;
+    }
+}

@@ -1,4 +1,5 @@
 @import "../base/_variable.scss";
+@import "../animation/rippleeffect.scss";
 
 @mixin btnCustom($tb: .5rem, $lr: 1.25rem, $radius: .25rem, $bg: $orange-code) {
     color: white;
@@ -10,4 +11,26 @@
     &:hover {
       transform: translateY(-3px);
     }
+}
+
+.btn-custom {
+  overflow: hidden;
+  position: relative;
+  .ripple {
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    content: "";
+    display: block;
+    position: absolute;
+    background: #d8d8d87c;
+    border-radius: 9999px;
+    @include rippleEffect;
+    -webkit-animation: rippleEffect 1.5s ease forwards;
+    animation: 1.5s ease 1 forwards rippleEffect;
+  }
+  .content {
+    position: relative;
+    z-index: 2;
+  }
 }

@@ -2,17 +2,6 @@
 @import "../styles/animation/bounce";
 @import "../styles/component/_btnCustom";
 
-@mixin text-head($color, $size, $weight) {
-  color: $color;
-  font-size: $size;
-  font-weight: $weight;
-}
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-}
-
 .home-component {
     #container_home {
         .section-child {
