@@ -20,10 +20,10 @@ func NewAPI(usersSource source.UsersSource) API {
 		usersSource, mux,
 	}
 
-	mux.Handle("/login", api.POST(http.HandlerFunc(api.login)))
-	mux.Handle("/logout", api.POST(http.HandlerFunc(api.logout)))
-	mux.Handle("/register", api.POST(http.HandlerFunc(api.register)))
-	// mux.Handle("/forgot-password", api.POST(http.HandlerFunc(api.forgotPassword)))
+	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
+	mux.Handle("/api/user/logout", api.POST(http.HandlerFunc(api.logout)))
+	mux.Handle("/api/user/register", api.POST(http.HandlerFunc(api.register)))
+	// mux.Handle("/api/user/forgot-password", api.POST(http.HandlerFunc(api.forgotPassword)))
 
 	return api
 }

@@ -11,8 +11,18 @@ import (
 
 // create struct for user
 type User struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	ID        int64     `json:"id"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	Name      string    `json:"name"`
+	Role      string    `json:"role"`
+	Phone     string    `json:"phone"`
+	Address   string    `json:"address"`
+	Status    string    `json:"status"`
+	Photo     string    `json:"photo"`
+	Logedin   bool      `json:"logedin"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 type LoginSuccess struct {
@@ -61,8 +71,8 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 
 	// create claim for object encode in jwt
 	claims := &Claims{
-		Email: res.Email,
-		Role:  userRole,
+		Email: *res,
+		Role:  *userRole,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 		},
@@ -103,10 +113,9 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Role, user.Phone, user.Address, user.Status, user.Photo, user.Logedin, user.CreatedAt, user.UpdatedAt)
-	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(LoginError{Error: "Failed to register user"})
+		json.NewEncoder(w).Encode(LoginError{Error: "Failed to register"})
 		return
 	}
 

@@ -111,7 +111,7 @@ func (api *API) POST(next http.Handler) http.Handler {
 		encoder := json.NewEncoder(w)
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
-			encoder.Encode(AuthErrorResponse{Error: "Need POST Method!"})
+			encoder.Encode(LoginError{Error: "need method POST"})
 			return
 		}
 
