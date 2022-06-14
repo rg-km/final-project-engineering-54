@@ -53,7 +53,7 @@ func (u *UsersSource) FetchAllUsers() ([]User, error) {
 func (u *UsersSource) Login(email string, password string) (*string, error) {
 	var user User
 
-	err := u.db.QueryRow("SELECT * FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.Email, &user.Password)
+	err := u.db.QueryRow("SELECT email FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.Email)
 	if err != nil {
 		return nil, errors.New("Email or password is incorrect")
 	}
