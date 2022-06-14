@@ -7,13 +7,13 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-	func main() {
-		db, err := sql.Open("sqlite3", "backend/db/codeswer.db")
-		if err != nil {
-			panic(err)
-		}
+func main() {
+	db, err := sql.Open("sqlite3", "backend/db/codeswer.db")
+	if err != nil {
+		panic(err)
+	}
 
-		_, err = db.Exec(`
+	_, err = db.Exec(`
 			CREATE TABLE IF NOT EXISTS users (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 				email VARCHAR(191) NOT NULL,
@@ -30,15 +30,13 @@ import (
 			);
 
 			INSERT INTO users (email, password, name, role, phone, address, status, photo, logedin, created_at, updated_at) VALUES
-			('admin@gmail.com', '123456', 'admin', 'admin', '081234567890', 'Jl. Raya', 'active', 'default.png', 1, '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('user@gmail.com', '123456', 'user', 'user', '081234567890', 'Jl. Raya', 'active', 'default.png', 0, '2020-01-01 00:00:00', '2020-01-01 00:00:00');
+			('admin@gmail.com', '123456', 'admin', 'admin', '081234567890', 'Jl. Raya', 'active', 'default.png', false, '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
+			('user@gmail.com', '123456', 'user', 'user', '081234567890', 'Jl. Raya', 'active', 'default.png', false, '2020-01-01 00:00:00', '2020-01-01 00:00:00');
 
 
 		`)
 
-		if err != nil {
-			panic(err)
-		}
+	if err != nil {
+		panic(err)
 	}
-
-			
+}
