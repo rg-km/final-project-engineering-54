@@ -63,14 +63,12 @@ func (u *UsersSource) Login(email string, password string) (*string, error) {
 
 // create function for register user
 func (u *UsersSource) Register(email string, password string, name string, role string, phone string, address string, status string, photo string, logedin bool, createdAt time.Time, updatedAt time.Time) (User, error) {
-	var user User
-
-	err := u.db.QueryRow("INSERT INTO users (email, password, name, role, phone, address, status, photo, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, role, phone, address, status, photo, logedin, createdAt, updatedAt).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Role, &user.Phone, &user.Address, &user.Status, &user.Photo, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
+	_, err := u.db.Exec("INSERT INTO users (email, password, name, role, phone, address, status, photo, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, role, phone, address, status, photo, logedin, createdAt, updatedAt)
 	if err != nil {
-		return user, err
+		return User{}, err
 	}
 
-	return user, nil
+	return User{Email: email, Password: password, Name: name, Role: role, Phone: phone, Address: address, Status: status, Photo: photo, Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
 }
 
 // create function for fetch user role
