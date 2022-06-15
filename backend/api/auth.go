@@ -122,9 +122,24 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// create function for logout user
+// create function for logout user, then change logedin status to false
 func (api *API) logout(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
+	var user User
+
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(LoginError{Error: "Invalid request"})
+		return
+	}
+
+	res, err := api.usersSource.Logout(user.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(LoginError{Error: "Failed to logout"})
+		return
+	}
 
 	token, err := r.Cookie("token")
 	if err != nil {
@@ -153,5 +168,6 @@ func (api *API) logout(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &c)
 
 	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(res)
 	w.Write([]byte("Logout success"))
 }

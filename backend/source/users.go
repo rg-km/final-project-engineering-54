@@ -49,13 +49,18 @@ func (u *UsersSource) FetchAllUsers() ([]User, error) {
 	return users, nil
 }
 
-// create function for login user by email and password
+// create function for login user by email and password, then update logedin status to true
 func (u *UsersSource) Login(email string, password string) (*string, error) {
 	var user User
 
 	err := u.db.QueryRow("SELECT email FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.Email)
 	if err != nil {
 		return nil, errors.New("Email or password is incorrect")
+	}
+
+	_, err = u.db.Exec("UPDATE users SET logedin = ? WHERE email = ?", true, email)
+	if err != nil {
+		return nil, err
 	}
 
 	return &user.Email, nil
@@ -81,4 +86,14 @@ func (u *UsersSource) FetchUserRole(email string) (*string, error) {
 	}
 
 	return &user.Role, nil
+}
+
+// create logout function for logout user, then update logedin status to false
+func (u *UsersSource) Logout(email string) (*string, error) {
+	_, err := u.db.Exec("UPDATE users SET logedin = ? WHERE email = ?", false, email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &email, nil
 }
