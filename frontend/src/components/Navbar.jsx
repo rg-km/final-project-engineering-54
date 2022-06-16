@@ -2,7 +2,7 @@ import React from "react"
 // import AuthBtn from "./AuthBtn";
 import NoAuthBtn from "./auth/NoAuthBtn";
 import { classes } from "../utils/Utils"
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import "../styles/component/_navbar.scss";
 
 export default function Navbar() {
@@ -17,10 +17,10 @@ export default function Navbar() {
             <nav id="navbar_component">   
                 <div id="nav_brand">
                     <h1 className="poppins">
-                        <Link to="/">
+                        <NavLink to="/">
                             Codeswer
                             {/* <img src="../assets/images/brand-ori.png" width="60" alt="logo" /> */}
-                        </Link>        
+                        </NavLink>        
                     </h1>
                 </div>
 
@@ -35,9 +35,30 @@ export default function Navbar() {
 
                 <div id="nav_links">
                     <ul id="nav_links_item" className="poppins">
-                        <li><Link to="/mentor">Find Mentor</Link></li>
-                        <li><Link to="/docs">How It Works</Link></li>
-                        <li><Link to="/blogs">Blog</Link></li>
+                        <li>
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-active' : ''
+                                } to="/">
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                className={({ isActive }) =>
+                                        isActive ? 'nav-active' : ''
+                                } to="/docs">
+                                How It Works
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/blogs"
+                                className={({ isActive }) =>
+                                    isActive ? 'nav-active' : ''
+                                }>
+                                Blog
+                            </NavLink>
+                        </li>
                         <NoAuthBtn classname="noauth-links" />
                         {/* <AuthBtn classname="auth-links">
                             <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>

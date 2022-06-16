@@ -1,20 +1,27 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useLocation } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import BtnToTop from "../components/BtnToTop";
 
-export default function Codeswer({ title, style, key, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
+export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
+
+    const location = useLocation();
+    function getFooter() {
+        if(location.pathname === "/dashboard" || location.pathname === "/profile" || location.pathname === "/questions") return
+        return <Footer />
+    }
+
     return (
         <React.Fragment>
             <Helmet>
-                    <link rel="apple-touch-icon" sizes="180x180" href="./static/util/img/babies/apple-touch-icon.png" />
+                    {/* <link rel="apple-touch-icon" sizes="180x180" href="./static/util/img/babies/apple-touch-icon.png" />
                     <link rel="icon" type="image/png" sizes="32x32" href="./static/util/img/babies/favicon-32x32.png" />
                     <link rel="icon" type="image/png" sizes="16x16" href="./static/util/img/babies/favicon-16x16.png" />
-                    <link rel="manifest" href="./static/util/img/babies/site.webmanifest" />  
+                    <link rel="manifest" href="./static/util/img/babies/site.webmanifest" />   */}
                     <title>{title}</title>
-
-                    {style}
 
                     <meta name="keywords" content={key}/>
                     <meta name="description" content={desc}/>
@@ -32,15 +39,11 @@ export default function Codeswer({ title, style, key, desc, ogUrl, ogType, ogTit
                     <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono:100,200,300,regular,500,600,700,800,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic" rel="stylesheet" />
                     <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
 
-                    {style}
-
-                    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-                    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
             </Helmet>
             
             <Navbar />
             {children}
-            <Footer />
+            {getFooter()}
 
             <BtnToTop />
 

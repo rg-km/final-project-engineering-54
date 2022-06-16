@@ -129,9 +129,11 @@
         }
         li {
           font-size: 1rem;
+          font-weight: 500;
+          margin-right: 2.5rem;
           a {
-            @include transition(color, .2s);
-            &.router-link-exact-active {
+            @include transition(all, .2s);
+            &.nav-active {
               text-underline-offset: 4px;
               text-decoration: underline;
               text-decoration-style: solid;
@@ -144,18 +146,12 @@
               }
             }
             @media only screen and (max-width: 919px) {
+              margin-right: 0;
               font-size: 1.25rem;
             }
           }
-        }
-        li {
-          font-weight: 500;
-          margin-right: 2.5rem;
           &:hover {
             color: $blue-code;
-          }
-          @media only screen and (max-width: 919px) {
-            margin-right: 0;
           }
         }
         .noauth-links {
