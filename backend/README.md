@@ -24,3 +24,7 @@ go run backend/db/migration/main.go
 go run backend/main.go
 ```
 3. Test Case: inprogress
+
+## Dummy Account
+- Admin : `admin@gmail.com`, `123456`
+- Users : `user@gmail.com`, `123456`
