@@ -1,7 +1,7 @@
 import React from "react"
 
 import "../../styles/auth/_signup.scss";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
@@ -67,8 +67,18 @@ export default function Signup() {
         },
     ]
 
-    const handleSubmit = (e) => {
+    const objectDummy = {
+        status: 404,
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        // ambil data dari url api, disimpan di zustand untuk middleware
+        if (objectDummy.status === 200) {
+            alert("Berhasil daftar")
+        } else if(objectDummy.status === 404) {
+            alert("Gagal Daftar")
+        }
     }
 
     const onChange = (e) => {
@@ -78,7 +88,6 @@ export default function Signup() {
         })
     }
 
-    console.log(values)
     return (
         <Codeswer
             title="Daftar - Codeswer"
@@ -106,13 +115,13 @@ export default function Signup() {
                                     onChange={onChange}/>
                             ))}
                             <BtnCustom type="submit" classname="poppins mt-8 w-full">
-                                Masuk
+                                Daftar
                             </BtnCustom>
                         </form>
                         <h3>
-                            Belom punya akun?
-                            <Link to="/signup"><span className="text-blue-code font-semibold"> Daftar di sini
-                            </span></Link>
+                            Sudah punya akun?
+                            <NavLink to="/signup"><span className="text-blue-code font-semibold"> Masuk di sini
+                            </span></NavLink>
                         </h3>
                     </div>
                     <div id="image_signup" className="bg-indigo-two-code md:block hidden rounded-r-[1.5rem] px-10 pt-12">
