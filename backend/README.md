@@ -27,4 +27,4 @@ go run backend/main.go
 
 ## Dummy Account
 - Admin : `admin@gmail.com`, `123456`
-- Users : `user@gmail.com`, `123456`
+- Users : `user@gmail.com`, `123456``
