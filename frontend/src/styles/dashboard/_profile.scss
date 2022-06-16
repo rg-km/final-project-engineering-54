@@ -1,0 +1,21 @@
+@import "../base/variable.scss";
+@import "../component/btnCustom.scss";
+
+.profile-component {
+    padding: 1.5rem;
+    
+    .heading-profile {
+        margin-bottom: 1.5rem;
+        h1 {
+            @include text-head($gray-800, 1.75rem, 700);
+        }
+    }
+    .avatar-wrapper {
+        margin-bottom: 1.5rem;
+    }
+    #form_wrapper {
+        > button {
+            @include btnCustom(.5rem, 1.25rem, .25rem, $indigo-code);
+        }
+    }
+}

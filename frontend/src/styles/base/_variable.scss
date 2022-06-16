@@ -18,8 +18,8 @@ $gray-900: #111827;
 }  
 
 @mixin flex-center {
-display: flex;
-align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 @mixin transition($property: all, $duration: 300) {
@@ -28,4 +28,10 @@ align-items: center;
     -ms-transition: $property $duration ease-in-out;
     -moz-transition: $property $duration ease-in-out;
     transition: $property $duration ease-in-out;
+}
+
+@mixin active-visit($color: transparent, $bg: transparent) {
+    color: $color;
+    font-weight: 500;
+    background-color: $bg;
 }

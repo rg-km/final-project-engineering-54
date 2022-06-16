@@ -1,7 +1,7 @@
-li{
+.listlanpage{
     display: flex;
     align-items: center;
-    svg {
+    > svg {
         margin-right: 1rem;
     }
 }
