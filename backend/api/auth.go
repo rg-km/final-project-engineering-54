@@ -66,8 +66,8 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 
 	userRole, _ := api.usersSource.FetchUserRole(*res)
 
-	// set expire time for token jwt in 1 hour
-	expireTime := time.Now().Add(time.Hour * 1)
+	// set expire time for token jwt in 24 hour
+	expireTime := time.Now().Add(time.Hour * 24)
 
 	// create claim for object encode in jwt
 	claims := &Claims{
@@ -112,7 +112,7 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Role, user.Phone, user.Address, user.Status, user.Photo, user.Logedin, user.CreatedAt, user.UpdatedAt)
+	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Role, user.Phone, user.Address, user.Status, user.Photo, user.Logedin, time.Now(), time.Now())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(LoginError{Error: "Failed to register"})
@@ -122,9 +122,24 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(res)
 }
 
-// create function for logout user
+// create function for logout user, then change logedin status to false
 func (api *API) logout(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
+	var user User
+
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(LoginError{Error: "Invalid request"})
+		return
+	}
+
+	res, err := api.usersSource.Logout(user.Email)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(LoginError{Error: "Failed to logout"})
+		return
+	}
 
 	token, err := r.Cookie("token")
 	if err != nil {
@@ -153,5 +168,6 @@ func (api *API) logout(w http.ResponseWriter, r *http.Request) {
 	http.SetCookie(w, &c)
 
 	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(res)
 	w.Write([]byte("Logout success"))
 }
