@@ -15,11 +15,10 @@ type User struct {
 	Email     string    `json:"email"`
 	Password  string    `json:"password"`
 	Name      string    `json:"name"`
-	Role      string    `json:"role"`
 	Phone     string    `json:"phone"`
 	Address   string    `json:"address"`
-	Status    string    `json:"status"`
 	Photo     string    `json:"photo"`
+	Role      string    `json:"role"`
 	Logedin   bool      `json:"logedin"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -60,7 +59,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(LoginError{Error: "Invalid email or password"})
+		json.NewEncoder(w).Encode(LoginError{Error: err.Error()})
 		return
 	}
 
@@ -111,11 +110,13 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(LoginError{Error: "Invalid request"})
 		return
 	}
-
-	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Role, user.Phone, user.Address, user.Status, user.Photo, user.Logedin, time.Now(), time.Now())
+	
+	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Phone, user.Address, user.Photo, user.Role, user.Logedin, time.Now(), time.Now())
+	
+	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(LoginError{Error: "Failed to register"})
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(LoginError{Error: err.Error()})
 		return
 	}
 
