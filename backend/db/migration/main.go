@@ -19,20 +19,18 @@ func main() {
 				email VARCHAR(191) NOT NULL,
 				password VARCHAR(40) NOT NULL,
 				name VARCHAR(40) NOT NULL,
-				role VARCHAR(20) NOT NULL,
 				phone VARCHAR(20) NOT NULL,
 				address VARCHAR(191) NOT NULL,
-				status VARCHAR(20) NOT NULL,
 				photo VARCHAR(191) NOT NULL,
+				role VARCHAR(20) NOT NULL,
 				logedin BOOLEAN NOT NULL,
 				created_at DATETIME NOT NULL,
 				updated_at DATETIME NOT NULL
 			);
 
-			INSERT INTO users (email, password, name, role, phone, address, status, photo, logedin, created_at, updated_at) VALUES
-			('admin@gmail.com', '123456', 'admin', 'admin', '081234567890', 'Jl. Raya', 'active', 'default.png', false, '2020-01-01 00:00:00', '2020-01-01 00:00:00'),
-			('user@gmail.com', '123456', 'user', 'user', '081234567890', 'Jl. Raya', 'active', 'default.png', false, '2020-01-01 00:00:00', '2020-01-01 00:00:00');
-
+			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
+			("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.png", "admin", true, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.png", "user", true, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		`)
 
