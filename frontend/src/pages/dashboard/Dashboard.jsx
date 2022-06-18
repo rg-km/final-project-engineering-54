@@ -3,6 +3,7 @@ import React from "react"
 import Codeswer from "../../layouts/Codeswer";
 import "../../styles/dashboard/_dashboard.scss";
 import { NavLink, Outlet } from "react-router-dom"
+import Image from "../../components/Image";
 
 
 export default function Dashboard() {
@@ -51,7 +52,7 @@ export default function Dashboard() {
                     <div className="left-content md:w-[25%] w-full md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
                         <div className="first-left flex-col space-y-6 md:flex hidden items-center">
                             <div className="avatar-wrapper w-[8rem]">
-                                <img className="image-avatar object-cover rounded-full" src="/asset/img/user.jpg" alt="User"/>
+                                <Image />
                             </div>
                             <h1 className="poppins">Aditya Rizqi Ardhana</h1>
                         </div>

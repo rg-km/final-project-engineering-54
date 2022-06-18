@@ -10,12 +10,6 @@
                     padding: 0;
                 }
                 .first-left {
-                    > div {
-                        @include flex-center;
-                        > img {
-                            aspect-ratio: 1;
-                        }
-                    }
                     > h1 {
                         line-height: 1.5;
                         text-align: center;
