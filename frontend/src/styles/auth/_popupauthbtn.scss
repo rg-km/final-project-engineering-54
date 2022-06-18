@@ -1,14 +1,18 @@
 @import "../base/variable";
 
 .popup-auth-btn {
-    width: 0;
-    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
     border-radius: 10px;
     background-color: white;
     border: 1px solid $gray-200;
-    @include transition(width, .3s);
+    transform-origin: top right;
+    transform: scale(0.8) translate3d(0, -15px, 40px);
+    @include transition(all, .3s);
     &.active-popup {
-        width: auto;
+        opacity: 1;
+        transform: none;
+        visibility: visible;    
     }    
     > nav {
         > ul {

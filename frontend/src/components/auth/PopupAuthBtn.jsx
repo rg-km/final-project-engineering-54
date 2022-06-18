@@ -3,7 +3,7 @@ import "../../styles/auth/_popupauthbtn.scss";
 
 export default function PopupAuthBtn({classname}) {
     return (
-        <aside className={`${classname} popup-auth-btn absolute py-2`}>
+        <aside className={`${classname} popup-auth-btn absolute z-10`}>
             <nav>
                 <ul className="poppins font-medium">
                     <li>

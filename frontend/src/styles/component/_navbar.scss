@@ -127,11 +127,15 @@
             }
           }
         }
-        li {
+        > li {
           font-size: 1rem;
           font-weight: 500;
+          text-align: center;
           margin-right: 2.5rem;
-          a {
+          @media only screen and (max-width: 919px) {
+            margin-right: 0;
+          }
+          > a {
             @include transition(all, .2s);
             &.nav-active {
               text-underline-offset: 4px;
@@ -161,6 +165,15 @@
           }
         }
         .auth-links {
+          .popup-auth-btn {
+            nav {
+              ul {
+                li {
+                  font-size: 1rem !important;
+                }
+              }
+            }
+          }
           @media only screen and (min-width: 321px) {
             display: none;
           }
@@ -178,7 +191,7 @@
           display: none;
         }
       }
-      .auth-nav {
+      .auth-nav, .popauth-nav {
         @media only screen and (max-width: 320px) {
           display: none;
         }
