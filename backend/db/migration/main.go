@@ -29,8 +29,8 @@ func main() {
 			);
 
 			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-			("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.png", "admin", true, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.png", "user", true, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.png", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.png", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		`)
 
