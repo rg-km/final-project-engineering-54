@@ -1,9 +1,10 @@
 import React from "react"
+import axios from "../../api/axios"
 
 import "../../styles/auth/_signup.scss";
-import { NavLink } from "react-router-dom";
 import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
+import { NavLink, Navigate } from "react-router-dom";
 import FormInput from "../../components/auth/FormInput";
 
 export default function Signup() {
@@ -18,6 +19,7 @@ export default function Signup() {
         password: "",
         confirmPassword: "",
     });
+    const [redirect, setRedirect] = React.useState(false);
 
     const inputs = [
         {
@@ -94,17 +96,12 @@ export default function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const res = await fetch ("http://localhost:8080/api/user/register", {
-            method: "POST",
-            headers: {
-                
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values),
-        });
-        const data = await res.json();
-        console.log(data);
+        const response = await axios.post("/user/register", values);
+        console.log(response)
+        setRedirect(true);
     }
+
+    if (redirect) return <Navigate to="/signin" />;
 
     const onChange = (e) => {
         setValues({
