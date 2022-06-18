@@ -1,9 +1,10 @@
 import React from "react"
 // import AuthBtn from "./AuthBtn";
+
 import NoAuthBtn from "./auth/NoAuthBtn";
-import { classes } from "../utils/Utils"
-import { NavLink } from 'react-router-dom';
+import { classes } from "../utils/Utils";
 import "../styles/component/_navbar.scss";
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
 

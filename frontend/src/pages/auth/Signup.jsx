@@ -11,8 +11,10 @@ export default function Signup() {
     const status = null;
 
     const [values, setValues] = React.useState({
+        name: "",
+        phone: "",
+        address: "",
         email: "",
-        username: "",
         password: "",
         confirmPassword: "",
     });
@@ -20,18 +22,41 @@ export default function Signup() {
     const inputs = [
         {
             key: 1,
-            label: "Username",
+            label: "Name",
             type: "text",
-            name: "username",
-            id: "username",
-            errorMessage: "Username harus memiliki minimal 3-20 karakter tanpa special character!",
-            forLabel: "username",
+            name: "name",
+            id: "name",
+            errorMessage: "Namea harus memiliki minimal 3-20 karakter tanpa special character!",
+            forLabel: "name",
             classname: "mt-0",
             pattern: "^[a-zA-Z0-9]{3,20}$",
             required: true,
         },
         {
             key: 2,
+            label: "Phone",
+            type: "tel",
+            name: "phone",
+            id: "phone",
+            errorMessage: "Max 10 digit angka. Format: 0899-9564-873; 08999564873; +62899-9564-873; +62 899-9564-873; +62 8999564873; +62 899 9564873; +628999564873;",
+            forLabel: "phone",
+            classname: "mt-7",
+            pattern: "(08\\d{1,4}(\\s*[\\-]\\s*)\\d{0,4}(\\s*[\\-]\\s*)\\d{3,5}|08\\d{9,11}$)|(^\\+(?:[0-9] ?){6,13}[0-9]$)|(^(?:(?:\\+|0{0,2})62) ?\\d{0,3}(\\s*[\\-]\\s*)\\d{0,4}(\\s*[\\-]\\s*)\\d{0,5})",
+            required: true,
+        },
+        {
+            key: 3,
+            label: "Address",
+            type: "text",
+            name: "address",
+            id: "address",
+            errorMessage: "Harus berupa alamat rumah yang lengkap, tidak boleh kosong!",
+            forLabel: "address",
+            classname: "mt-7",
+            required: true,
+        },
+        {
+            key: 4,
             label: "Email",
             type: "email",
             name: "email",
@@ -42,7 +67,7 @@ export default function Signup() {
             required: true,
         },
         {
-            key: 3,
+            key: 5,
             label: "Password",
             type: "password",
             name: "password",
@@ -54,7 +79,7 @@ export default function Signup() {
             required: true,
         },
         {
-            key: 4,
+            key: 6,
             label: "Konfirmasi Password",
             type: "password",
             name: "confirmPassword",
@@ -67,18 +92,18 @@ export default function Signup() {
         },
     ]
 
-    const objectDummy = {
-        status: 404,
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // ambil data dari url api, disimpan di zustand untuk middleware
-        if (objectDummy.status === 200) {
-            alert("Berhasil daftar")
-        } else if(objectDummy.status === 404) {
-            alert("Gagal Daftar")
-        }
+        const res = await fetch ("http://localhost:8080/api/user/register", {
+            method: "POST",
+            headers: {
+                
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values),
+        });
+        const data = await res.json();
+        console.log(data);
     }
 
     const onChange = (e) => {
@@ -106,7 +131,9 @@ export default function Signup() {
                 <div id="container_card" className="poppins">
                     <div id="card_signup" className="px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
                         <h2>Daftar</h2>
-                        <form id="form_wrapper" onSubmit={handleSubmit}>
+                        <form id="form_wrapper" onSubmit={handleSubmit}
+                            encType="multipart/form-data"
+                        >
                             {inputs.map(input => (
                                 <FormInput 
                                     key={input.key} 
