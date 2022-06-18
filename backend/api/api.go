@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/rs/cors"
+
 	"github.com/rg-km/final-project-engineering-54/backend/source"
 )
 
@@ -37,6 +39,7 @@ func (api *API) Handler() *http.ServeMux {
 func (api *API) Start() {
 	fmt.Println("Server started on port 8080")
 	fmt.Println("http://localhost:8080")
-	http.ListenAndServe(":8080", api.Handler())
+	handler := cors.Default().Handler(api.Handler())
+	http.ListenAndServe(":8080", handler)
 }
 
