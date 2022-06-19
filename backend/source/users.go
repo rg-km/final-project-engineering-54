@@ -48,6 +48,26 @@ func (u *UsersSource) FetchAllUsers() ([]User, error) {
 
 	return users, nil
 }
+// create function for get user who logedin	true
+func (u *UsersSource) FetchUserLogedin() ([]User, error) {
+	var users []User
+
+	rows, err := u.db.Query("SELECT * FROM users WHERE logedin = ?", true)
+	if err != nil {
+		return users, err
+	}
+
+	for rows.Next() {
+		var user User
+		err := rows.Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
+		if err != nil {
+			return users, err
+		}
+		users = append(users, user)
+	}
+
+	return users, nil
+}
 
 // create function for login user by email and password, then update logedin status to true
 func (u *UsersSource) Login(email string, password string) (*string, error) {
