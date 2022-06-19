@@ -39,10 +39,10 @@ func main() {
 			CREATE TABLE IF NOT EXISTS users_mentor (
 				users_id INTEGER NOT NULL PRIMARY KEY,
 				courses_id INTEGER NOT NULL,
-				about VARCHAR(191) NOT NULL,
-				rating_sum DOUBLE NOT NULL,
-				rating_count INTEGER NOT NULL,
-				avg_rating DOUBLE NOT NULL,
+				about VARCHAR(191),
+				rating_sum DOUBLE,
+				rating_count INTEGER,
+				avg_rating DOUBLE,
 				FOREIGN KEY (users_id) REFERENCES users(id),
 				FOREIGN KEY (courses_id) REFERENCES courses(id)
 			);
@@ -55,8 +55,8 @@ func main() {
 				title VARCHAR(191) NOT NULL,
 				question TEXT NOT NULL,
 				question_photo VARCHAR(191) NOT NULL,
-				answer TEXT NOT NULL,
-				answer_photo VARCHAR(191) NOT NULL,
+				answer TEXT,
+				answer_photo VARCHAR(191),
 				created_at DATETIME NOT NULL,
 				updated_at DATETIME NOT NULL,
 				FOREIGN KEY (users_id) REFERENCES users(id),
