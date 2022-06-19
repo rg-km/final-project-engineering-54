@@ -1,0 +1,37 @@
+@import "../base/variable.scss";
+
+.readblog-component {
+    #container_readblog {
+        padding: 3.5rem 3rem;
+        @media only screen and (max-width: 639px) {
+            padding: 3.5rem 1.5rem;
+        }
+        .content-blog {
+            > .author-detail {
+                .name-date {
+                    h3 {
+                        &:first-child {
+                            @include text-head($gray-800, 1rem, 500);
+                        }
+                    }
+                    h3 {
+                        &:last-child {
+                            @include text-head(rgb(138, 136, 136), 1rem, 300);
+                        }
+                    }
+                }
+            }   
+            > .card-title {
+                @include text-head($gray-800, 2.25rem, 800);
+            }
+        }
+        .share-button {
+            .box-icon-share {
+                width: 100%;
+                @include flex-center;
+                justify-content: center;
+
+            }
+        }      
+    }
+}

@@ -1,0 +1,31 @@
+@import "../base/variable.scss";
+
+.card-wrapper {
+    padding: 1rem;
+    border-radius: 14px;
+    @include transition(transform, 0.3s);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    .card-image {
+        border-radius: 14px;
+    }
+    .card-content {
+        padding: 1.15rem 0;
+        .card-title {
+            @include text-head($gray-800, 1.15rem, 600);
+        }
+        .author-detail {
+            .name-date {
+                h3 {
+                    &:first-child {
+                        @include text-head($gray-800, 0.85rem, 600);
+                    }
+                }
+                h3 {
+                    &:last-child {
+                        @include text-head(rgb(138, 136, 136), 0.85rem, 400);
+                    }
+                }
+            }
+        }
+    }
+}
