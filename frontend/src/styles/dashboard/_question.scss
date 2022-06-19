@@ -1,0 +1,27 @@
+@import "../base/variable.scss";
+@import "../component/btnCustom.scss";
+
+.question-component {
+    padding: 1.5rem;
+    .box-question {
+        .title-question {
+            > textarea {
+                width: 100%;
+                height: 48px;
+                resize: none;
+                overflow: hidden;
+                line-height: 48px;
+                letter-spacing: 1px;
+                overflow-wrap: break-word;
+                @include text-head($gray-800, 2rem, 700);
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+        > button {
+            @include btnCustom(.5rem, 1.25rem, .25rem, $purple-code);
+        }
+    }
+}

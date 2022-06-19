@@ -79,6 +79,7 @@ export default function Login() {
                         <h2>Masuk</h2>
                         <form id="form_wrapper" 
                             onSubmit={handleSubmit}
+                            encType="multipart/form-data"
                         >
                             {inputs.map((input) => (
                                 <FormInput

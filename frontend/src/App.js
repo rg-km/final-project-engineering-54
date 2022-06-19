@@ -7,10 +7,10 @@ import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
 import Mydash from "./pages/dashboard/Mydash";
+import Question from "./pages/dashboard/Question";
 import Profile from "./pages/dashboard/Profile";
 import Questions from "./pages/dashboard/Questions";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Tanya from "./pages/dashboard/Tanya";
 
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +24,7 @@ export default function App() {
         <Route path="/dashboard" element={<Mydash />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/tanya" element={<Tanya />} />
+        <Route path="/question" element={<Question />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>

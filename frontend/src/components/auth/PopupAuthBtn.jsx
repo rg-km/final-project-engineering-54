@@ -7,6 +7,9 @@ export default function PopupAuthBtn({classname}) {
             <nav>
                 <ul className="poppins font-medium">
                     <li>
+                        <Link to="/question">Tanya</Link>
+                    </li>
+                    <li>
                         <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li className="text-red-500 font-light">

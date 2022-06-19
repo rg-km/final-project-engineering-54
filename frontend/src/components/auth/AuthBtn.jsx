@@ -1,4 +1,4 @@
-import "../../styles/component/auth/_authbtn.scss"
+// import "../../styles/component/auth/_authbtn.scss"
 
 export default function NoAuthBtn({classname, children, onClick}) {
     return (
