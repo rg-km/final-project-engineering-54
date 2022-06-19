@@ -1,0 +1,28 @@
+@import "../base/variable";
+
+.popup-auth-btn {
+    opacity: 0;
+    visibility: hidden;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid $gray-200;
+    transform-origin: top right;
+    transform: scale(0.8) translate3d(0, -15px, 40px);
+    @include transition(all, .3s);
+    &.active-popup {
+        opacity: 1;
+        transform: none;
+        visibility: visible;    
+    }    
+    > nav {
+        > ul {
+            li {
+                cursor: pointer;
+                padding: 9px 16px;
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,9 @@
 import React from "react"
+import axios from "../../api/axios"
 
 import "../../styles/auth/_signin.scss";
-import { Link } from "react-router-dom";
 import Codeswer from "../../layouts/Codeswer";
+import { Link, Navigate } from "react-router-dom";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
 
@@ -14,7 +15,7 @@ export default function Login() {
         email: "",
         password: "",
     });
-
+    const [redirect, setRedirect] = React.useState(false);
 
     const inputs = [
         {
@@ -44,7 +45,11 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios.post("/user/login", values)
+        setRedirect(true);
     }
+
+    if (redirect) return <Navigate to="/dashboard" replace />;
 
     const onChange = (e) => {
         setValues({
@@ -74,6 +79,7 @@ export default function Login() {
                         <h2>Masuk</h2>
                         <form id="form_wrapper" 
                             onSubmit={handleSubmit}
+                            encType="multipart/form-data"
                         >
                             {inputs.map((input) => (
                                 <FormInput

@@ -10,7 +10,7 @@ export default function Mydash() {
         <h1>Pertanyaan Saya</h1>
       </div>
       <Link
-        to="/dashboard/questions/create"
+        to="/question"
         className="questions-create poppins"
       >
         <BtnCustom>Buat Pertanyaan</BtnCustom>
