@@ -54,7 +54,7 @@ func main() {
 				courses_id INTEGER NOT NULL,
 				title VARCHAR(191) NOT NULL,
 				question TEXT NOT NULL,
-				question_photo VARCHAR(191) NOT NULL,
+				question_photo VARCHAR(191),
 				answer TEXT,
 				answer_photo VARCHAR(191),
 				created_at DATETIME NOT NULL,
