@@ -9,6 +9,7 @@ import ReadBlog from "./pages/blog/ReadBlog";
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
+import Terms from "./pages/terms/Terms";
 
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
@@ -33,6 +34,7 @@ export default function App() {
       </Route>
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/terms" element={<Terms />} />
     </Routes>
   );
 }

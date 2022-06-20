@@ -11,25 +11,36 @@ import (
 
 // create struct API for manage api
 type API struct {
-	usersSource source.UsersSource
-	mux         *http.ServeMux
+	usersSource  source.UsersSource
+	courseSource source.CourseSource
+	mux          *http.ServeMux
 }
 
 // create function for create new api
-func NewAPI(usersSource source.UsersSource) API {
+func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource) API {
 	mux := http.NewServeMux()
 	api := API{
-		usersSource, mux,
+		usersSource, courseSource, mux,
 	}
 
 	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
 	mux.Handle("/api/user/logout", api.POST(http.HandlerFunc(api.logout)))
 	mux.Handle("/api/user/register", api.POST(http.HandlerFunc(api.register)))
+	mux.Handle("/api/course", api.GET(http.HandlerFunc(api.getCourse)))
+	mux.Handle("/api/course/id", api.GET(http.HandlerFunc(api.getCourseByID)))
+	mux.Handle("/api/course/name", api.GET(http.HandlerFunc(api.getCourseByName)))
 
 	// API with AuthMiddleware
 	mux.Handle("/api/user", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsers))))
-	mux.Handle("/api/user/", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersByID))))
+	mux.Handle("/api/user/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersByID))))
 	mux.Handle("/api/user/logged", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersLogedin))))
+	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
+
+	// API with AuthMiddleware and AdminMiddleware
+	mux.Handle("/api/user/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteUsers)))))
+	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addCourse)))))
+	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.updateCourse)))))
+	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteCourse)))))
 
 	return api
 }
