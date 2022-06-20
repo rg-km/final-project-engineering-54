@@ -92,6 +92,17 @@ export default function Kebijakanprivasi() {
               kerahasiaan akun Kamu ditanggung oleh Kamu sendiri.
             </p>
 
+            <h1>KETENTUAN PRIVASI</h1>
+            <p className="poppins mt-2">
+              Ketentuan Privasi ini berlaku selama tidak mempengaruhi keamanan
+              dan kerahasiaan akun Kamu. Tim Codswer.com akan mengubah, atau
+              menonaktifkan akun yang tidak memenuhi ketentuan ini. Kamu tidak
+              akan mengambil bagian dalam perilaku apa pun yang mengorbankan,
+              melecehkan, merendahkan, atau mengintimidasi individu atau
+              kelompok individu berdasarkan agama, gender, orientasi seksual,
+              ras, etnis, usia, atau cacat.
+            </p>
+
             <h1>PENGEMBANGAN PLATFORM</h1>
             <p className="poppins mt-2">
               Codswer berhak untuk melakukan pengembangan, perubahan, dan/atau
