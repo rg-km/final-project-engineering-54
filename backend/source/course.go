@@ -90,12 +90,17 @@ func (c *CourseSource) UpdateCourse(id int64, name string, desc string, updatedA
 		return course, err
 	}
 
-	_, err = c.db.Exec("UPDATE courses SET name = ?, desc = ?, updated_at = ? WHERE id = ?", name, desc, updatedAt, id)
-	if err != nil {
-		return course, err
+	if name != "" {
+		course.Name = name
 	}
 
-	course, err = c.FetchCourseByID(id)
+	if desc != "" {
+		course.Desc = desc
+	}
+
+	course.UpdatedAt = updatedAt
+
+	_, err = c.db.Exec("UPDATE courses SET name = ?, desc = ?, updated_at = ? WHERE id = ?", course.Name, course.Desc, course.UpdatedAt, id)
 	if err != nil {
 		return course, err
 	}

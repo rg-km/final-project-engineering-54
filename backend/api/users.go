@@ -55,7 +55,6 @@ func (api *API) getUsers(w http.ResponseWriter, r *http.Request) {
 		response.Users = append(response.Users, getUsers{
 			ID:        user.ID,
 			Email:     user.Email,
-			Password:  user.Password,
 			Name:      user.Name,
 			Phone:     user.Phone,
 			Address:   user.Address,
@@ -97,7 +96,6 @@ func (api *API) getUsersByID(w http.ResponseWriter, r *http.Request) {
 	response.Users = append(response.Users, getUsers{
 		ID:        user.ID,
 		Email:     user.Email,
-		Password:  user.Password,
 		Name:      user.Name,
 		Phone:     user.Phone,
 		Address:   user.Address,
@@ -138,7 +136,6 @@ func (api *API) getUsersLogedin(w http.ResponseWriter, r *http.Request) {
 		response.Users = append(response.Users, getUsers{
 			ID:        user.ID,
 			Email:     user.Email,
-			Password:  user.Password,
 			Name:      user.Name,
 			Phone:     user.Phone,
 			Address:   user.Address,
@@ -152,4 +149,55 @@ func (api *API) getUsersLogedin(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	encoder.Encode(response)
+}
+
+// create func for update user
+func (api *API) updateUsers(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	var user getUsers
+	err := json.NewDecoder(r.Body).Decode(&user)
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(getUsersError{Error: "user not found"})
+		return
+	}
+
+	res, err := api.usersSource.UpdateUser(int64(id), user.Password, user.Name, user.Phone, user.Address, user.Photo, time.Now())
+	
+	w.Header().Set("Content-Type", "application/json")
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(getUsersError{Error: err.Error()})
+		return
+	}
+
+	json.NewEncoder(w).Encode(res)
+	w.Write([]byte("Update user success"))
+}
+
+// create func for delete user
+func (api *API) deleteUsers(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(getUsersError{Error: "user not found"})
+		return
+	}
+
+	res, err := api.usersSource.DeleteUser(int64(id))
+	
+	w.Header().Set("Content-Type", "application/json")
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(getUsersError{Error: err.Error()})
+		return
+	}
+
+	encoder.Encode(res)
+	w.Write([]byte("Delete user success"))
 }

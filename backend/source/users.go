@@ -135,3 +135,55 @@ func (u *UsersSource) Logout(email string) (*string, error) {
 
 	return &email, nil
 }
+
+// create function for update user by id
+func (u *UsersSource) UpdateUser(id int64, password string, name string, phone string, address string, photo string, updatedAt time.Time) (User, error) {
+	var user User
+
+	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
+	if err != nil {
+		return user, err
+	}
+
+	if password != "" {
+		user.Password = password
+	}
+	if name != "" {
+		user.Name = name
+	}
+	if phone != "" {
+		user.Phone = phone
+	}
+	if address != "" {
+		user.Address = address
+	}
+	if photo != "" {
+		user.Photo = photo
+	}
+
+	user.UpdatedAt = updatedAt
+
+	_, err = u.db.Exec("UPDATE users SET password = ?, name = ?, phone = ?, address = ?, photo = ?, updated_at = ? WHERE id = ?", user.Password, user.Name, user.Phone, user.Address, user.Photo, user.UpdatedAt, id)
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
+
+// create function for delete user by id
+func (u *UsersSource) DeleteUser(id int64) (User, error) {
+	var user User
+
+	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
+	if err != nil {
+		return user, err
+	}
+
+	_, err = u.db.Exec("DELETE FROM users WHERE id = ?", id)
+	if err != nil {
+		return user, err
+	}
+
+	return user, nil
+}
