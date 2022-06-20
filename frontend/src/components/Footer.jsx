@@ -36,27 +36,27 @@ export default function Footer() {
                 className="space-y-4 text-gray-200 font-light"
               >
                 <li>
-                  <Link to="/blogs">Blog</Link>
-                </li>
-                <li>
-                  <Link to="/about">About Us</Link>
+                  <Link to="/about">Tentang Kami</Link>
                 </li>
                 <li>
                   <Link to="/docs">How It Works</Link>
                 </li>
+                <li>
+                  <Link to="/blogs">Blog</Link>
+                </li>
               </ul>
             </article>
             <article className="nav-links-list space-y-5 poppins">
-              <h1>Layanan</h1>
+              <h1>Layanan dan Panduan</h1>
               <ul
                 id="nav_links_item"
                 className="space-y-4 text-gray-200 font-light"
               >
                 <li>
-                  <Link to="/mentoring">Forum Mentoring</Link>
+                  <Link to="/questions">Pertanyaan</Link>
                 </li>
                 <li>
-                  <Link to="/mentor">Mentor Us</Link>
+                  <Link to="/question">Tanya Jawab</Link>
                 </li>
                 <li>
                   <Link to="/terms">Syarat dan Ketentuan</Link>
