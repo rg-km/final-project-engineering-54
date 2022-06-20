@@ -11,6 +11,7 @@ import Profile from "./pages/dashboard/Profile";
 import Questions from "./pages/dashboard/Questions";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Tanya from "./pages/dashboard/Tanya";
+import KebijakanPrivasi from "./pages/Kebijakanprivasi";
 
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tanya" element={<Tanya />} />
+        <Route path="/kebijakanprivasi" element={<KebijakanPrivasi />} />
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
