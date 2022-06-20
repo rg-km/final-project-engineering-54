@@ -1,7 +1,7 @@
 import React from 'react';
 import "../../styles/blog/_blog.scss";
 import { Link } from 'react-router-dom';
-import Image from "../../components/Image";
+import AuthorDetail from '../../components/AuthorDetail';
 
 const Blog = (
     {
@@ -9,6 +9,7 @@ const Blog = (
             title,
             slug,
             image,
+            slugCategory,
             description,
             authorName,
             createdAt,
@@ -18,20 +19,14 @@ const Blog = (
 
   return (
     <article className="card-wrapper bg-white rounded-tl-[2rem] rounded-br-[2rem] hover:-translate-y-2">
-        <Link to={`/blog/${slug}`}>
+        <Link to={`/blog/${slugCategory}/${slug}`}>
             <img className="card-image object-cover h-[18rem] w-full" src={image} alt={title}/>
-            <div className="card-content inter space-y-4">
+            <div className="card-content inter flex flex-col justify-between space-y-4">
                 <h2 className="card-title line-clamp-2">{title}</h2>
                 <div className="card-text line-clamp-3">
-                    <p>{description}</p>
+                    <p className="whitespace-pre-line align-bottom leading-relaxed" dangerouslySetInnerHTML={{ __html: description }}></p>
                 </div>
-                <div className="author-detail flex items-center space-x-3">
-                    <Image classname="w-[2.5rem] mr-1"/>
-                    <div className="name-date space-y-1">
-                        <h3 className="name-author">{authorName}</h3>
-                        <h3 className="name-author">{createdAt}</h3>
-                    </div>
-                </div>
+                <AuthorDetail text1={authorName} text2={createdAt} classname="flex items-center space-x-3" classname2="text-gray-800 text-[0.85rem] font-semibold" classname3="text-[#8A8888] text-[0.85rem] font-normal"/>
             </div>
         </Link>
     </article>

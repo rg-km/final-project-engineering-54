@@ -1,8 +1,10 @@
 import React from "react"
 import "../../styles/blog/_blogs.scss";
+
 import ListBlogs from "../blog/ListBlogs" 
 import Codeswer from "../../layouts/Codeswer";
 import { useBlogStore } from "../../store/blogState";
+import SearchNotFound from "../../components/gif/SearchNotFound";
 
 export default function Blogs() {
 
@@ -50,10 +52,17 @@ export default function Blogs() {
                         <h3>Cari</h3>
                     </button>
                 </form>
-                <div className="wrapper-list-blog grid grid-cols-1 md:grid-cols-2 md:gap-x-10 gap-x-0 gap-y-10">
-                    {/* Blog List & Empty View */}
-                    {!blogs.length ? "Gak ada bro" : <ListBlogs blogs={blogs} />}
-                </div>
+                    {!blogs.length ? 
+                        <div className="flex justify-center w-full">
+                            <SearchNotFound 
+                                classGif="max-w-[30rem] w-full"
+                            />
+                        </div>
+                        : 
+                        <div className="wrapper-list-blog grid grid-cols-1 md:grid-cols-2 md:gap-x-10 gap-x-0 gap-y-10">
+                            <ListBlogs blogs={blogs} />
+                        </div>
+                    }
             </section>
         </main>
 

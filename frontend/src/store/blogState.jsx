@@ -2,8 +2,10 @@ import create from "zustand";
 import { blogStore } from "../store/blogStore";
 
 export const useBlogStore = create(set => ({
-    blogs: blogStore,
+    blog: [],
     searchKey: "",
+    blogs: blogStore,
+    blogByCategory: [],
 
     handleSearchResults: () => {
         const allBlog = blogStore;
@@ -28,7 +30,12 @@ export const useBlogStore = create(set => ({
     },
     findBlog: (slug) => {
         set(state => ({
-            blogs: state.blogs.find((blog) => blog.slug === slug)
+            blog: state.blogs.find((blog) => blog.slug === slug)
+        }));
+    },
+    findBlogByCategory: () => {
+        set(state => ({
+            blogByCategory: state.blogs.filter((e) => e.category === state.blog.category)
         }));
     }
 }));
