@@ -12,7 +12,7 @@ import (
 // creat func for allow origin
 func (api *API) AllowOrigin(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "*")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
@@ -112,6 +112,36 @@ func (api *API) POST(next http.Handler) http.Handler {
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			encoder.Encode(LoginError{Error: "need method POST"})
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+// create func PUT for method PUT
+func (api *API) PUT(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		api.AllowOrigin(w, r)
+		encoder := json.NewEncoder(w)
+		if r.Method != http.MethodPut {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			encoder.Encode(LoginError{Error: "need method PUT"})
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+// create func DELETE for method DELETE
+func (api *API) DELETE(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		api.AllowOrigin(w, r)
+		encoder := json.NewEncoder(w)
+		if r.Method != http.MethodDelete {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			encoder.Encode(LoginError{Error: "need method DELETE"})
 			return
 		}
 
