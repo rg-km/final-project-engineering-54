@@ -34,8 +34,10 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource) AP
 	mux.Handle("/api/user", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsers))))
 	mux.Handle("/api/user/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersByID))))
 	mux.Handle("/api/user/logged", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersLogedin))))
+	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
 
 	// API with AuthMiddleware and AdminMiddleware
+	mux.Handle("/api/user/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteUsers)))))
 	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addCourse)))))
 	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.updateCourse)))))
 	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteCourse)))))
