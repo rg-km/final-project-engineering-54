@@ -16,8 +16,8 @@ export default function FormInput(props) {
         <div className={` ${classname} form-control space-y-2`}> 
             <label htmlFor={forLabel} className="text-gray-800 font-medium">{label} <RequireStar /></label>
             <input 
-                {...inputProps} 
-                className="form-input w-full rounded-[0.5rem] pl-3 h-10 border border-gray-200 border-solid rouded-[1rem]" 
+                {...inputProps}
+                className="form-input w-full rounded-[0.5rem] pl-3 h-10 border border-gray-200 border-solid rouded-[1rem] focus:outline" 
                 onChange={onChange} 
                 onBlur={handleFocus} 
                 onFocus={ () => inputProps.name === "confirmPassword" && setFocus(true)} 

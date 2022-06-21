@@ -6,6 +6,23 @@
     align-items: center;
 
     li {
+      &:first-child {
+        > a {
+          @include transition(all, .2s);
+          &.nav-active {
+            text-underline-offset: 4px;
+            text-decoration: underline;
+            text-decoration-style: solid;
+            -moz-text-decoration-style: solid;
+            text-decoration-color: $blue-code;
+            -moz-text-decoration-color: $blue-code;
+            &:hover {
+              text-decoration-color: $orange-code;
+              -moz-text-decoration-color: $orange-code;
+            }
+          }
+        }
+      }
       &:nth-child(2) {
         button {
           cursor: pointer;

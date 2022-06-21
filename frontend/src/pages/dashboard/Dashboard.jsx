@@ -1,9 +1,10 @@
 import React from "react"
+import { AuthContext } from "../../App";
+import { NavLink, Outlet, Navigate } from "react-router-dom"
 
+import Image from "../../components/Image";
 import Codeswer from "../../layouts/Codeswer";
 import "../../styles/dashboard/_dashboard.scss";
-import { NavLink, Outlet } from "react-router-dom"
-import Image from "../../components/Image";
 
 
 export default function Dashboard() {
@@ -33,6 +34,10 @@ export default function Dashboard() {
     const handleClick = (e) => {
         setActive(e.target.innerText);
     }
+
+    const {state} = React.useContext(AuthContext);
+
+    if(!state.isAuthenticated) return <Navigate to="/signin" replace/>  
 
     return (
         <Codeswer

@@ -3,6 +3,7 @@ import Swal from "sweetalert2"
 import axios from "../../api/axios"
 
 import "../../styles/auth/_signup.scss";
+import { AuthContext } from "../../App";
 import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
 import { NavLink, Navigate } from "react-router-dom";
@@ -20,6 +21,7 @@ export default function Signup() {
         password: "",
         confirmPassword: "",
     });
+    
     const [redirect, setRedirect] = React.useState(false);
 
     const inputs = [
@@ -94,16 +96,15 @@ export default function Signup() {
             required: true,
         },
     ]
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         await axios.post("/user/register", values)
         .then( res => {
             let timerInterval
             Swal.fire({
-                timer: 2500,
+                timer: 2000,
                 icon: 'success',
-                position: 'top-end',
                 showConfirmButton: false,
                 title: 'Daftar Berhasil',
                 text: 'Silahkan masuk ke Codeswer',
@@ -124,11 +125,10 @@ export default function Signup() {
         })
         .catch( error => {
             let errorMessage = error.response;
-            if (errorMessage.status === 400) {
+            if (errorMessage.status !== 200) {
                 Swal.fire({
                     timer: 5000,
                     icon: 'error',
-                    position: 'top-end',
                     titleText: 'Coba lagi yuk',
                     showConfirmButton: false,
                     text: `${errorMessage.data.error}`,
@@ -136,21 +136,8 @@ export default function Signup() {
                         container: 'poppins',
                     }
                 })
-                console.log(errorMessage.data.error);
-             } else if(errorMessage.status !== 200 || errorMessage.status !== 400) {
-                Swal.fire({
-                    timer: 5000,
-                    icon: 'error',
-                    position: 'top-end',
-                    titleText: 'Coba lagi yuk',
-                    showConfirmButton: false,
-                    confirmButtonText: 'Masuk',
-                    text: `Ada yang salah dengan data kamu`,
-                    customClass: {
-                        container: 'poppins',
-                    }
-                })
-             } 
+                // console.log(errorMessage.data.error);
+            }
             return
         });
     }

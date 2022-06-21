@@ -11,7 +11,7 @@ import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
 import Terms from "./pages/terms/Terms";
-import Abouts from "./pages/about/Abouts";
+// import Abouts from "./pages/about/Abouts";
 
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
@@ -33,13 +33,11 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem("email", action.payload.token);
+      localStorage.setItem("email", action.payload.email);
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("name", action.payload.name);
       return {
         ...state,
         isAuthenticated: true,
-        name: action.payload.name,
         email: action.payload.email,
         token: action.payload.token,
       };
@@ -48,9 +46,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: false,
-        name: action.payload.name,
-        email: action.payload.email,
-        token: action.payload.token,
+        email: null,
       }
     default:
       return state;
@@ -80,6 +76,6 @@ export default function App() {
               <Route path="/terms" element={<Terms />} />
           </Routes>
         </ScrollPage>
-      </AuthContext.Provider>
+      </AuthContext.Provider> 
     );
 }
