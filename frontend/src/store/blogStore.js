@@ -244,7 +244,7 @@ export const blogStore = [
         <strong>Kesimpulan</strong>
         Kesalahan CORS dapat menjadi kutukan bagi pengembang frontend. Namun begitu Anda memahami kebijakan asal yang sama di balik kesalahan tersebut, dan bagaimana hal itu melawan serangan pemalsuan permintaan lintas situs yang berbahaya, itu menjadi sedikit lebih tertahankan.
 
-        Pada akhirnya, dengan perbaikan ini, Anda tidak perlu berkeringat lagi melihat kesalahan CORS merah di log konsol browser Anda lagi. Sebagai gantinya, di hadapannya, Anda akan mencabut plugin atau proxy, dan berseru:
+        Pad akhirnya, dengan perbaikan ini, Anda tidak perlu berkeringat lagi melihat kesalahan CORS merah di log konsol browser Anda lagi. Sebagai gantinya, di hadapannya, Anda akan mencabut plugin atau proxy, dan berseru:
         
         <strong>"I HAVE THE POWER"</strong>
 
