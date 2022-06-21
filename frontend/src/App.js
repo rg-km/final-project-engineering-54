@@ -10,6 +10,7 @@ import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
 import Terms from "./pages/terms/Terms";
+import Abouts from "./pages/about/Abouts";
 
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
@@ -35,6 +36,7 @@ export default function App() {
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/terms" element={<Terms />} />
+      <Route path="/abouts" element={<Abouts />} />
     </Routes>
   );
 }
