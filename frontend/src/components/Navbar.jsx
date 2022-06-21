@@ -1,8 +1,8 @@
 import React from "react"
-import AuthBtn from "./auth/AuthBtn";
+// import AuthBtn from "./auth/AuthBtn";
 
 import Image from "./Image";
-// import NoAuthBtn from "./auth/NoAuthBtn";
+import NoAuthBtn from "./auth/NoAuthBtn";
 import { classes } from "../utils/Utils";
 import "../styles/component/_navbar.scss";
 import { NavLink } from 'react-router-dom';
@@ -69,19 +69,19 @@ export default function Navbar() {
                                 Blog
                             </NavLink>
                         </li>
-                        {/* <NoAuthBtn classname="noauth-links" /> */}
-                        <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
+                        <NoAuthBtn classname="noauth-links" />
+                        {/* <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
                             <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>
                             <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
-                        </AuthBtn>
+                        </AuthBtn> */}
                     </ul>
                 </div>
 
                 <div id="nav_autentikasi">
-                    {/* <NoAuthBtn classname={"noauth-nav"}/> */}
-                    <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
+                    <NoAuthBtn classname={"noauth-nav"}/>
+                    {/* <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
                         <Image classname="w-[2.5rem] mr-1"/>
-                    </AuthBtn>  
+                    </AuthBtn>   */}
                     <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
                 </div>
             </nav>
