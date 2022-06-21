@@ -254,5 +254,60 @@ export const blogStore = [
         authorImage: '/asset/img/user.jpg',
         createdAt: 'June 20, 2022',
     },
+    {
+        id: 6,
+        title: "Mengenal Text Editor",
+        slug: "mengenal-text-editor",
+        image: "/asset/img/blog/text-editor.jpg",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 18,
+        description: `Haloo, Sahabat Codeswer.Kali ini kita akan membahas tentang Text Editor
+        
+        <strong>Apa Itu Text Editor ?</strong>
+        
+        Text editor adalah sebuah aplikasi yang biasa dipakai oleh para programmer untuk menyusun dan menjalankan kode program.
+        
+        <strong>Beberapa Macam Text Editor</strong>
+        
+        Saat ini banyak sekali pilihan text editor,kali ini akan kami berikan rekomendasi beberapa text editor terbaik & populer
+        
+        <strong>1.Sublime Text</strong>
+        
+        Ingin tampilan text editor yang 'meriah' dengan fitur yang melimpah? Coba Kamu lihat Sublime Text di bawah ini.
+
+        Salah satu keunggulan dari Sublime Text memang tampilannya yang dinamis. Tersedia juga beberapa tema yang dapat Kamu pilih sesuai dengan selera.
+
+        Sublime Text termasuk di dalam text editor yang mendukung berbagai macam sistem operasi seperti Windows, Mac, dan Linux. Jadi tidak masalah jika Kamu mengerjakan pengembangan aplikasi menggunakan beberapa sistem operasi yang berbeda-beda. 
+
+        Keunggulan dari Sublime Text adalah cepat dan dapat digunakan bahkan di perangkat dengan resource yang kecil. Sublime Text juga memungkinkan Kamu untuk menambah fitur dengan menginstall plugin.Kamu bisa menginstall beberapa plugin apabila mempunyai resource yang cukup.
+
+        Sublime Text dapat Kamu gunakan secara gratis dengan batasan waktu. Namun Sublime Text juga menyediakan fitur premium yang hanya bisa Kamu gunakan jika melakukan pembayaran. Biayanya sekitar 70 US Dollar untuk mendapatkan lisensi penuh. 
+        
+        <strong>2.Visual Studio Code</strong>
+        
+        Visual Studio Code merupakan text editor yang gratis dan sangat powerfull.Dengan banyaknya fitur tambahan yang akan membuat Kamu nyaman saat membuat program.Kamu pun pasti akan menyukainya
+
+        Kamu dapat menyembunyikan menu dan ikon dengan menggunakan mode Zen. Mode ini mendukung Kamu untuk tetap fokus pada aplikasi yang sedang dikembangkan. Untuk menavigasi antara fitur satu dengan yang lain, Kamu bisa memanfaatkan keyboard shortcut yang juga tersedia lengkap di Visual Code.
+
+        Menariknya, terdapat juga terdapat juga fitur integrasi dengan Git dan fitur debugging yang dapat membantu Kamu untuk mengecek kesalahan pada baris kode. Sangat ideal untuk programmer.
+
+        <strong>3.IntelliJ IDEA</strong>
+        Pada umumnya,sebuah IDE (Integrated Development Environment) menyediakan beberapa fitur seperti text editor yang akan kita gunakan untuk menulis kode,tools untuk mengotomatisasi proses build dari program yang kita buat dan juga debugger yang akan membantu kita mendeteksi dan memperbaiki kesalahan yang terdapat pada program.Apa aja sihh fitur yang terdapat di IntelliJ ini
+
+        <ul>#1.Intelligent Code Editor</ul>
+        IntelliJ IDEA memiliki editor yang mendukung code completion, sebuah fitur yang dapat membantu kita untuk menuliskan kode dengan cepat. IntelliJ IDEA menganalisa konteks dari kode yang ditulis sehingga dapat memberikan saran penyelesaian pengetikan kode dengan tepat. Selain itu, IntelliJ IDEA mendukung refactoring yang saling terintegrasi yang memudahkan kita untuk meminimalisir kesalahan yang terjadi ketika adanya perubahan dalam proyek yang sedang dikembangkan.
+
+        <ul>#2.Terminal</ul>
+        Jika ingin menjalankan perintah pada sebuah terminal, kita tidak perlu beralih dari editor. Sebabnya, Intellij IDEA dilengkapi dengan terminal bawaan yang berbasis platform yang kita gunakan seperti command prompt, Far, powershell atau bash.
+
+        <ul>#3.Version Control</ul>
+        IntelliJ IDEA menyediakan sebuah antarmuka terpadu untuk version control system (VCS) termasuk Git, SVN, Mercurial, CVS, Perforce, dan TFS. Kita dengan mudah bisa melihat catatan perubahan, mengatur branch, melakukan commit, memperbaiki conflict dan aktivitas lain yang terkait dengannya.
+        
+        Nahh itu dia beberapa Text Editor yang populer saat ini,semoga membantu ya. Salam Codeswer `,
+        authorName: 'Imron Nur Rohman',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June  21, 2022',
+    }
     
 ]
