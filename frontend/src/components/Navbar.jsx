@@ -22,6 +22,9 @@ export default function Navbar() {
         setIsPopup(!isPopup);
     }
 
+    
+
+
     return (
         <header>
             <nav id="navbar_component">   

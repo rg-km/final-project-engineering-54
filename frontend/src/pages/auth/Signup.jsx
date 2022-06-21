@@ -1,4 +1,5 @@
 import React from "react"
+import Swal from "sweetalert2"
 import axios from "../../api/axios"
 
 import "../../styles/auth/_signup.scss";
@@ -96,9 +97,62 @@ export default function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await axios.post("/user/register", values);
-        console.log(response)
-        setRedirect(true);
+        await axios.post("/user/register", values)
+        .then( res => {
+            let timerInterval
+            Swal.fire({
+                timer: 2500,
+                icon: 'success',
+                position: 'top-end',
+                showConfirmButton: false,
+                title: 'Daftar Berhasil',
+                text: 'Silahkan masuk ke Codeswer',
+                customClass: {
+                    container: 'poppins'
+                },
+                didOpen: () => {
+                    Swal.showLoading()
+                  },
+                  willClose: () => {
+                    clearInterval(timerInterval)
+                  }
+                }).then((result) => {
+                  if (result.dismiss === Swal.DismissReason.timer) {
+                      setRedirect(true);                  
+                  }
+            })    
+        })
+        .catch( error => {
+            let errorMessage = error.response;
+            if (errorMessage.status === 400) {
+                Swal.fire({
+                    timer: 5000,
+                    icon: 'error',
+                    position: 'top-end',
+                    titleText: 'Coba lagi yuk',
+                    showConfirmButton: false,
+                    text: `${errorMessage.data.error}`,
+                    customClass: {
+                        container: 'poppins',
+                    }
+                })
+                console.log(errorMessage.data.error);
+             } else if(errorMessage.status !== 200 || errorMessage.status !== 400) {
+                Swal.fire({
+                    timer: 5000,
+                    icon: 'error',
+                    position: 'top-end',
+                    titleText: 'Coba lagi yuk',
+                    showConfirmButton: false,
+                    confirmButtonText: 'Masuk',
+                    text: `Ada yang salah dengan data kamu`,
+                    customClass: {
+                        container: 'poppins',
+                    }
+                })
+             } 
+            return
+        });
     }
 
     if (redirect) return <Navigate to="/signin" />;
