@@ -40,6 +40,7 @@ var jwtKey = []byte("secret")
 
 // create struct claim for object encode in jwt
 type Claims struct {
+	Id    int64
 	Email string
 	Role  string
 	jwt.StandardClaims
@@ -72,6 +73,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 
 	// create claim for object encode in jwt
 	claims := &Claims{
+		Id:    res.ID,
 		Email: user.Email,
 		Role:  *userRole,
 		StandardClaims: jwt.StandardClaims{
