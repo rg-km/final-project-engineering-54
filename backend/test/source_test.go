@@ -120,7 +120,8 @@ var _ = Describe("Source Test", func() {
 			It("accepts the login", func() {
 				res, err := userSource.Login("admin@gmail.com", "123456")
 				Expect(err).ToNot(HaveOccurred())
-				Expect(*res).To(Equal("admin@gmail.com"))
+				Expect(res.ID).To(Equal(int64(1)))
+				Expect(res.Email).To(Equal("admin@gmail.com"))
 			})
 		})
 		When("Email is correct but Password is wrong", func() {
