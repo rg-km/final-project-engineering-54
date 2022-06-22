@@ -2,6 +2,7 @@ package source_test
 
 import (
 	"database/sql"
+	"time"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -119,7 +120,8 @@ var _ = Describe("Source Test", func() {
 			It("accepts the login", func() {
 				res, err := userSource.Login("admin@gmail.com", "123456")
 				Expect(err).ToNot(HaveOccurred())
-				Expect(*res).To(Equal("admin@gmail.com"))
+				Expect(res.ID).To(Equal(int64(1)))
+				Expect(res.Email).To(Equal("admin@gmail.com"))
 			})
 		})
 		When("Email is correct but Password is wrong", func() {
@@ -139,28 +141,40 @@ var _ = Describe("Source Test", func() {
 	})
 
 	// create for register user if email already exist in database then return error
-	// Describe("Register User", func() {
-	// 	When("Email is not exist in Database", func() {
-	// 		It("accepts the register", func() {
-	// 			res, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, time.Now(), time.Now())
-	// 			Expect(err).ToNot(HaveOccurred())
-	// 			Expect(res).To(Equal("damaraccd11@gmail.com"))
-	// 		})
-	// 	})
-	// 	When("Email is exist in Database", func() {
-	// 		It("rejects the register", func() {
-	// 			_, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, time.Now(), time.Now())
-	// 			Expect(err).To(HaveOccurred())
-	// 			Expect(err.Error()).To(Equal("Email is already exist"))
-	// 		})
-	// 	})
-	// 	When("All Field is Empty", func() {
-	// 		It("rejects the register", func() {
-	// 			_, err := userSource.Register("", "", "", "", "", "", "", false, time.Now(), time.Now())
-	// 			Expect(err).To(HaveOccurred())
-	// 			Expect(err.Error()).To(Equal("All Field is Empty"))
-	// 		})
-	// 	})
-	// })
+	Describe("Register User", func() {
+		start := time.Now()
+
+		When("Email is not exist in Database", func() {
+			It("accepts the register", func() {
+				res, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, start, start)
+				Expect(err).ToNot(HaveOccurred())
+
+				Expect(res.Email).ToNot(Equal(""))
+				Expect(res.Password).ToNot(Equal(""))
+				Expect(res.Name).ToNot(Equal(""))
+				Expect(res.Phone).ToNot(Equal(""))
+				Expect(res.Address).ToNot(Equal(""))
+				Expect(res.Photo).ToNot(Equal(""))
+				Expect(res.Role).ToNot(Equal(""))
+				Expect(res.Logedin).To(Equal(false))
+				Expect(res.CreatedAt).ToNot(Equal(time.Now()))
+				Expect(res.UpdatedAt).ToNot(Equal(time.Now()))
+			})
+		})
+		When("Email is exist in Database", func() {
+			It("rejects the register", func() {
+				_, err := userSource.Register("admin@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, start, start)
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(Equal("Email already exist"))
+			})
+		})
+		When("All Field is Empty", func() {
+			It("rejects the register", func() {
+				_, err := userSource.Register("", "", "", "", "", "", "", false, start, start)
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(Equal("Please fill all field"))
+			})
+		})
+	})
 
 })

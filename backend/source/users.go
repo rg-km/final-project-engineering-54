@@ -48,6 +48,7 @@ func (u *UsersSource) FetchAllUsers() ([]User, error) {
 
 	return users, nil
 }
+
 // create function for get user who logedin	true
 func (u *UsersSource) FetchUserLogedin() ([]User, error) {
 	var users []User
@@ -70,42 +71,42 @@ func (u *UsersSource) FetchUserLogedin() ([]User, error) {
 }
 
 // create function for login user by email and password, then update logedin status to true
-func (u *UsersSource) Login(email string, password string) (*string, error) {
+func (u *UsersSource) Login(email string, password string) (User, error) {
 	var user User
 
-	err := u.db.QueryRow("SELECT email FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.Email)
+	err := u.db.QueryRow("SELECT id, email, name FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.ID, &user.Email, &user.Name)
 	if err != nil {
-		return nil, errors.New("Email or password is incorrect")
+		return user, errors.New("Email or password is incorrect")
 	}
 
 	_, err = u.db.Exec("UPDATE users SET logedin = ? WHERE email = ?", true, email)
 	if err != nil {
-		return nil, err
+		return user, err
 	}
 
-	return &user.Email, nil
+	return user, nil
 }
 
 // create function for register user if email already exist in database then return error
 func (u *UsersSource) Register(email string, password string, name string, phone string, address string, photo string, role string, logedin bool, createdAt time.Time, updatedAt time.Time) (User, error) {
 	var user User
 
-	if email == "" || password == "" || name == "" || phone == "" || address == ""{
+	if email == "" || password == "" || name == "" || phone == "" || address == "" {
 		return user, errors.New("Please fill all field")
 	}
-	
+
 	err := u.db.QueryRow("SELECT email FROM users WHERE email = ?", email).Scan(&user.Email)
 	if err == nil {
 		return user, errors.New("Email already exist")
 	}
 
-	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)	
+	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
 	if err != nil {
 		return user, errors.New("Failed to register")
 	}
 
 	return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
-	
+
 	// _, err := u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
 	// if err != nil {
 	// 	return User{}, err

@@ -6,5 +6,5 @@ export default function Image({ classname, path }) {
 
 
 Image.defaultProps = {
-    path: "/asset/img/user.jpg",
+    path: "/asset/img/user/default.svg",
 }

@@ -1,17 +1,21 @@
 import BtnCustom from "../BtnCustom"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import "../../styles/component/auth/_noauthbtn.scss"
 
 export default function NoAuthBtn({classname}) {
     return (
         <ul id="nav_noauth_item" className={`${classname} poppins space-x-8`}>
-            <li><Link to="/signup">Daftar</Link></li>
+            <li><NavLink to="/signup"
+                className={({ isActive }) =>
+                    isActive ? 'nav-active' : ''
+                }
+            >Daftar</NavLink></li>
             <li>
-                <Link to="/signin">
+                <NavLink to="/signin">
                     <BtnCustom>
                         Masuk
                     </BtnCustom>
-                </Link>
+                </NavLink>
             </li>
         </ul>
     )

@@ -1,7 +1,11 @@
+import React from "react"
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../App";
 import "../../styles/auth/_popupauthbtn.scss";
 
 export default function PopupAuthBtn({classname}) {
+
+    const {state, dispatch} = React.useContext(AuthContext);
     return (
         <aside className={`${classname} popup-auth-btn absolute z-10`}>
             <nav>
@@ -13,7 +17,12 @@ export default function PopupAuthBtn({classname}) {
                         <Link to="/question">Tanya</Link>
                     </li>
                     <li className="text-red-500 font-light">
-                        <Link to="/logout">Keluar</Link>
+                        <span className="outline-none"
+                            onClick={() =>
+                                dispatch({
+                                    type: "LOGOUT"
+                            })}
+                        >Keluar</span>
                     </li>
                 </ul>
             </nav>

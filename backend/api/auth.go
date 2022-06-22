@@ -25,7 +25,9 @@ type User struct {
 }
 
 type LoginSuccess struct {
+	Id    int64  `json:"id"`
 	Email string `json:"email"`
+	Name  string `json:"name"`
 	Token string `json:"token"`
 }
 
@@ -38,6 +40,7 @@ var jwtKey = []byte("secret")
 
 // create struct claim for object encode in jwt
 type Claims struct {
+	Id    int64
 	Email string
 	Role  string
 	jwt.StandardClaims
@@ -63,14 +66,15 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userRole, _ := api.usersSource.FetchUserRole(*res)
+	userRole, _ := api.usersSource.FetchUserRole(res.Email)
 
 	// set expire time for token jwt in 24 hour
 	expireTime := time.Now().Add(time.Hour * 24)
 
 	// create claim for object encode in jwt
 	claims := &Claims{
-		Email: *res,
+		Id:    res.ID,
+		Email: user.Email,
 		Role:  *userRole,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
@@ -97,7 +101,11 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 	})
 
 	// return token to client
-	json.NewEncoder(w).Encode(LoginSuccess{Email: *res, Token: tokenString})
+	json.NewEncoder(w).Encode(LoginSuccess{
+		Id:    res.ID,
+		Email: res.Email,
+		Name:  res.Name,
+		Token: tokenString})
 }
 
 // create function for register user
@@ -110,9 +118,9 @@ func (api *API) register(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(LoginError{Error: "Invalid request"})
 		return
 	}
-	
+
 	res, err := api.usersSource.Register(user.Email, user.Password, user.Name, user.Phone, user.Address, user.Photo, user.Role, user.Logedin, time.Now(), time.Now())
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
