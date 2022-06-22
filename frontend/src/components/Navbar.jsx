@@ -1,5 +1,6 @@
 import React from "react"
-// import AuthBtn from "./auth/AuthBtn";
+import AuthBtn from "./auth/AuthBtn";
+import { AuthContext } from "../App";
 
 import Image from "./Image";
 import NoAuthBtn from "./auth/NoAuthBtn";
@@ -17,11 +18,12 @@ export default function Navbar() {
     }
 
     const [isPopup, setIsPopup] = React.useState(false);
-
     const openPopup = () => {
         setIsPopup(!isPopup);
     }
-
+    
+    const {state} = React.useContext(AuthContext);
+    
     return (
         <header>
             <nav id="navbar_component">   
@@ -69,20 +71,30 @@ export default function Navbar() {
                                 Blog
                             </NavLink>
                         </li>
-                        <NoAuthBtn classname="noauth-links" />
-                        {/* <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
-                            <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>
-                            <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
-                        </AuthBtn> */}
+                        {
+                            state.isAuthenticated ?
+                                <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
+                                    <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>
+                                    <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
+                                </AuthBtn>
+                                :
+                                <NoAuthBtn classname="noauth-links" />
+                        }
                     </ul>
                 </div>
 
                 <div id="nav_autentikasi">
-                    <NoAuthBtn classname={"noauth-nav"}/>
-                    {/* <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
-                        <Image classname="w-[2.5rem] mr-1"/>
-                    </AuthBtn>   */}
-                    <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
+                    {
+                        state.isAuthenticated ?
+                            <>
+                                <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
+                                    <Image classname="w-[2.5rem] mr-1"/>
+                                </AuthBtn>  
+                                <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
+                            </>
+                            :
+                            <NoAuthBtn classname={"noauth-nav"}/>
+                    }
                 </div>
             </nav>
         </header>

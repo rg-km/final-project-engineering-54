@@ -1,15 +1,19 @@
 import React from "react"
+import Swal from "sweetalert2"
 import axios from "../../api/axios"
+import { AuthContext } from "../../App";
+import { Link, Navigate } from "react-router-dom";
 
 import "../../styles/auth/_signin.scss";
 import Codeswer from "../../layouts/Codeswer";
-import { Link, Navigate } from "react-router-dom";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
 
 export default function Login() {
 
     const status = null;
+
+    const { dispatch } = React.useContext(AuthContext)
 
     const [values, setValues] = React.useState({
         email: "",
@@ -43,14 +47,62 @@ export default function Login() {
         },
     ]
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        axios.post("/user/login", values)
-        setRedirect(true);
+
+        await axios.post("/user/login", values, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(res => {
+            // console.log(res.data)
+            if(res.status === 200) {
+                dispatch({
+                    type: "LOGIN",
+                    payload: res.data
+                })
+                let timerInterval
+                Swal.fire({
+                    timer: 1000,
+                    icon: 'success',
+                    showConfirmButton: false,
+                    title: 'Login Berhasil',
+                    text: 'Tunggu sebentar',
+                    customClass: {
+                        container: 'poppins'
+                    },
+                    didOpen: () => {
+                        Swal.showLoading()
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval)
+                      }
+                    }).then((result) => {
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                          setRedirect(true);                  
+                      }
+                })    
+            }
+        })
+        .catch( error => {
+            let errorMessage = error.response;
+            Swal.fire({
+                timer: 5000,
+                icon: 'error',
+                titleText: 'Coba lagi yuk',
+                showConfirmButton: false,
+                text: `${errorMessage.data.error}`,
+                customClass: {
+                    container: 'poppins',
+                }
+            })
+        })
     }
-
+    
     if (redirect) return <Navigate to="/dashboard" replace />;
-
+    
     const onChange = (e) => {
         setValues({
             ...values,

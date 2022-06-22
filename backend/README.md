@@ -14,6 +14,17 @@
 - `POST`: `/api/user/register`
 - `POST`: `/api/user/logout`
 
+### Auth Middleware
+- `GET`: `/api/user`
+- `GET`: `/api/user/id`
+- `GET`: `/api/user/logged`
+- `GET`: `/api/user/update`
+  
+### Course
+- `GET`: `/api/course`
+- `GET`: `/api/course/id`
+- `GET`: `/api/course/name`
+
 # How to run service
 1. Migration: run `main.go` inside directory `backend/db/migration/` for Migration database SQLite
 ```

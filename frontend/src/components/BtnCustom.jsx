@@ -1,7 +1,7 @@
 import React from "react"
 import "../styles/component/_btnCustom.scss";
 
-export default function BtnCustom({classname, type, children}) {
+export default function BtnCustom({disabled, classname, type, children}) {
 
     const [coords, setCoords] = React.useState({ x: -1, y: -1 });
     const [isRippling, setIsRippling] = React.useState(false);
@@ -18,7 +18,7 @@ export default function BtnCustom({classname, type, children}) {
     }, [isRippling]);
 
     return(
-        <button type={type} className={`${classname} btn-custom`}
+        <button disabled={disabled} type={type} className={`${classname} btn-custom`}
             onClick={e => {
                 const rect = e.target.getBoundingClientRect();
                 setCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });
