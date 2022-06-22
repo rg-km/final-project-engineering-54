@@ -171,7 +171,7 @@ var _ = Describe("Source Test", func() {
 			It("rejects the register", func() {
 				_, err := userSource.Register("", "", "", "", "", "", "", false, start, start)
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).To(Equal("Please fill all field"))``
+				Expect(err.Error()).To(Equal("Please fill all field"))
 			})
 		})
 	})
