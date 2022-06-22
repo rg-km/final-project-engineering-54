@@ -308,6 +308,49 @@ export const blogStore = [
         authorName: 'Imron Nur Rohman',
         authorImage: '/asset/img/user.jpg',
         createdAt: 'June  21, 2022',
-    }
-    
+    },
+    {
+        id: 7,
+        title: "Extension Di Visual Studio Untuk Pemula",
+        slug: "extension-di-visual-studio-untuk-pemula",
+        image: "/asset/img/blog/vscode.png",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 8,
+        description: `Haloo, Sahabat Codeswer.Berjumpa lagi nih di website kita tercinta, semoga kalian gak bosen-bosen ya mampir baca artikel disini. Visual Studio Code merupakan text editor yang gratis dan sangat powerfull.Dengan banyaknya fitur tambahan yang akan membuat Kamu nyaman saat membuat program.salah satunya yaitu dengan adanya extension.
+
+        Berikut ini kita berikan saran beberapa extension yang berguna terutama untuk pemula.
+        
+        <strong>1. Live Server</strong>
+
+        <img src="/asset/img/blog/Live-server.png">
+        
+        Dengan Live Srver, kita dapat memuat ulang halaman web kita secara otomatis ketika kita mengubah kode di VS Code tanpa kita refresh halaman web-nya 😁.
+        
+        <strong>2. Auto Rename Tag</strong>
+        
+        <img src="/asset/img/blog/auto-rename-tag.png">
+
+        Salah mengetik atau sering disebut <i>typo</i> kode HTML merupakan hal yang biasa bagi Programmer. Namun, disaat kita ingin merubah tag tersebut, maka kita perlu merubah tag pembuka dan penutupnya satu per satu.Tentu hal tersebut cukup melelahkan,apalagi jika yang kita rubah banyak kan ? Auto Rename Tag adalah solusinya.Ini akan memudahkan kita melakukan rename tag secara otomatis.Cukup rubah tag pembuka maka tag penutup akan otomatis mengikuti tag pembuka tanpa repot merubah kedua tag tersebut.Jadi menghemat waktu dan tenaga dehh 😎.
+        
+        <strong>3. Material Icon</strong>
+        
+        <img src="/asset/img/blog/material-icon.png">
+        <img src="/asset/img/blog/file-icon.png">
+
+        Dengan tampilan file icon yang menarik tersebut tentunya membuat semangat untuk kita belajar coding bukann ?? 
+        😍
+
+        <strong>4. Intellisense for CSS class names></strong>
+
+        <img src="/asset/img/blog/intellisense.png">
+
+        Dengan ekstensi ini ketika kita menuliskan sebuah code maka akan diberikan saran sehingga lebih memudahkan kita saat membuat code di CSS
+        
+        
+        Okee codeswer sekian tips dari kita tentang extension,semoga membantu ya. Salam Codeswer😃 `,
+        authorName: 'Imron Nur Rohman',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June 21, 2022',
+    },
 ]
