@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "../../api/axios";
 import { AuthContext } from "../../App";
 import { NavLink, Outlet, Navigate } from "react-router-dom"
 
@@ -10,6 +11,7 @@ import "../../styles/dashboard/_dashboard.scss";
 export default function Dashboard() {
 
     const status = null;
+    const {state} = React.useContext(AuthContext);
 
     const options = [
         {
@@ -35,9 +37,10 @@ export default function Dashboard() {
         setActive(e.target.innerText);
     }
 
-    const {state} = React.useContext(AuthContext);
 
-    if(!state.isAuthenticated) return <Navigate to="/signin" replace/>  
+    if(!state.isAuthenticated) {
+        return <Navigate to="/signin" replace/>  
+    }
 
     return (
         <Codeswer
@@ -59,7 +62,11 @@ export default function Dashboard() {
                             <div className="avatar-wrapper w-[8rem]">
                                 <Image />
                             </div>
-                            <h1 className="poppins">Aditya Rizqi Ardhana</h1>
+                            <h1 className="poppins">
+                                {
+                                    state.email
+                                }
+                            </h1>
                         </div>
                         <div className="second-left">
                             <nav className="nav-dashboard md:pl-4 pl-0">

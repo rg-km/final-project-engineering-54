@@ -3,7 +3,6 @@ import Swal from "sweetalert2"
 import axios from "../../api/axios"
 
 import "../../styles/auth/_signup.scss";
-import { AuthContext } from "../../App";
 import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
 import { NavLink, Navigate } from "react-router-dom";

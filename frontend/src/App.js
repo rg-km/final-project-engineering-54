@@ -25,7 +25,7 @@ export const AuthContext = createContext();
 
 const initialState = {
   isAuthenticated: false,
-  name: null,
+  id: null,
   email: null,
   token: null,
 };
@@ -33,11 +33,13 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
+      localStorage.setItem("id", action.payload.id);
       localStorage.setItem("email", action.payload.email);
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isAuthenticated: true,
+        id: action.payload.id,
         email: action.payload.email,
         token: action.payload.token,
       };
@@ -61,12 +63,12 @@ export default function App() {
       <AuthContext.Provider value={{ state, dispatch }}>
         <ScrollPage>
           <Routes>
-              <Route path="/signin" element={<Signin />} />
+              <Route exact path="/signin" element={<Signin />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
               <Route element={<Dashboard />}>
-                <Route path="/dashboard" element={<Mydash />} />
+                <Route exact path="/dashboard" element={<Mydash />} />
                 <Route path="/questions" element={<Questions />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/question" element={<Question />} />
