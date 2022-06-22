@@ -71,20 +71,20 @@ func (u *UsersSource) FetchUserLogedin() ([]User, error) {
 }
 
 // create function for login user by email and password, then update logedin status to true
-func (u *UsersSource) Login(email string, password string) (*string, error) {
+func (u *UsersSource) Login(email string, password string) (User, error) {
 	var user User
 
-	err := u.db.QueryRow("SELECT email FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.Email)
+	err := u.db.QueryRow("SELECT id, email, name FROM users WHERE email = ? AND password = ?", email, password).Scan(&user.ID, &user.Email, &user.Name)
 	if err != nil {
-		return nil, errors.New("Email or password is incorrect")
+		return user, errors.New("Email or password is incorrect")
 	}
 
 	_, err = u.db.Exec("UPDATE users SET logedin = ? WHERE email = ?", true, email)
 	if err != nil {
-		return nil, err
+		return user, err
 	}
 
-	return &user.Email, nil
+	return user, nil
 }
 
 // create function for register user if email already exist in database then return error
