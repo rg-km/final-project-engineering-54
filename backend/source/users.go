@@ -48,6 +48,7 @@ func (u *UsersSource) FetchAllUsers() ([]User, error) {
 
 	return users, nil
 }
+
 // create function for get user who logedin	true
 func (u *UsersSource) FetchUserLogedin() ([]User, error) {
 	var users []User
@@ -90,22 +91,22 @@ func (u *UsersSource) Login(email string, password string) (*string, error) {
 func (u *UsersSource) Register(email string, password string, name string, phone string, address string, photo string, role string, logedin bool, createdAt time.Time, updatedAt time.Time) (User, error) {
 	var user User
 
-	if email == "" || password == "" || name == "" || phone == "" || address == ""{
+	if email == "" || password == "" || name == "" || phone == "" || address == "" {
 		return user, errors.New("Please fill all field")
 	}
-	
+
 	err := u.db.QueryRow("SELECT email FROM users WHERE email = ?", email).Scan(&user.Email)
-	if err != nil {
+	if err == nil {
 		return user, errors.New("Email already exist")
 	}
 
-	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)	
+	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
 	if err != nil {
 		return user, errors.New("Failed to register")
 	}
 
 	return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
-	
+
 	// _, err := u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
 	// if err != nil {
 	// 	return User{}, err
