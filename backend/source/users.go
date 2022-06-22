@@ -95,7 +95,7 @@ func (u *UsersSource) Register(email string, password string, name string, phone
 	}
 	
 	err := u.db.QueryRow("SELECT email FROM users WHERE email = ?", email).Scan(&user.Email)
-	if err != nil {
+	if err == nil {
 		return user, errors.New("Email already exist")
 	}
 
