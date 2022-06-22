@@ -146,6 +146,7 @@ var _ = Describe("Source Test", func() {
 	 		It("accepts the register", func() {
 	 			res, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, start, start)
 	 			Expect(err).To(HaveOccurred())
+
 	 			Expect(res.Email).ToNot(Equal(""))
 				Expect(res.Password).ToNot(Equal(""))
 				Expect(res.Name).ToNot(Equal(""))
