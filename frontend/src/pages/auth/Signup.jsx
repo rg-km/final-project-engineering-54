@@ -33,7 +33,7 @@ export default function Signup() {
             errorMessage: "Namea harus memiliki minimal 3-20 karakter tanpa special character!",
             forLabel: "name",
             classname: "mt-0",
-            pattern: "^[a-zA-Z0-9]{3,20}$",
+            pattern: "^[w a-zA-Z0-9]{3,50}$",
             required: true,
         },
         {

@@ -18,9 +18,9 @@ export default function Profile() {
         password: "",
         address: "",
     });
-
+    
     const [image, setImage] = React.useState("default.svg")
-
+    
     const inputs = [
         {
             key: 1,
@@ -115,11 +115,14 @@ export default function Profile() {
 
     const handleEdit = async (e) => {
         e.preventDefault()
-        await axios.put(`/user/update`, values, {
+        await axios.put(`/user/update?id=${state.id}`, {
+            values,
+            image
+        }, {
+            withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
             },
-            withCredentials: true
         }).then(response => {
             console.log("Status: ", response.status);
             console.log("Data: ", response.data);
