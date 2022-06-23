@@ -166,7 +166,7 @@ export default function Signup() {
             <section id="container_signup">
                 <h1 className="inter">Selamat Datang di Codeswer</h1>
                 <div id="container_card" className="poppins">
-                    <div id="card_signup" className="px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
+                    <div id="card_signup" className="md:[w-30rem] px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
                         <h2>Daftar</h2>
                         <form id="form_wrapper" onSubmit={handleSubmit}
                             encType="multipart/form-data"

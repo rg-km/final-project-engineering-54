@@ -1,28 +1,27 @@
 import React from "react";
+// import { Link } from "react-router-dom";
 
-import "../../styles/_aboutus.scss";
-import CardCustom from "../../components/CardCustom";
-import { Link } from "react-router-dom";
-import BtnCustom from "../../components/BtnCustom";
-
-import Codeswer from "../../layouts/Codeswer";
+import "../styles/_about.scss";
+import Codeswer from "../layouts/Codeswer";
+import CardCustom from "../components/CardCustom";
+// import BtnCustom from "../components/BtnCustom";
 
 export default function About() {
   const status = null;
 
   return (
     <Codeswer
-      title="Masuk - Codeswer"
-      kw="codeswer login, codeswer signin, codeswer masuk, codeswer id masuk, codeswer masuk indonesia"
-      desc="Sudah punya akun Codeswer? Yuk masuk untuk mengakses fitur Codeswer."
+      title="About Us | Codeswer"
+      kw="codeswer about us, codeswer about us, codeswer about us, codeswer id about us, codeswer about us indonesia"
+      desc="Halaman About Us From Codeswer"
       ogUrl={status}
       ogType={status}
       ogTitle={status}
       ogDesc={status}
       twitTitle={status}
     >
-      <article className="terms-component">
-        <section id="container_terms">
+      <article className="about-component">
+        <section id="container_about">
           <article
             id="part_one"
             className="section-child bg-gradient-to-r from-sky-500 to-indigo-500 md:gap-x-3 gap-x-0 md:gap-y-0 gap-y-20 md:flex-row flex-col"
@@ -129,7 +128,7 @@ export default function About() {
             </div>
           </article>
 
-          <article id="part_two" className="section-child space-y-16">
+          {/* <article id="part_two" className="section-child space-y-16">
             <div className="md:gap-x-3 gap-x-0 md:gap-y-0 gap-y-20 md:flex-row flex-col poppins">
               <div id="two_left" className="md:w-[45%] w-full">
                 <img
@@ -150,7 +149,7 @@ export default function About() {
                 </Link>
               </div>
             </div>
-          </article>
+          </article> */}
         </section>
       </article>
     </Codeswer>

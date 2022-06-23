@@ -13,7 +13,7 @@ export default function Login() {
 
     const status = null;
 
-    const { state, dispatch } = React.useContext(AuthContext)
+    const { dispatch } = React.useContext(AuthContext)
 
     const [values, setValues] = React.useState({
         email: "",
@@ -39,14 +39,13 @@ export default function Login() {
             type: "password",
             name: "password",
             id: "password",
-            errorMessage: "Password harus memiliki minimal 8-25 karakter dan mengandung 1 huruf, 1 angka, dan 1 special character!",
+            errorMessage: "Minimal 8-25 karakter dan mengandung 1 huruf, 1 angka, dan 1 special character!",
             forLabel: "password",
             classname: "mt-7",
             pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*_])[a-zA-Z0-9!@#$%^&*_]{8,25}$",
             required: true,
         },
     ]
-    const [user, setUser] = React.useState([])
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -101,21 +100,6 @@ export default function Login() {
             })
         })
 
-        const getUser = () => {
-            axios.get(`/user/id?id=1`, {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                withCredentials: true
-            }).then( res => {
-                setUser(res)
-                console.log(res)
-            }).catch( er => {
-                console.log(er)
-            })
-        }
-
-        getUser()
     }
     
     if (redirect) return <Navigate to="/dashboard" replace />;
@@ -126,7 +110,6 @@ export default function Login() {
             [e.target.name]: e.target.value
         })
     }
-
 
     return (
         <Codeswer
@@ -144,7 +127,7 @@ export default function Login() {
             <section id="container_signin">
                 <h1 className="inter">Selamat Datang di Codeswer</h1>
                 <div id="container_card" className="poppins">
-                    <div id="card_signin" className="px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
+                    <div id="card_signin" className="md:w-[30rem] w-full px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
                         <h2>Masuk</h2>
                         <form id="form_wrapper" 
                             onSubmit={handleSubmit}

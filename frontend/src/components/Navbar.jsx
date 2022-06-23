@@ -1,7 +1,6 @@
 import React from "react"
 import AuthBtn from "./auth/AuthBtn";
 import { AuthContext } from "../App";
-import axios from "../api/axios"
 
 import Image from "./Image";
 import NoAuthBtn from "./auth/NoAuthBtn";

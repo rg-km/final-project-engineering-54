@@ -1,16 +1,16 @@
 import React from "react";
 
-import "../../styles/_terms.scss";
-import Codeswer from "../../layouts/Codeswer";
+import "../styles/_terms.scss";
+import Codeswer from "../layouts/Codeswer";
 
 export default function Kebijakanprivasi() {
   const status = null;
 
   return (
     <Codeswer
-      title="Masuk - Codeswer"
-      kw="codeswer login, codeswer signin, codeswer masuk, codeswer id masuk, codeswer masuk indonesia"
-      desc="Sudah punya akun Codeswer? Yuk masuk untuk mengakses fitur Codeswer."
+      title="Terms | Codeswer"
+      kw="codeswer terms, codeswer terms, codeswer terms, codeswer id terms, codeswer terms indonesia"
+      desc="Kami mempunyai kebijakan privasi terkait penggunaan aplikasi Codeswer"
       ogUrl={status}
       ogType={status}
       ogTitle={status}

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Codeswer from "../layouts/Codeswer";
 
 export default function NotFound() {
@@ -6,9 +7,9 @@ export default function NotFound() {
 
     return (
         <Codeswer
-            title="Pecahkan Masalah Pemrograman Bersama Mentor Berpengalaman"
-            kw="codeswer home, codeswer beranda, codeswer id home, codeswer beranda indonesia"
-            desc="Codeswer. Website yang menyediakan layanan forum bersama mentor yang berpengalaman secara privasi untuk membantumu menyelesaikan masalah kodinganmu."
+            title="404 | Halaman tidak ditemukan"
+            kw="codeswer not found, codeswer halaman tidak ditemukan, codeswer id home, codeswer halaman tidak ditemukan indonesia"
+            desc="Halaman Tidak Ditemukan"
             ogUrl={status}
             ogType={status}
             ogTitle={status}
@@ -16,7 +17,13 @@ export default function NotFound() {
             twitTitle={status}
         >
             <article className="notfound-component">
-                <h1>404</h1>
+                <div id="container_notfound" className="flex flex-col justify-center items-center text-center space-y-16 py-10">
+                    <img src="/asset/img/404.webp" alt="404" width={400}></img>
+                    <h1 className="text-gray-800 font-medium poppins text-[1.15rem] leading-normal">Tetap tenang. Coba cek kembali alamat URL yang kamu masukkan atau kembali ke 
+                        <Link to="/" className="text-blue-code font-semibold hover:text-orange-code"> Halaman utama</Link>
+                    </h1>
+                </div>
+
             </article>
         </Codeswer>
     )
