@@ -407,9 +407,40 @@ export const blogStore = [
         <img src="/asset/img/blog/section.png">
         
         
-        Okee codeswer sekian tips dari kita tentang HTML5,semoga membantu ya. Salam Codeswer😃 `,
+        Okee codeswer sekian tips dari kita tentang HTML5,semoga membantu yaa. Salam Codeswer😃 `,
         authorName: 'Imron Nur Rohman',
         authorImage: '/asset/img/user.jpg',
         createdAt: 'June 22, 2022',
+    },
+    {
+        id: 9,
+        title: "Apa Perbedaan Hosting, Server, dan Domain?",
+        slug: "apa_perbedaan_hosting,_server,_dan_domain?",
+        image: "/asset/img/blog/hosting.png",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 8,
+        description: `Saat hendak berbisnis, mulai membuat blog, atau apapun alasanmu membuat website, kamu perlu mengetahui istilah terkait website agar tak salah paham.
+
+        Beberapa istilah seperti hosting, server, dan domain akan sering kamu dengar. Lantas, apa perbedaan server, domain dan hosting?
+        
+        <strong>Perbedaan Server, Domain dan Hosting</strong>
+        Server, domain dan hosting adalah 3 hal yang saling terkait satu sama lain, tetapi pengertiannya masih sering tertukar satu sama lain. Mari kita bahas satu per satu.
+        
+        Hosting
+        Hosting merupakan tempat untuk menyimpan data yang ada di website. Sebuah hosting di simpan di dalam sebuah server. Meski sama-sama menampung data, namun bedanya hosting dengan server, yaitu server mempunyai hard disk, RAM hingga prosesor, yang bentuk dan ukurannya disesuaikan untuk disimpan di rack server.
+
+        Ada beberapa jenis hosting yang dapat kamu pahami, dua di antaranya adalah shared hosting dan cloud hosting.
+
+        Shared hosting adalah jenis hosting dengan harga terjangkau yang digunakan oleh beberapa website sekaligus. Artinya, hosting yang kamu gunakan berada pada server yang juga digunakan oleh orang lain sehingga kecepatan website pun terbagi-bagi oleh para pengguna lain.
+        Cloud hosting adalah layanan hosting yang disimpan pada server dan terhubung melalui internet. Oleh karena itu, jumlah server yang digunakan bisa lebih dari satu server sehingga saat terjadi masalah, server lain yang terhubung dengan internet dapat menjadi cadangan sementara hingga masalah tuntas.
+        Di Dewaweb, kami menggunakan hosting berbasis internet alias cloud hosting terbaik sehingga kamu bisa mendapatkan jaminan up-time website hingga 100% untuk paket hosting apapun sesuai keinginanmu. Selain itu, jika kamu membeli Paket Warrior selama minimal setahun, kamu bisa sekaligus menikmati tema dan plugin premium!
+        Secara garis besar, ketika kamu menyewa layanan hosting, maka yang kamu dapatkan adalah jasa penyimpanan data yang nantinya dipakai untuk website-mu, seperti data dalam bentuk teks, video, audio, gambar, file dan lainnya. Sekarang, yuk cari tau jenis hosting apa yang cocok buat kamu, dari sini.
+        
+        
+        Okee codeswer sekian. Semoga artikel ini membantu!. Salam Codeswer😃 `,
+        authorName: 'Rizki Nur Fadhila',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June 23, 2022',
     }
 ]
