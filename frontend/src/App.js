@@ -49,6 +49,9 @@ const reducer = (state, action) => {
         ...state,
         isAuthenticated: false,
         email: null,
+        id: null,
+        token: null
+      }
       };
     default:
       return state;

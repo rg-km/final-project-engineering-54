@@ -1,5 +1,5 @@
-export default function RequireStar() {
+export default function RequireStar({classStar}) {
     return (
-        <span className="text-red-600">*</span>
+        <span className={`${classStar} text-red-600`}>*</span>
     )
 }
