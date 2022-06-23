@@ -18,7 +18,8 @@ func main() {
 
 	users := source.NewUsersSource(db)
 	courses := source.NewCoursesSource(db)
+	usersMentor := source.NewUserMentorSource(db)
 
-	mainApi := api.NewAPI(*users, *courses)
+	mainApi := api.NewAPI(*users, *courses, *usersMentor)
 	mainApi.Start()
 }

@@ -26,3 +26,49 @@ type Course struct {
 	CreatedAt time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt time.Time `db:"updated_at" json:"updated_at"`
 }
+
+type UserMentor struct {
+	ID          int64     `db:"id" json:"id"`
+	UserID      int64     `db:"user_id" json:"user_id"`
+	CourseID    int64     `db:"course_id" json:"course_id"`
+	Email       string    `db:"email" json:"email"`
+	Password    string    `db:"password" json:"password"`
+	Name        string    `db:"name" json:"name"`
+	Phone       string    `db:"phone" json:"phone"`
+	Address     string    `db:"address" json:"address"`
+	Photo       string    `db:"photo" json:"photo"`
+	Role        string    `db:"role" json:"role"`
+	Logedin     bool      `db:"logedin" json:"logedin"`
+	CreatedAt   time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
+	About       string    `db:"about" json:"about"`
+	RatingSum   float64   `db:"rating_sum" json:"rating_sum"`
+	RatingCount int64     `db:"rating_count" json:"rating_count"`
+	CourseName  string    `db:"name" json:"course_name"`
+	CourseDesc  string    `db:"desc" json:"course_desc"`
+}
+
+type Forum struct {
+	ID            int64     `db:"id" json:"id"`
+	UserID        int64     `db:"user_id" json:"user_id"`
+	CourseID      int64     `db:"course_id" json:"course_id"`
+	UserMentorID  int64     `db:"user_mentor_id" json:"user_mentor_id"`
+	Title         string    `db:"title" json:"title"`
+	Question      string    `db:"question" json:"question"`
+	QuestionPhoto string    `db:"question_photo" json:"question_photo"`
+	Answer        string    `db:"answer" json:"answer"`
+	AnswerPhoto   string    `db:"answer_photo" json:"answer_photo"`
+	CreatedAt     time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt     time.Time `db:"updated_at" json:"updated_at"`
+	Email         string    `db:"email" json:"email"`
+	Name          string    `db:"name" json:"name"`
+	Phone         string    `db:"phone" json:"phone"`
+	Address       string    `db:"address" json:"address"`
+	Photo         string    `db:"photo" json:"photo"`
+	Role          string    `db:"role" json:"role"`
+	About         string    `db:"about" json:"about"`
+	RatingSum     float64   `db:"rating_sum" json:"rating_sum"`
+	RatingCount   int64     `db:"rating_count" json:"rating_count"`
+	CourseName    string    `db:"name" json:"course_name"`
+	CourseDesc    string    `db:"desc" json:"course_desc"`
+}
