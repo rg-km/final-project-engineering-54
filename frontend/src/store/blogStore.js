@@ -353,4 +353,63 @@ export const blogStore = [
         authorImage: '/asset/img/user.jpg',
         createdAt: 'June 21, 2022',
     },
+    {
+        id: 8,
+        title: "Belajar HTML 5",
+        slug: "belajar-html-5",
+        image: "/asset/img/blog/html5.png",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 10,
+        description: `Haloo, Sahabat Codeswer.Kali ini kita akan belajar HTML5<i>(Hypertext Markup Language)</i>.HTML5 mulai berkembang pada tahun 2011. Setelah Internet Explorer 9 rilis beberapa bulan yang lalu, maka semua browser utama seperti Internet Explorer, Mozilla Firefox, Safari, Chrome dan Opera, telah mendukung HTML5 dan CSS3.  Walaupun belum semua fungsi HTML5 dan CSS3 didukung sepenuhnya, tetapi tahun 2011 merupakan tahun lahirnya HTML5. Jadi tunggu apa lagi, kamu masih pakai XHTML? Atau mungkin masih menggunakan HTML4? Sebaiknya mulai belajar HTML5 karena ada banyak tag-tag baru yang sangat menarik lohh. Disini akan dijelaskan beberapa tag yang baru saja dan yang paling banyak digunakan dalam melayout sebuah website. 
+
+        Mari kita mulai 👨‍💻
+        
+        <strong><header></strong>
+        Tag pertama kita adalah <mark>header</mark>
+        sesuai namanya tag ini ditempatkan diatas pada bagian awal website kita. Kalau dulu kita biasa memakai
+        <mark>div id="header"</mark>
+        Sekarang kita bisa menggantinya hanya dengan menulis
+        <mark>header</mark>
+        
+        <strong><hgroup></strong>
+        Untuk apa <mark>hgroup</mark>  Mudahnya jika kita memiliki satu atau lebih dari satu heading berurutan
+        misal <mark>h1-h6</mark> Maka kita bisa mengelompokkannya dengan <mark>hgroup</mark>
+        Biasanya digunakan apabila kita memiliki judul dan ada sub judul, atau untuk judul web kemudian kita memiliki slogan.Tapi kalau headingnya cuma satu ya nggak usah dikasih <mark>hgroup</mark>
+
+        Contoh :
+        <img src="/asset/img/blog/header.png">
+        
+        <strong><nav></strong>
+        
+        Nah, dari namanya sudah kelihatan kalau ini fungsinya untuk menampilkan navigasi pada website kita.Ya kalau dulu kita memakai
+        <mark>ul li</mark> sekarang kita juga masih memakainya tetapi di bungkus dengan <mark>nav</mark>
+
+        Contoh :
+        <img src="/asset/img/blog/nav.png">
+
+        Yang perlu diingat yaitu <mark>nav</mark> digunakan untuk ngelink kehalaman-halaman utama dari website atau bagian dari halaman itu sendiri. Kalau untuk <i>paging</i>, Social Networking atau list-list yang lain yang menggunakan <mark>ul</mark>
+        
+
+        <strong>section dan article</strong>
+        Sesuai namanya 
+        <article>
+        digunakan untuk membungkus teks artikel atau teks utama dalam halaman web kita. Kita boleh punya banyak tag 
+        <mark>article</mark>
+        , misal saja komentar, nah setiap komentar kita bungkus pakai 
+        <mark>article</mark>
+        atau forum dan lain sebagainya. Apabila kita memiliki list atau daftar 
+        <mark>article</mark>
+        , misal blog maka kita perlu membungkusnya dengan 
+        <mark>section</mark>
+
+        Contoh : 
+        <img src="/asset/img/blog/section.png">
+        
+        
+        Okee codeswer sekian tips dari kita tentang HTML5,semoga membantu ya. Salam Codeswer😃 `,
+        authorName: 'Imron Nur Rohman',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June 22, 2022',
+    }
 ]
