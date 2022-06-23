@@ -5,9 +5,9 @@ import "../../styles/auth/_popupauthbtn.scss";
 
 export default function PopupAuthBtn({classname}) {
 
-    const {state, dispatch} = React.useContext(AuthContext);
+    const {dispatch} = React.useContext(AuthContext);
     return (
-        <aside className={`${classname} popup-auth-btn absolute z-10`}>
+        <aside className={`${classname} popup-auth-btn absolute`}>
             <nav>
                 <ul className="poppins font-medium">
                     <li>

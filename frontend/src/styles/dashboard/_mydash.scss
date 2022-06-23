@@ -10,6 +10,7 @@
 
         .heading-mydash {
             h1 {
+                text-transform: capitalize;
                 @include text-head($gray-100, 30px, 700);
             }
             h3 {

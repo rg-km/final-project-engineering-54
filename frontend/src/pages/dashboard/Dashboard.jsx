@@ -1,5 +1,4 @@
 import React from "react"
-import axios from "../../api/axios";
 import { AuthContext } from "../../App";
 import { NavLink, Outlet, Navigate } from "react-router-dom"
 
@@ -8,7 +7,7 @@ import Codeswer from "../../layouts/Codeswer";
 import "../../styles/dashboard/_dashboard.scss";
 
 
-export default function Dashboard() {
+export default function Dashboard({title, kw, desc, ogUrl, ogType, ogDesc, twitTitle}) {
 
     const status = null;
     const {state} = React.useContext(AuthContext);
@@ -37,7 +36,6 @@ export default function Dashboard() {
         setActive(e.target.innerText);
     }
 
-
     if(!state.isAuthenticated) {
         return <Navigate to="/signin" replace/>  
     }
@@ -57,16 +55,11 @@ export default function Dashboard() {
         <article className="dashboard-component">
             <section id="container_dashboard">
                 <article className="content-wrapper md:flex-row flex-col">
-                    <div className="left-content md:w-[25%] w-full md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
-                        <div className="first-left flex-col space-y-6 md:flex hidden items-center">
+                    <div className="left-content md:w-[25%] w-full sticky top-0 md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
+                        <div className="first-left flex-col md:flex hidden items-center">
                             <div className="avatar-wrapper w-[8rem]">
                                 <Image />
                             </div>
-                            <h1 className="poppins">
-                                {
-                                    state.email
-                                }
-                            </h1>
                         </div>
                         <div className="second-left">
                             <nav className="nav-dashboard md:pl-4 pl-0">
