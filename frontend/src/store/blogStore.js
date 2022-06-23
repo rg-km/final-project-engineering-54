@@ -313,11 +313,7 @@ export const blogStore = [
         id: 7,
         title: "Extension Di Visual Studio Untuk Pemula",
         slug: "extension-di-visual-studio-untuk-pemula",
-<<<<<<< HEAD
-        image: "/asset/img/blog/vscode.png",
-=======
         image: "/asset/img/blog/vscode.webp",
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         category: "Coding",
         slugCategory: "coding",
         readTime: 8,
@@ -327,44 +323,27 @@ export const blogStore = [
         
         <strong>1. Live Server</strong>
 
-<<<<<<< HEAD
-        <img src="/asset/img/blog/Live-server.png">
-=======
         <img src="/asset/img/blog/Live-server.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         
         Dengan Live Srver, kita dapat memuat ulang halaman web kita secara otomatis ketika kita mengubah kode di VS Code tanpa kita refresh halaman web-nya 😁.
         
         <strong>2. Auto Rename Tag</strong>
         
-<<<<<<< HEAD
-        <img src="/asset/img/blog/auto-rename-tag.png">
-=======
         <img src="/asset/img/blog/auto-rename-tag.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
 
         Salah mengetik atau sering disebut <i>typo</i> kode HTML merupakan hal yang biasa bagi Programmer. Namun, disaat kita ingin merubah tag tersebut, maka kita perlu merubah tag pembuka dan penutupnya satu per satu.Tentu hal tersebut cukup melelahkan,apalagi jika yang kita rubah banyak kan ? Auto Rename Tag adalah solusinya.Ini akan memudahkan kita melakukan rename tag secara otomatis.Cukup rubah tag pembuka maka tag penutup akan otomatis mengikuti tag pembuka tanpa repot merubah kedua tag tersebut.Jadi menghemat waktu dan tenaga dehh 😎.
         
         <strong>3. Material Icon</strong>
         
-<<<<<<< HEAD
-        <img src="/asset/img/blog/material-icon.png">
-        <img src="/asset/img/blog/file-icon.png">
-=======
         <img src="/asset/img/blog/material-icon.webp">
         <img src="/asset/img/blog/file-icon.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
 
         Dengan tampilan file icon yang menarik tersebut tentunya membuat semangat untuk kita belajar coding bukann ?? 
         😍
 
         <strong>4. Intellisense for CSS class names></strong>
 
-<<<<<<< HEAD
-        <img src="/asset/img/blog/intellisense.png">
-=======
         <img src="/asset/img/blog/intellisense.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
 
         Dengan ekstensi ini ketika kita menuliskan sebuah code maka akan diberikan saran sehingga lebih memudahkan kita saat membuat code di CSS
         
@@ -378,11 +357,7 @@ export const blogStore = [
         id: 8,
         title: "Belajar HTML 5",
         slug: "belajar-html-5",
-<<<<<<< HEAD
-        image: "/asset/img/blog/html5.png",
-=======
         image: "/asset/img/blog/html5.webp",
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         category: "Coding",
         slugCategory: "coding",
         readTime: 10,
@@ -403,11 +378,7 @@ export const blogStore = [
         Biasanya digunakan apabila kita memiliki judul dan ada sub judul, atau untuk judul web kemudian kita memiliki slogan.Tapi kalau headingnya cuma satu ya nggak usah dikasih <mark>hgroup</mark>
 
         Contoh :
-<<<<<<< HEAD
-        <img src="/asset/img/blog/header.png">
-=======
         <img src="/asset/img/blog/header.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         
         <strong><nav></strong>
         
@@ -415,15 +386,9 @@ export const blogStore = [
         <mark>ul li</mark> sekarang kita juga masih memakainya tetapi di bungkus dengan <mark>nav</mark>
 
         Contoh :
-<<<<<<< HEAD
-        <img src="/asset/img/blog/nav.png">
-
-        Yang perlu diingat yaitu <mark>nav</mark> digunakan untuk ngelink kehalaman-halaman utama dari website atau bagian dari halaman itu sendiri. Kalau untuk <i>paging</i>, Social Networking atau list-list yang lain yang menggunakan <mark>ul</mark>
-=======
         <img src="/asset/img/blog/nav.webp">
 
         Yang perlu diingat yaitu <mark>nav</mark> digunakan untuk ngelink kehalaman-halaman utama dari website atau bagian dari halaman itu sendiri. Kalau untuk <i>paging</i>, <i>Social Networking</i> atau list-list yang lain yang menggunakan <mark>ul</mark>
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         
 
         <strong>section dan article</strong>
@@ -439,11 +404,7 @@ export const blogStore = [
         <mark>section</mark>
 
         Contoh : 
-<<<<<<< HEAD
-        <img src="/asset/img/blog/section.png">
-=======
         <img src="/asset/img/blog/section.webp">
->>>>>>> 8e70c37fa088a6457a95ed15f600e6806fc63afa
         
         
         Okee codeswer sekian tips dari kita tentang HTML5,semoga membantu yaa. Salam Codeswer😃 `,
