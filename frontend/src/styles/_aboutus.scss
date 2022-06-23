@@ -49,6 +49,7 @@
         #two_right {
           display: flex;
           flex-direction: column;
+
           h2 {
             @include text-head($gray-800, 1.5rem, 600);
           }
