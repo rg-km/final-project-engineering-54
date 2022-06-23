@@ -2,6 +2,8 @@ import React, { useReducer, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import Terms from "./pages/Terms";
+import About from "./pages/About";
 import ScrollPage from "./components/ScrollPage";
 
 import Blogs from "./pages/blog/Blogs";
@@ -9,9 +11,6 @@ import ReadBlog from "./pages/blog/ReadBlog";
 
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
-
-import Terms from "./pages/terms/Terms";
-import Abouts from "./pages/about/Abouts";
 
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
@@ -77,7 +76,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/abouts" element={<Abouts />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </ScrollPage>
     </AuthContext.Provider>
