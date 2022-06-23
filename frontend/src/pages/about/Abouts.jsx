@@ -1,11 +1,10 @@
 import React from "react";
+// import { Link } from "react-router-dom";
 
-import "../../styles/_aboutus.scss";
-import CardCustom from "../../components/CardCustom";
-import { Link } from "react-router-dom";
-import BtnCustom from "../../components/BtnCustom";
-
+import "../.styles/_about.scss";
 import Codeswer from "../../layouts/Codeswer";
+import CardCustom from "../../components/CardCustom";
+// import BtnCustom from "../components/BtnCustom";
 
 export default function About() {
   const status = null;
@@ -128,7 +127,7 @@ export default function About() {
               />
             </div>
           </article>
-
+          {/* 
           <article id="part_two" className="section-child space-y-16">
             <div className="md:gap-x-3 gap-x-0 md:gap-y-0 gap-y-20 md:flex-row flex-col poppins">
               <div id="two_left" className="md:w-[45%] w-full">
@@ -150,7 +149,7 @@ export default function About() {
                 </Link>
               </div>
             </div>
-          </article>
+          </article> */}
         </section>
       </article>
     </Codeswer>
