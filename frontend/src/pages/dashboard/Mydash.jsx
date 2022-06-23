@@ -16,7 +16,7 @@ export default function Mydash() {
                         </div>
                         <div className="value-items-total py-1">
                             <h1>
-                                <span className="number-value">10</span>
+                                <span className="number-value">0</span>
                                 <span className="text-value text-gray-500 text-[18px]">  Pertanyaan</span>
                             </h1>
                         </div>

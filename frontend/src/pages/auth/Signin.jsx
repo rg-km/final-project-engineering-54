@@ -13,7 +13,7 @@ export default function Login() {
 
     const status = null;
 
-    const { dispatch } = React.useContext(AuthContext)
+    const { state, dispatch } = React.useContext(AuthContext)
 
     const [values, setValues] = React.useState({
         email: "",
@@ -46,6 +46,7 @@ export default function Login() {
             required: true,
         },
     ]
+    const [user, setUser] = React.useState([])
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -99,6 +100,22 @@ export default function Login() {
                 }
             })
         })
+
+        const getUser = () => {
+            axios.get(`/user/id?id=1`, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true
+            }).then( res => {
+                setUser(res)
+                console.log(res)
+            }).catch( er => {
+                console.log(er)
+            })
+        }
+
+        getUser()
     }
     
     if (redirect) return <Navigate to="/dashboard" replace />;
