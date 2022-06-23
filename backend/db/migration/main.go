@@ -42,7 +42,6 @@ func main() {
 				about VARCHAR(191),
 				rating_sum DOUBLE,
 				rating_count INTEGER,
-				avg_rating DOUBLE,
 				FOREIGN KEY (users_id) REFERENCES users(id),
 				FOREIGN KEY (courses_id) REFERENCES courses(id)
 			);
@@ -75,9 +74,9 @@ func main() {
 			("Go", "Go is a compiled language developed at Google", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
 			("React", "React is a front-end library developed at Facebook", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
-			INSERT INTO users_mentor (users_id, courses_id, about, rating_sum, rating_count, avg_rating) VALUES
-			(3, 1, "I am a mentor for Go", 50, 10, 5),
-			(4, 2, "I am a mentor for React", 30, 10, 3);
+			INSERT INTO users_mentor (users_id, courses_id, about, rating_sum, rating_count) VALUES
+			(3, 1, "I am a mentor for Go", 50, 10),
+			(4, 2, "I am a mentor for React", 30, 10);
 
 			INSERT INTO forums (users_id, users_mentor_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
 			(1, 1, 1, "How to use Go?", "I want to learn how to use Go", "default.png", "I can use Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
