@@ -11,16 +11,17 @@ import (
 
 // create struct API for manage api
 type API struct {
-	usersSource  source.UsersSource
-	courseSource source.CourseSource
-	mux          *http.ServeMux
+	usersSource       source.UsersSource
+	courseSource      source.CourseSource
+	usersMentorSource source.UserMentorSource
+	mux               *http.ServeMux
 }
 
 // create function for create new api
-func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource) API {
+func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, userMentor source.UserMentorSource) API {
 	mux := http.NewServeMux()
 	api := API{
-		usersSource, courseSource, mux,
+		usersSource, courseSource, userMentor, mux,
 	}
 
 	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
@@ -35,6 +36,7 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource) AP
 	mux.Handle("/api/user/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersByID))))
 	mux.Handle("/api/user/logged", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersLogedin))))
 	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
+	mux.Handle("/api/mentor", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentor))))
 
 	// API with AuthMiddleware and AdminMiddleware
 	mux.Handle("/api/user/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteUsers)))))
@@ -53,6 +55,14 @@ func (api *API) Handler() *http.ServeMux {
 func (api *API) Start() {
 	fmt.Println("Server started on port 8080")
 	fmt.Println("http://localhost:8080")
-	handler := cors.Default().Handler(api.Handler())
+	corsMiddleware := cors.New(cors.Options{
+		AllowedOrigins:   []string{"*"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+		Debug:            true,
+	})
+
+	handler := corsMiddleware.Handler(api.Handler())
 	http.ListenAndServe(":8080", handler)
 }
