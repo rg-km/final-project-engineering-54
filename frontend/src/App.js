@@ -52,7 +52,6 @@ const reducer = (state, action) => {
         id: null,
         token: null
       }
-      };
     default:
       return state;
   }

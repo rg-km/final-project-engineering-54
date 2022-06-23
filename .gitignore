@@ -25,4 +25,4 @@ yarn-error.log*
 
 #db
 *.db
-# backend/db/codeswer.db
+backend/db/codeswer.db
