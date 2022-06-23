@@ -50,8 +50,8 @@ func main() {
 			CREATE TABLE IF NOT EXISTS forums (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 				users_id INTEGER NOT NULL,
-				users_mentor_id INTEGER NOT NULL,
-				courses_id INTEGER NOT NULL,
+				users_mentor_id INTEGER,
+				courses_id INTEGER,
 				title VARCHAR(191) NOT NULL,
 				question TEXT NOT NULL,
 				question_photo VARCHAR(191),
