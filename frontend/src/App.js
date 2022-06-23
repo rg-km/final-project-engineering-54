@@ -1,8 +1,8 @@
-import React, {useReducer, createContext } from "react";
+import React, { useReducer, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import ScrollPage from "./components/ScrollPage"
+import ScrollPage from "./components/ScrollPage";
 
 import Blogs from "./pages/blog/Blogs";
 import ReadBlog from "./pages/blog/ReadBlog";
@@ -11,7 +11,7 @@ import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
 import Terms from "./pages/terms/Terms";
-// import Abouts from "./pages/about/Abouts";
+import Abouts from "./pages/about/Abouts";
 
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
@@ -52,34 +52,35 @@ const reducer = (state, action) => {
         id: null,
         token: null
       }
+      };
     default:
       return state;
-    }
-}
+  }
+};
 
 export default function App() {
-
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-      <AuthContext.Provider value={{ state, dispatch }}>
-        <ScrollPage>
-          <Routes>
-              <Route exact path="/signin" element={<Signin />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
-              <Route element={<Dashboard />}>
-                <Route exact path="/dashboard" element={<Mydash />} />
-                <Route path="/questions" element={<Questions />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/question" element={<Question />} />
-              </Route>
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/terms" element={<Terms />} />
-          </Routes>
-        </ScrollPage>
-      </AuthContext.Provider> 
-    );
+    <AuthContext.Provider value={{ state, dispatch }}>
+      <ScrollPage>
+        <Routes>
+          <Route exact path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
+          <Route element={<Dashboard />}>
+            <Route exact path="/dashboard" element={<Mydash />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/question" element={<Question />} />
+          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/abouts" element={<Abouts />} />
+        </Routes>
+      </ScrollPage>
+    </AuthContext.Provider>
+  );
 }

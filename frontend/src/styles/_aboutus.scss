@@ -34,31 +34,7 @@
         }
       }
     }
-    #part_two {
-      h1 {
-        text-align: center;
-        @include text-head($gray-800, 2.75rem, 700);
-      }
-      div {
-        display: flex;
-        #two_left {
-          img {
-            margin: 0 auto;
-          }
-        }
-        #two_right {
-          display: flex;
-          flex-direction: column;
-          h2 {
-            @include text-head($gray-800, 1.5rem, 600);
-          }
-          button {
-            @include btnCustom;
-            @include text-head(auto, 1.25rem, 600);
-          }
-        }
-      }
-    }
+
     #part_three {
       @include flex-center;
 
