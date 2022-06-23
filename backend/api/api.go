@@ -53,6 +53,14 @@ func (api *API) Handler() *http.ServeMux {
 func (api *API) Start() {
 	fmt.Println("Server started on port 8080")
 	fmt.Println("http://localhost:8080")
-	handler := cors.Default().Handler(api.Handler())
+	corsMiddleware := cors.New(cors.Options{
+		AllowedOrigins: []string{"*"},
+		AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders: []string{"*"},
+		AllowCredentials: true,
+		Debug: true,
+	})
+
+	handler := corsMiddleware.Handler(api.Handler())
 	http.ListenAndServe(":8080", handler)
 }
