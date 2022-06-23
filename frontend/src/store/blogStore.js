@@ -308,6 +308,108 @@ export const blogStore = [
         authorName: 'Imron Nur Rohman',
         authorImage: '/asset/img/user.jpg',
         createdAt: 'June  21, 2022',
+    },
+    {
+        id: 7,
+        title: "Extension Di Visual Studio Untuk Pemula",
+        slug: "extension-di-visual-studio-untuk-pemula",
+        image: "/asset/img/blog/vscode.png",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 8,
+        description: `Haloo, Sahabat Codeswer.Berjumpa lagi nih di website kita tercinta, semoga kalian gak bosen-bosen ya mampir baca artikel disini. Visual Studio Code merupakan text editor yang gratis dan sangat powerfull.Dengan banyaknya fitur tambahan yang akan membuat Kamu nyaman saat membuat program.salah satunya yaitu dengan adanya extension.
+
+        Berikut ini kita berikan saran beberapa extension yang berguna terutama untuk pemula.
+        
+        <strong>1. Live Server</strong>
+
+        <img src="/asset/img/blog/Live-server.png">
+        
+        Dengan Live Srver, kita dapat memuat ulang halaman web kita secara otomatis ketika kita mengubah kode di VS Code tanpa kita refresh halaman web-nya 😁.
+        
+        <strong>2. Auto Rename Tag</strong>
+        
+        <img src="/asset/img/blog/auto-rename-tag.png">
+
+        Salah mengetik atau sering disebut <i>typo</i> kode HTML merupakan hal yang biasa bagi Programmer. Namun, disaat kita ingin merubah tag tersebut, maka kita perlu merubah tag pembuka dan penutupnya satu per satu.Tentu hal tersebut cukup melelahkan,apalagi jika yang kita rubah banyak kan ? Auto Rename Tag adalah solusinya.Ini akan memudahkan kita melakukan rename tag secara otomatis.Cukup rubah tag pembuka maka tag penutup akan otomatis mengikuti tag pembuka tanpa repot merubah kedua tag tersebut.Jadi menghemat waktu dan tenaga dehh 😎.
+        
+        <strong>3. Material Icon</strong>
+        
+        <img src="/asset/img/blog/material-icon.png">
+        <img src="/asset/img/blog/file-icon.png">
+
+        Dengan tampilan file icon yang menarik tersebut tentunya membuat semangat untuk kita belajar coding bukann ?? 
+        😍
+
+        <strong>4. Intellisense for CSS class names></strong>
+
+        <img src="/asset/img/blog/intellisense.png">
+
+        Dengan ekstensi ini ketika kita menuliskan sebuah code maka akan diberikan saran sehingga lebih memudahkan kita saat membuat code di CSS
+        
+        
+        Okee codeswer sekian tips dari kita tentang extension,semoga membantu ya. Salam Codeswer😃 `,
+        authorName: 'Imron Nur Rohman',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June 21, 2022',
+    },
+    {
+        id: 8,
+        title: "Belajar HTML 5",
+        slug: "belajar-html-5",
+        image: "/asset/img/blog/html5.png",
+        category: "Coding",
+        slugCategory: "coding",
+        readTime: 10,
+        description: `Haloo, Sahabat Codeswer.Kali ini kita akan belajar HTML5<i>(Hypertext Markup Language)</i>.HTML5 mulai berkembang pada tahun 2011. Setelah Internet Explorer 9 rilis beberapa bulan yang lalu, maka semua browser utama seperti Internet Explorer, Mozilla Firefox, Safari, Chrome dan Opera, telah mendukung HTML5 dan CSS3.  Walaupun belum semua fungsi HTML5 dan CSS3 didukung sepenuhnya, tetapi tahun 2011 merupakan tahun lahirnya HTML5. Jadi tunggu apa lagi, kamu masih pakai XHTML? Atau mungkin masih menggunakan HTML4? Sebaiknya mulai belajar HTML5 karena ada banyak tag-tag baru yang sangat menarik lohh. Disini akan dijelaskan beberapa tag yang baru saja dan yang paling banyak digunakan dalam melayout sebuah website. 
+
+        Mari kita mulai 👨‍💻
+        
+        <strong><header></strong>
+        Tag pertama kita adalah <mark>header</mark>
+        sesuai namanya tag ini ditempatkan diatas pada bagian awal website kita. Kalau dulu kita biasa memakai
+        <mark>div id="header"</mark>
+        Sekarang kita bisa menggantinya hanya dengan menulis
+        <mark>header</mark>
+        
+        <strong><hgroup></strong>
+        Untuk apa <mark>hgroup</mark>  Mudahnya jika kita memiliki satu atau lebih dari satu heading berurutan
+        misal <mark>h1-h6</mark> Maka kita bisa mengelompokkannya dengan <mark>hgroup</mark>
+        Biasanya digunakan apabila kita memiliki judul dan ada sub judul, atau untuk judul web kemudian kita memiliki slogan.Tapi kalau headingnya cuma satu ya nggak usah dikasih <mark>hgroup</mark>
+
+        Contoh :
+        <img src="/asset/img/blog/header.png">
+        
+        <strong><nav></strong>
+        
+        Nah, dari namanya sudah kelihatan kalau ini fungsinya untuk menampilkan navigasi pada website kita.Ya kalau dulu kita memakai
+        <mark>ul li</mark> sekarang kita juga masih memakainya tetapi di bungkus dengan <mark>nav</mark>
+
+        Contoh :
+        <img src="/asset/img/blog/nav.png">
+
+        Yang perlu diingat yaitu <mark>nav</mark> digunakan untuk ngelink kehalaman-halaman utama dari website atau bagian dari halaman itu sendiri. Kalau untuk <i>paging</i>, Social Networking atau list-list yang lain yang menggunakan <mark>ul</mark>
+        
+
+        <strong>section dan article</strong>
+        Sesuai namanya 
+        <article>
+        digunakan untuk membungkus teks artikel atau teks utama dalam halaman web kita. Kita boleh punya banyak tag 
+        <mark>article</mark>
+        , misal saja komentar, nah setiap komentar kita bungkus pakai 
+        <mark>article</mark>
+        atau forum dan lain sebagainya. Apabila kita memiliki list atau daftar 
+        <mark>article</mark>
+        , misal blog maka kita perlu membungkusnya dengan 
+        <mark>section</mark>
+
+        Contoh : 
+        <img src="/asset/img/blog/section.png">
+        
+        
+        Okee codeswer sekian tips dari kita tentang HTML5,semoga membantu ya. Salam Codeswer😃 `,
+        authorName: 'Imron Nur Rohman',
+        authorImage: '/asset/img/user.jpg',
+        createdAt: 'June 22, 2022',
     }
-    
 ]
