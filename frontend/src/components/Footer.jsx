@@ -35,9 +35,9 @@ export default function Footer() {
                 id="nav_links_item"
                 className="space-y-4 text-gray-200 font-light"
               >
-                {/* <li>
-                  <Link to="/about">Tentang Kami</Link>
-                </li> */}
+                <li>
+                  <Link to="/abouts">Tentang Kami</Link>
+                </li>
                 <li>
                   <Link to="/docs">How It Works</Link>
                 </li>
