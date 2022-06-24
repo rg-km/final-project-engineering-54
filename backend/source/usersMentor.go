@@ -28,6 +28,7 @@ func (u *UserMentorSource) FetchUserMentor() ([]UserMentor, error) {
 		u.phone,
 		u.address,
 		u.photo,
+		u.role,
 		um.about,
 		um.rating_sum,
 		um.rating_count,
@@ -57,6 +58,7 @@ func (u *UserMentorSource) FetchUserMentor() ([]UserMentor, error) {
 			&userMentor.Phone,
 			&userMentor.Address,
 			&userMentor.Photo,
+			&userMentor.Role,
 			&userMentor.About,
 			&userMentor.RatingSum,
 			&userMentor.RatingCount,
@@ -71,4 +73,59 @@ func (u *UserMentorSource) FetchUserMentor() ([]UserMentor, error) {
 	}
 
 	return userMentors, nil
+}
+
+// create func fetch user mentor by id using join query
+func (u *UserMentorSource) FetchUserMentorByID(id int64) (UserMentor, error) {
+	var sqlStatement string
+	var userMentor UserMentor
+
+	sqlStatement = `
+	SELECT
+		u.id,
+		u.email,
+		u.password,
+		u.name,
+		u.phone,
+		u.address,
+		u.photo,
+		u.role,
+		um.about,
+		um.rating_sum,
+		um.rating_count,
+		c.id,
+		c.name,
+		c.desc
+	FROM 
+		users u
+	JOIN
+		users_mentor um ON u.id = um.users_id
+	JOIN
+		courses c ON um.courses_id = c.id
+	WHERE
+		u.id = ?
+	`
+
+	row := u.db.QueryRow(sqlStatement, id)
+	err := row.Scan(
+		&userMentor.UserID,
+		&userMentor.Email,
+		&userMentor.Password,
+		&userMentor.Name,
+		&userMentor.Phone,
+		&userMentor.Address,
+		&userMentor.Photo,
+		&userMentor.Role,
+		&userMentor.About,
+		&userMentor.RatingSum,
+		&userMentor.RatingCount,
+		&userMentor.CourseID,
+		&userMentor.CourseName,
+		&userMentor.CourseDesc,
+	)
+	if err != nil {
+		return userMentor, err
+	}
+
+	return userMentor, nil
 }

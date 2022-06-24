@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -58,15 +59,15 @@ func (api *API) getMentor(w http.ResponseWriter, r *http.Request) {
 
 	for _, user := range mentor {
 		response.UserMentor = append(response.UserMentor, listMentor{
-			UserID:      user.UserID,
-			CourseID:    user.CourseID,
-			Email:       user.Email,
-			Password:    user.Password,
-			Name:        user.Name,
-			Phone:       user.Phone,
-			Address:     user.Address,
-			Photo:       user.Photo,
-			Role:        user.Role,
+			UserID:   user.UserID,
+			CourseID: user.CourseID,
+			Email:    user.Email,
+			// Password:    user.Password,
+			Name:    user.Name,
+			Phone:   user.Phone,
+			Address: user.Address,
+			Photo:   user.Photo,
+			// Role:        user.Role,
 			Logedin:     user.Logedin,
 			CreatedAt:   user.CreatedAt,
 			UpdatedAt:   user.UpdatedAt,
@@ -77,6 +78,53 @@ func (api *API) getMentor(w http.ResponseWriter, r *http.Request) {
 			CourseDesc:  user.CourseDesc,
 		})
 	}
+
+	w.Header().Set("Content-Type", "application/json")
+	encoder.Encode(response)
+}
+
+// create function to get mentor by id
+func (api *API) getMentorByID(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	response := listMentorSuccess{}
+	response.UserMentor = make([]listMentor, 0)
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	mentor, err := api.usersMentorSource.FetchUserMentorByID(int64(id))
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(listMentorError{Error: err.Error()})
+		}
+	}()
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listMentorError{Error: err.Error()})
+		return
+	}
+
+	response.UserMentor = append(response.UserMentor, listMentor{
+		UserID:   mentor.UserID,
+		CourseID: mentor.CourseID,
+		Email:    mentor.Email,
+		// Password:    mentor.Password,
+		Name:    mentor.Name,
+		Phone:   mentor.Phone,
+		Address: mentor.Address,
+		Photo:   mentor.Photo,
+		// Role:        mentor.Role,
+		Logedin:     mentor.Logedin,
+		CreatedAt:   mentor.CreatedAt,
+		UpdatedAt:   mentor.UpdatedAt,
+		About:       mentor.About,
+		RatingSum:   mentor.RatingSum,
+		RatingCount: mentor.RatingCount,
+		CourseName:  mentor.CourseName,
+		CourseDesc:  mentor.CourseDesc,
+	})
 
 	w.Header().Set("Content-Type", "application/json")
 	encoder.Encode(response)

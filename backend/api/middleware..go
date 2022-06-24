@@ -90,6 +90,22 @@ func (api *API) AdminMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+// create func for mentor middlewar for check role mentor
+func (api *API) MentorMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		api.AllowOrigin(w, r)
+		encoder := json.NewEncoder(w)
+		role := r.Context().Value("role").(string)
+		if role != "mentor" && role != "admin" {
+			w.WriteHeader(http.StatusForbidden)
+			encoder.Encode(LoginError{Error: "you are not mentor or admin"})
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 // create func GET for method GET
 func (api *API) GET(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
