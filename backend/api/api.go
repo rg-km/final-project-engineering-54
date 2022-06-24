@@ -14,14 +14,15 @@ type API struct {
 	usersSource       source.UsersSource
 	courseSource      source.CourseSource
 	usersMentorSource source.UserMentorSource
+	forumSource       source.ForumSource
 	mux               *http.ServeMux
 }
 
 // create function for create new api
-func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, userMentor source.UserMentorSource) API {
+func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, userMentor source.UserMentorSource, forumSource source.ForumSource) API {
 	mux := http.NewServeMux()
 	api := API{
-		usersSource, courseSource, userMentor, mux,
+		usersSource, courseSource, userMentor, forumSource, mux,
 	}
 
 	mux.Handle("/api/user/login", api.POST(http.HandlerFunc(api.login)))
@@ -38,6 +39,7 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
 	mux.Handle("/api/mentor", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentor))))
 	mux.Handle("/api/mentor/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentorByID))))
+	mux.Handle("/api/forum", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getForum))))
 
 	// API with AuthMiddleware and MentorMiddleware
 	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.addCourse)))))

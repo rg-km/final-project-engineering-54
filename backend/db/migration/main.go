@@ -59,16 +59,15 @@ func main() {
 				created_at DATETIME NOT NULL,
 				updated_at DATETIME NOT NULL,
 				FOREIGN KEY (users_id) REFERENCES users(id),
-				FOREIGN KEY (users_mentor_id) REFERENCES users_mentor(users_id),
 				FOREIGN KEY (courses_id) REFERENCES courses(id)
 			);
 
 
 			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-			("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.png", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.png", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor1@gmail.com", "123456", "mentor1", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor2@gmail.com", "123456", "mentor2", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			("admin@gmail.com", "Codeswer54-", "admin", "081234567890", "Jl. Raya", "default.png", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("user@gmail.com", "Codeswer54-", "user", "081234567890", "Jl. Raya", "default.png", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor1@gmail.com", "Codeswer54-", "mentor1", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor2@gmail.com", "Codeswer54-", "mentor2", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 			INSERT INTO courses (name, desc, created_at, updated_at) VALUES
 			("Go", "Go is a compiled language developed at Google", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
@@ -78,10 +77,10 @@ func main() {
 			(3, 1, "I am a mentor for Go", 50, 10),
 			(4, 2, "I am a mentor for React", 30, 10);
 
-			INSERT INTO forums (users_id, users_mentor_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
-			(1, 1, 1, "How to use Go?", "I want to learn how to use Go", "default.png", "I can use Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(1, 1, 2, "How to use React?", "I want to learn how to use React", "default.png", "I can use React", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(2, 1, 1, "How to use Go? with gin", "I want to use Go with gin", "default.png", "I can use Go with gin", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			INSERT INTO forums (users_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
+			(1, 1, "How to use Go?", "I want to learn how to use Go", "default.png", "I can use Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(1, 2, "How to use React?", "I want to learn how to use React", "default.png", "I can use React", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(2, 1, "How to use Go? with gin", "I want to use Go with gin", "default.png", "I can use Go with gin", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		`)
 
