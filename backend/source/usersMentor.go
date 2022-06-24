@@ -129,3 +129,38 @@ func (u *UserMentorSource) FetchUserMentorByID(id int64) (UserMentor, error) {
 
 	return userMentor, nil
 }
+
+// create func insert user mentor using join query
+func (u *UserMentorSource) InsertUserMentor(userID int64, courseID int64, about string, ratingSum float64, ratingCount int64) (UserMentor, error) {
+	var sqlStatement string
+	var userMentor UserMentor
+
+	sqlStatement = `
+	INSERT INTO users_mentor (users_id, courses_id, about, rating_sum, rating_count) VALUES (?, ?, ?, ?, ?)
+	`
+
+	stmt, err := u.db.Prepare(sqlStatement)
+	if err != nil {
+		return userMentor, err
+	}
+
+	res, err := stmt.Exec(userID, courseID, about, ratingSum, ratingCount)
+	if err != nil {
+		return userMentor, err
+	}
+
+	id, err := res.LastInsertId()
+	if err != nil {
+		return userMentor, err
+	}
+
+	userMentor.UserID = id
+	userMentor.CourseID = courseID
+	userMentor.About = about
+	userMentor.RatingSum = ratingSum
+	userMentor.RatingCount = ratingCount
+
+	return userMentor, nil
+}
+
+// create func insert user mentor from user

@@ -45,6 +45,7 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteCourse)))))
 
 	// API with AuthMiddleware and AdminMiddleware
+	mux.Handle("/api/mentor/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addMentor)))))
 	mux.Handle("/api/user/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteUsers)))))
 
 	return api
