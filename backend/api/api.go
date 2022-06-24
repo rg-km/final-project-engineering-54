@@ -37,6 +37,7 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/user/logged", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getUsersLogedin))))
 	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
 	mux.Handle("/api/mentor", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentor))))
+	mux.Handle("/api/mentor/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentorByID))))
 
 	// API with AuthMiddleware and MentorMiddleware
 	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.addCourse)))))
