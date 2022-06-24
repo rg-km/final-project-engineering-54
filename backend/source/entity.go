@@ -52,7 +52,6 @@ type Forum struct {
 	ID            int64     `db:"id" json:"id"`
 	UserID        int64     `db:"user_id" json:"user_id"`
 	CourseID      int64     `db:"course_id" json:"course_id"`
-	UserMentorID  int64     `db:"user_mentor_id" json:"user_mentor_id"`
 	Title         string    `db:"title" json:"title"`
 	Question      string    `db:"question" json:"question"`
 	QuestionPhoto string    `db:"question_photo" json:"question_photo"`
