@@ -36,7 +36,7 @@ export default function Footer() {
                 className="space-y-4 text-gray-200 font-light"
               >
                 <li>
-                  <Link to="/abouts">Tentang Kami</Link>
+                  <Link to="/about">Tentang Kami</Link>
                 </li>
                 <li>
                   <Link to="/docs">How It Works</Link>
