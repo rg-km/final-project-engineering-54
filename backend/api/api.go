@@ -38,11 +38,13 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/user/update", api.PUT(api.AuthMiddleware(http.HandlerFunc(api.updateUsers))))
 	mux.Handle("/api/mentor", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getMentor))))
 
+	// API with AuthMiddleware and MentorMiddleware
+	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.addCourse)))))
+	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.updateCourse)))))
+	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteCourse)))))
+
 	// API with AuthMiddleware and AdminMiddleware
 	mux.Handle("/api/user/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteUsers)))))
-	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addCourse)))))
-	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.updateCourse)))))
-	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.deleteCourse)))))
 
 	return api
 }
@@ -56,7 +58,7 @@ func (api *API) Start() {
 	fmt.Println("Server started on port 8080")
 	fmt.Println("http://localhost:8080")
 	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
+		AllowedOrigins:   []string{"http://localhost:3000"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
