@@ -2,6 +2,7 @@ import React from "react";
 import Swal from "sweetalert2"
 import axios from "../../api/axios";
 import { AuthContext } from "../../App";
+import ReactTooltip from 'react-tooltip';
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
@@ -11,15 +12,14 @@ export default function Profile() {
     const [user, setUser] = React.useState([])
     const {state} = React.useContext(AuthContext);
 
+    const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
+    const [photo, setPhoto] = React.useState(null)
     const [values, setValues] = React.useState({
         name: "",
         phone: "",
-        email: "",
         password: "",
         address: "",
     });
-    
-    const [image, setImage] = React.useState("default.svg")
     
     const inputs = [
         {
@@ -80,9 +80,6 @@ export default function Profile() {
     const getUser = async () => {
         const resp = await axios.get(`/user/id?id=${state.id}`, {
             withCredentials: true,
-            headers: {
-                "Content-Type": "application/json",
-            },
         }).catch( er => {
             let errorMessage = er.response;
             Swal.fire({
@@ -104,28 +101,33 @@ export default function Profile() {
             ...values,
             [e.target.name]: e.target.value
         })
-        console.log(values)
+        // console.log(values)
     }
 
     const changeInputImage = (e) => {
-        setImage(e.target.files[0].name)
-        console.log(image)
+        setPhoto(e.target.files[0].name)
+        setPhotoPrev(URL.createObjectURL(e.target.files[0]))
+        // console.log(image)
     }
-
 
     const handleEdit = async (e) => {
         e.preventDefault()
-        await axios.put(`/user/update?id=${state.id}`, {
-            values,
-            image
-        }, {
-            withCredentials: true,
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }).then(response => {
-            console.log("Status: ", response.status);
-            console.log("Data: ", response.data);
+
+        const dataReq = {photo, ...values}
+        await axios.put(`/user/update?id=${state.id}`,dataReq, {
+            withCredentials: true
+        }).then(res => {
+            Swal.fire({
+                toast: true,
+                timer: 1900,
+                icon: 'success',
+                position: "top end",
+                showConfirmButton: false,
+                title: 'Data telah disimpan',
+                customClass: {
+                    container: 'poppins'
+                }    
+            // console.log(res.data + res.status)
           }).catch( er => {
             Swal.fire({
                 timer: 3000,
@@ -138,7 +140,10 @@ export default function Profile() {
                 }
             })
         })
+        })
     }
+
+    // console.log(values)
     
     React.useEffect( () => {
         getUser()
@@ -152,8 +157,9 @@ export default function Profile() {
                 <h1>Detail Profile</h1>
             </div>
             <div className="avatar-wrapper w-[8rem] space-y-4">
-                <img className="image-avatar object-cover rounded-full aspect-square" src={`/asset/img/user/${image}`} alt="User"/>
-                <input type="file" name="image" id="image" className="block poppins" onChange={changeInputImage}></input>
+                <ReactTooltip place="right" type="dark" effect="solid" className="sm:block hidden"/>
+                <img data-tip='Preview Image' className="image-avatar object-cover rounded-full aspect-square" src={`${photoPrev}`} alt="User"/>
+                <input type="file" name="photo" id="photo" className="block poppins" onChange={changeInputImage}></input>
             </div>
             <form id="form_wrapper" className="poppins mt-8" onSubmit={handleEdit}>
                 { 
@@ -164,40 +170,36 @@ export default function Profile() {
                                                             key={input.key}
                                                             classStar="hidden" 
                                                             {...input}
-                                                            curData={e.name} 
-                                                            value={values[input.name]} 
+                                                            defValue={e.name} 
                                                             onChange={onChange}/>
                                 :
                                 input.label === "Phone" ? <FormInput 
                                                             key={input.key}
                                                             classStar="hidden" 
                                                             {...input}
-                                                            curData={e.phone} 
-                                                            value={values[input.name]} 
+                                                            defValue={e.phone} 
                                                             onChange={onChange}/>
                                 :
                                 input.label === "Email" ? <FormInput 
                                                             key={input.key}
                                                             classStar="hidden" 
+                                                            classInput="hidden" 
                                                             {...input}
-                                                            curData={e.email} 
-                                                            value={values[input.name]} 
+                                                            defValue={e.email} 
                                                             onChange={onChange}/>
                                 :
                                 input.label === "Password" ? <FormInput 
                                                                 key={input.key}
                                                                 classStar="hidden" 
                                                                 {...input}
-                                                                curData={e.password} 
-                                                                value={values[input.name]} 
+                                                                defValue={e.password} 
                                                                 onChange={onChange}/>
                                 :
                                 input.label === "Address" ? <FormInput 
                                                                 key={input.key}
                                                                 classStar="hidden" 
                                                                 {...input}
-                                                                curData={e.address} 
-                                                                value={values[input.name]} 
+                                                                defValue={e.address} 
                                                                 onChange={onChange}/>
                                 : "Student tidak memiliki hak akses"
                             )

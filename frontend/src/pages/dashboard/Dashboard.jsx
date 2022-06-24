@@ -1,4 +1,6 @@
 import React from "react"
+import Swal from "sweetalert2"
+import axios from "../../api/axios";
 import { AuthContext } from "../../App";
 import { NavLink, Outlet, Navigate } from "react-router-dom"
 
@@ -10,6 +12,7 @@ import "../../styles/dashboard/_dashboard.scss";
 export default function Dashboard({title, kw, desc, ogUrl, ogType, ogDesc, twitTitle}) {
 
     const status = null;
+    const [user, setUser] = React.useState([])
     const {state} = React.useContext(AuthContext);
 
     const options = [
@@ -36,6 +39,30 @@ export default function Dashboard({title, kw, desc, ogUrl, ogType, ogDesc, twitT
         setActive(e.target.innerText);
     }
 
+    const getUser = async () => {
+        const resp = await axios.get(`/user/id?id=${state.id}`, {
+            withCredentials: true,
+        }).catch( er => {
+            let errorMessage = er.response;
+            Swal.fire({
+                timer: 5000,
+                icon: 'error',
+                titleText: 'Maaf, User tidak ada',
+                showConfirmButton: false,
+                text: `${errorMessage.data.er}`,
+                customClass: {
+                    container: 'poppins',
+                }
+            })
+        })
+        setUser(resp.data.users)
+    }
+
+    React.useEffect(() => {
+        getUser()
+        // eslint-disable-next-line
+    }, [])
+
     if(!state.isAuthenticated) {
         return <Navigate to="/signin" replace/>  
     }
@@ -58,7 +85,17 @@ export default function Dashboard({title, kw, desc, ogUrl, ogType, ogDesc, twitT
                     <div className="left-content md:w-[25%] w-full sticky top-0 md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
                         <div className="first-left flex-col md:flex hidden items-center">
                             <div className="avatar-wrapper w-[8rem]">
-                                <Image />
+                                {
+                                    user &&
+                                    user.map((e, i)=> {
+                                        return (
+                                            <span key={i}>
+                                                <Image path={`/asset/img/user/${e.photo}`}/>
+                                            </span>
+                                        )
+                                    })
+
+                                }
                             </div>
                         </div>
                         <div className="second-left">
