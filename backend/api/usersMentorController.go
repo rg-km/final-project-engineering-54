@@ -8,8 +8,8 @@ import (
 )
 
 type listMentor struct {
-	UserID      int64     `json:"user_id"`
-	CourseID    int64     `json:"course_id"`
+	UserID      int64     `json:"users_id"`
+	CourseID    int64     `json:"courses_id"`
 	Email       string    `json:"email"`
 	Password    string    `json:"password"`
 	Name        string    `json:"name"`
