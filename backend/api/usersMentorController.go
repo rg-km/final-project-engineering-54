@@ -147,14 +147,13 @@ func (api *API) addMentor(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	
-	res, err := api.usersMentorSource.InsertUserMentor(userMentor.UserID, userMentor.CourseID, userMentor.About, userMentor.RatingSum, userMentor.RatingCount)
-
-	w.Header().Set("Content-Type", "application/json")
+	res, err := api.usersMentorSource.InsertUserMentor(userMentor.Email, userMentor.Password, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, userMentor.Role, userMentor.Logedin, time.Now(), time.Now(), userMentor.About, userMentor.RatingSum, userMentor.RatingCount, userMentor.CourseID, userMentor.CourseName, userMentor.CourseDesc)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(listMentorError{Error: err.Error()})
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
 }
