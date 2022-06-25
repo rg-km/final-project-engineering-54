@@ -37,7 +37,8 @@ func main() {
 			);
 
 			CREATE TABLE IF NOT EXISTS users_mentor (
-				users_id INTEGER NOT NULL PRIMARY KEY,
+				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+				users_id INTEGER NOT NULL,
 				courses_id INTEGER NOT NULL,
 				about VARCHAR(191),
 				rating_sum DOUBLE,
@@ -59,6 +60,7 @@ func main() {
 				created_at DATETIME NOT NULL,
 				updated_at DATETIME NOT NULL,
 				FOREIGN KEY (users_id) REFERENCES users(id),
+				FOREIGN KEY (users_mentor_id) REFERENCES users_mentor(id),
 				FOREIGN KEY (courses_id) REFERENCES courses(id)
 			);
 
@@ -74,13 +76,15 @@ func main() {
 			("React", "React is a front-end library developed at Facebook", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 			INSERT INTO users_mentor (users_id, courses_id, about, rating_sum, rating_count) VALUES
-			(3, 1, "I am a mentor for Go", 50, 10),
-			(4, 2, "I am a mentor for React", 30, 10);
+			(3, 1, "I am a mentor for Go", 50, 5),
+			(4, 2, "I am a mentor for React", 50, 5);
 
-			INSERT INTO forums (users_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
-			(1, 1, "How to use Go?", "I want to learn how to use Go", "default.png", "I can use Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(1, 2, "How to use React?", "I want to learn how to use React", "default.png", "I can use React", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(2, 1, "How to use Go? with gin", "I want to use Go with gin", "default.png", "I can use Go with gin", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			INSERT INTO forums (users_id, users_mentor_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
+			(1, 1, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "I will teach you how to start with Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(1, 4, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.png", "I will teach you how to start with React", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(2, 3, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "I will teach you how to start with Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(2, null, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.png", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(1, null, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		`)
 

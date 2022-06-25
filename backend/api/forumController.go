@@ -4,14 +4,15 @@ import (
 	"encoding/json"
 	"net/http"
 
-	// "strconv"
+	// "database/sql"
 	"time"
 )
 
 type listForum struct {
 	ID            int64     `json:"id"`
-	UserID        int64     `json:"user_id"`
-	CourseID      int64     `json:"course_id"`
+	UserID        int64     `json:"users_id"`
+	UserMentorID  int64     `json:"users_mentor_id"`
+	CourseID      int64     `json:"courses_id"`
 	Title         string    `json:"title"`
 	Question      string    `json:"question"`
 	QuestionPhoto string    `json:"question_photo"`
@@ -62,29 +63,30 @@ func (api *API) getForum(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for _, user := range forum {
+	for _, f := range forum {
 		response.Forum = append(response.Forum, listForum{
-			ID:            user.ID,
-			UserID:        user.UserID,
-			CourseID:      user.CourseID,
-			Title:         user.Title,
-			Question:      user.Question,
-			QuestionPhoto: user.QuestionPhoto,
-			Answer:        user.Answer,
-			AnswerPhoto:   user.AnswerPhoto,
-			CreatedAt:     user.CreatedAt,
-			UpdatedAt:     user.UpdatedAt,
-			Email:         user.Email,
-			Name:          user.Name,
-			Phone:         user.Phone,
-			Address:       user.Address,
-			Photo:         user.Photo,
-			Role:          user.Role,
-			About:         user.About,
-			RatingSum:     user.RatingSum,
-			RatingCount:   user.RatingCount,
-			CourseName:    user.CourseName,
-			CourseDesc:    user.CourseDesc,
+			ID:            f.ID,
+			UserID:        f.UserID,
+			UserMentorID:  f.UserMentorID.Int64,
+			CourseID:      f.CourseID.Int64,
+			Title:         f.Title,
+			Question:      f.Question,
+			QuestionPhoto: f.QuestionPhoto,
+			Answer:        f.Answer,
+			AnswerPhoto:   f.AnswerPhoto,
+			CreatedAt:     f.CreatedAt,
+			UpdatedAt:     f.UpdatedAt,
+			Email:         f.Email,
+			Name:          f.Name.String,
+			Phone:         f.Phone,
+			Address:       f.Address,
+			Photo:         f.Photo,
+			Role:          f.Role,
+			About:         f.About.String,
+			RatingSum:     f.RatingSum.Float64,
+			RatingCount:   f.RatingCount.Int64,
+			CourseName:    f.CourseName.String,
+			CourseDesc:    f.CourseDesc.String,
 		})
 	}
 
