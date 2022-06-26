@@ -53,12 +53,12 @@ type Forum struct {
 	ID            int64           `db:"id" json:"id"`
 	UserID        int64           `db:"users_id" json:"users_id"`
 	UserMentorID  sql.NullInt64   `db:"users_mentor_id" json:"users_mentor_id"`
-	CourseID      sql.NullInt64   `db:"courses_id" json:"courses_id"`
+	CourseID      int64           `db:"courses_id" json:"courses_id"`
 	Title         string          `db:"title" json:"title"`
 	Question      string          `db:"question" json:"question"`
 	QuestionPhoto string          `db:"question_photo" json:"question_photo"`
-	Answer        string          `db:"answer" json:"answer"`
-	AnswerPhoto   string          `db:"answer_photo" json:"answer_photo"`
+	Answer        sql.NullString  `db:"answer" json:"answer"`
+	AnswerPhoto   sql.NullString  `db:"answer_photo" json:"answer_photo"`
 	CreatedAt     time.Time       `db:"created_at" json:"created_at"`
 	UpdatedAt     time.Time       `db:"updated_at" json:"updated_at"`
 	Email         string          `db:"email" json:"email"`
