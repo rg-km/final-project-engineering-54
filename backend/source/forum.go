@@ -195,7 +195,6 @@ func (f *ForumSource) InsertQuestion(userID int64, CourseID int64, title string,
 	var sqlStatement string
 	var forum Forum
 
-	// cannot insert if title is already exist
 	sqlStatement = `
 	SELECT title FROM forums WHERE title LIKE ?
 	`
@@ -215,4 +214,41 @@ func (f *ForumSource) InsertQuestion(userID int64, CourseID int64, title string,
 	}
 
 	return Forum{UserID: userID, CourseID: CourseID, Title: title, Question: question, QuestionPhoto: questionPhoto, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
+}
+
+// create func for answer from question using update
+func (f *ForumSource) AnswerQuestion(id int64, userMentorID int64, answer string, answerPhoto string, updatedAt time.Time) (Forum, error) {
+	var sqlStatement string
+	var forum Forum
+
+	sqlStatement = `
+	UPDATE forums SET users_mentor_id = ?, answer = ?, answer_photo = ?, updated_at = ? WHERE id = ?
+	`
+	_, err := f.db.Exec(sqlStatement, userMentorID, answer, answerPhoto, updatedAt, id)
+	if err != nil {
+		return forum, err
+	}
+
+	return Forum{
+		ID: id, 
+		UserMentorID: sql.NullInt64{Int64: userMentorID, Valid: true}, 
+		Answer: sql.NullString{String: answer, Valid: true},
+		AnswerPhoto: sql.NullString{String: answerPhoto, Valid: true},
+		UpdatedAt: updatedAt}, nil
+}
+
+// create func for delete forum
+func (f *ForumSource) DeleteForum(id int64) error {
+	var sqlStatement string
+
+	sqlStatement = `
+	DELETE FROM forums WHERE id = ?
+	`
+
+	_, err := f.db.Exec(sqlStatement, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

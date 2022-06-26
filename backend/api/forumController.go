@@ -190,3 +190,54 @@ func (api *API) addQuestion(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(res)
 }
+
+// create func to answer question
+func (api *API) answerQuestion(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	var forum listForum
+	err := json.NewDecoder(r.Body).Decode(&forum)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+	
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	res, err := api.forumSource.AnswerQuestion(int64(id), forum.UserMentorID, forum.Answer, forum.AnswerPhoto, time.Now())
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(res)
+}
+
+// create func to delete forum
+func (api *API) deleteForum(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	err = api.forumSource.DeleteForum(int64(id))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(nil)
+	w.Write([]byte("Delete forum success"))
+}

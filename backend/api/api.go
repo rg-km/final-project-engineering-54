@@ -50,6 +50,8 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.addCourse)))))
 	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.updateCourse)))))
 	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteCourse)))))
+	mux.Handle("/api/forum/answer", api.PUT(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.answerQuestion)))))
+	mux.Handle("/api/forum/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteForum)))))
 
 	// API with AuthMiddleware and AdminMiddleware
 	mux.Handle("/api/mentor/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addMentor)))))
