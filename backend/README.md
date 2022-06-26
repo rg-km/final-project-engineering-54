@@ -65,7 +65,7 @@ ginkgo backend/test
 *nb : You must run inside the root directory `final-project-engineering-54`.
 
 ## Dummy Account
-- Admin : `admin@gmail.com`, `Codeswer54-`
-- Users : `user@gmail.com`, `Codeswer54-`
-- Mentor 1 : `mentor1@gmail.com`, `Codeswer54-`
-- Mentor 2 : `mentor2@gmail.com`, `Codeswer54-`
+- Admin : `admin@gmail.com`, `Codeswer54_`
+- Users : `user@gmail.com`, `Codeswer54_`
+- Mentor 1 : `mentor1@gmail.com`, `Codeswer54_`
+- Mentor 2 : `mentor2@gmail.com`, `Codeswer54_`
