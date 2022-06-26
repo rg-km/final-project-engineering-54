@@ -42,8 +42,8 @@ var _ = Describe("Source Test", func() {
 		);
 
 		INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-		("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.png", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-		("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.png", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+		("admin@gmail.com", "123456", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+		("user@gmail.com", "123456", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		
 
@@ -82,7 +82,7 @@ var _ = Describe("Source Test", func() {
 				Expect(usersList[0].Name).To(Equal("admin"))
 				Expect(usersList[0].Phone).To(Equal("081234567890"))
 				Expect(usersList[0].Address).To(Equal("Jl. Raya"))
-				Expect(usersList[0].Photo).To(Equal("default.png"))
+				Expect(usersList[0].Photo).To(Equal("default.svg"))
 				Expect(usersList[0].Role).To(Equal("admin"))
 				Expect(usersList[0].Logedin).To(Equal(false))
 				Expect(usersList[1].Email).To(Equal("user@gmail.com"))
@@ -90,7 +90,7 @@ var _ = Describe("Source Test", func() {
 				Expect(usersList[1].Name).To(Equal("user"))
 				Expect(usersList[1].Phone).To(Equal("081234567890"))
 				Expect(usersList[1].Address).To(Equal("Jl. Raya"))
-				Expect(usersList[1].Photo).To(Equal("default.png"))
+				Expect(usersList[1].Photo).To(Equal("default.svg"))
 				Expect(usersList[1].Role).To(Equal("user"))
 				Expect(usersList[1].Logedin).To(Equal(false))
 			})
@@ -108,7 +108,7 @@ var _ = Describe("Source Test", func() {
 				Expect(user.Name).To(Equal("admin"))
 				Expect(user.Phone).To(Equal("081234567890"))
 				Expect(user.Address).To(Equal("Jl. Raya"))
-				Expect(user.Photo).To(Equal("default.png"))
+				Expect(user.Photo).To(Equal("default.svg"))
 				Expect(user.Role).To(Equal("admin"))
 				Expect(user.Logedin).To(Equal(false))
 			})
@@ -146,7 +146,7 @@ var _ = Describe("Source Test", func() {
 
 		When("Email is not exist in Database", func() {
 			It("accepts the register", func() {
-				res, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, start, start)
+				res, err := userSource.Register("damaraccd11@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.svg", "user", false, start, start)
 				Expect(err).ToNot(HaveOccurred())
 
 				Expect(res.Email).ToNot(Equal(""))
@@ -163,7 +163,7 @@ var _ = Describe("Source Test", func() {
 		})
 		When("Email is exist in Database", func() {
 			It("rejects the register", func() {
-				_, err := userSource.Register("admin@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.png", "user", false, start, start)
+				_, err := userSource.Register("admin@gmail.com", "123456", "damara", "081234567890", "Jl. Raya", "default.svg", "user", false, start, start)
 				Expect(err).To(HaveOccurred())
 				Expect(err.Error()).To(Equal("Email already exist"))
 			})
