@@ -100,19 +100,19 @@ func (u *UsersSource) Register(email string, password string, name string, phone
 		return user, errors.New("Email already exist")
 	}
 
-	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
+	_, err = u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.svg", "user", false, createdAt, updatedAt)
 	if err != nil {
 		return user, errors.New("Failed to register")
 	}
 
-	return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
+	return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.svg", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
 
-	// _, err := u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.png", "user", false, createdAt, updatedAt)
+	// _, err := u.db.Exec("INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", email, password, name, phone, address, "default.svg", "user", false, createdAt, updatedAt)
 	// if err != nil {
 	// 	return User{}, err
 	// }
 
-	// return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
+	// return User{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.svg", Role: "user", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
 }
 
 // create function for fetch user role

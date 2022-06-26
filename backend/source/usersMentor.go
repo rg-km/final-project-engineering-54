@@ -155,7 +155,7 @@ func (u *UserMentorSource) InsertUserMentor(email string, password string, name 
 		return userMentor, err
 	}
 
-	res, err := stmt.Exec(email, password, name, phone, address, "default.png", "mentor", false, createdAt, updatedAt)
+	res, err := stmt.Exec(email, password, name, phone, address, "default.svg", "mentor", false, createdAt, updatedAt)
 	if err != nil {
 		return userMentor, err
 	}
@@ -179,5 +179,5 @@ func (u *UserMentorSource) InsertUserMentor(email string, password string, name 
 		return userMentor, err
 	}
 
-	return UserMentor{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "mentor", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt, About: about, RatingSum: ratingSum, RatingCount: ratingCount, CourseID: courseID, CourseName: courseName, CourseDesc: courseDesc}, nil
+	return UserMentor{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.svg", Role: "mentor", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt, About: about, RatingSum: ratingSum, RatingCount: ratingCount, CourseID: courseID, CourseName: courseName, CourseDesc: courseDesc}, nil
 }

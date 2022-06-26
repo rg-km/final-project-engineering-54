@@ -66,10 +66,10 @@ func main() {
 
 
 			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-			("admin@gmail.com", "Codeswer54-", "admin", "081234567890", "Jl. Raya", "default.png", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("user@gmail.com", "Codeswer54-", "user", "081234567890", "Jl. Raya", "default.png", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor1@gmail.com", "Codeswer54-", "mentor1", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor2@gmail.com", "Codeswer54-", "mentor2", "081234567890", "Jl. Raya", "default.png", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			("admin@gmail.com", "Codeswer54-", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("user@gmail.com", "Codeswer54-", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor1@gmail.com", "Codeswer54-", "mentor1", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor2@gmail.com", "Codeswer54-", "mentor2", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 			INSERT INTO courses (name, desc, created_at, updated_at) VALUES
 			("Go", "Go is a compiled language developed at Google", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
@@ -80,11 +80,11 @@ func main() {
 			(4, 2, "I am a mentor for React", 50, 5);
 
 			INSERT INTO forums (users_id, users_mentor_id, courses_id, title, question, question_photo, answer, answer_photo, created_at, updated_at) VALUES
-			(1, 1, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "I will teach you how to start with Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(1, 4, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.png", "I will teach you how to start with React", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(2, 3, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "I will teach you how to start with Go", "default.png", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(2, null, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.png", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			(1, null, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.png", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			(1, 1, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.svg", "I will teach you how to start with Go", "default.svg", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(1, 4, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.svg", "I will teach you how to start with React", "default.svg", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(2, 3, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.svg", "I will teach you how to start with Go", "default.svg", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(2, null, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.svg", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			(1, null, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.svg", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		`)
 
