@@ -6,6 +6,8 @@ import Terms from "./pages/Terms";
 import About from "./pages/About";
 import ScrollPage from "./components/ScrollPage";
 
+import AdminSignin from "./pages/auth/admin/Signin"
+
 import Blogs from "./pages/blog/Blogs";
 import ReadBlog from "./pages/blog/ReadBlog";
 
@@ -63,20 +65,23 @@ export default function App() {
     <AuthContext.Provider value={{ state, dispatch }}>
       <ScrollPage>
         <Routes>
-          <Route exact path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/about" element={<About />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
+          {/* Student */}
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
           <Route element={<Dashboard />}>
             <Route exact path="/dashboard" element={<Mydash />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/question" element={<Question />} />
           </Route>
+          {/* Admin */}
+          <Route path="/admin/signin" element={<AdminSignin />} />
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/about" element={<About />} />
         </Routes>
       </ScrollPage>
     </AuthContext.Provider>

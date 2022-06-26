@@ -1,4 +1,6 @@
 import React from "react"
+import Swal from "sweetalert2"
+import axios from "../api/axios";
 import AuthBtn from "./auth/AuthBtn";
 import { AuthContext } from "../App";
 
@@ -22,7 +24,32 @@ export default function Navbar() {
         setIsPopup(!isPopup);
     }
     
+    const [user, setUser] = React.useState([])
     const {state} = React.useContext(AuthContext);
+    
+    if(state.id !== null) {
+        const getUser = async () => {
+            const resp = await axios.get(`/user/id?id=${state.id}`, {
+                withCredentials: true,
+            }).catch( er => {
+                let errorMessage = er.response;
+                Swal.fire({
+                    timer: 5000,
+                    icon: 'error',
+                    titleText: 'Maaf, User tidak ada',
+                    showConfirmButton: false,
+                    text: `${errorMessage.data.er}`,
+                    customClass: {
+                        container: 'poppins',
+                    }
+                })
+            })
+            setUser(resp.data.users)
+        }
+        getUser()
+    }
+    React.useEffect(() => {
+    }, [user])
     
     return (
         <header>
@@ -74,7 +101,14 @@ export default function Navbar() {
                         {
                             state.isAuthenticated ?
                                 <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
-                                    <h1 className="text-semibold text-[1rem] inline mr-2">Aditya Rizqi</h1>
+                                    {
+                                        user &&
+                                        user.map((e, i) => {
+                                            return (
+                                                <h1 className="text-semibold text-[1rem] inline mr-2">{e.name}</h1>
+                                            )
+                                        })
+                                    }
                                     <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
                                 </AuthBtn>
                                 :
@@ -87,9 +121,20 @@ export default function Navbar() {
                     {
                         state.isAuthenticated ?
                             <>
-                                <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
-                                    <Image classname="w-[2.5rem] mr-1"/>
-                                </AuthBtn>  
+                                {
+                                    user &&
+                                    <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
+                                        {
+                                            user.map((e, i) => {
+                                                return (
+                                                    <span key={i}>
+                                                        <Image classname="w-[2.5rem] mr-1" path={`/asset/img/user/${e.photo}`}/>
+                                                    </span>
+                                                )
+                                            })
+                                        }
+                                    </AuthBtn>  
+                                }
                                 <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
                             </>
                             :

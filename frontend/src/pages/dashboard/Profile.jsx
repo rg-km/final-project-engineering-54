@@ -20,6 +20,7 @@ export default function Profile() {
         password: "",
         address: "",
     });
+    const [isLoading, setIsLoading] = React.useState(false)
     
     const inputs = [
         {
@@ -94,6 +95,7 @@ export default function Profile() {
             })
         })
         setUser(resp.data.users)
+        setIsLoading(true)
     }
 
     const onChange = (e) => {
@@ -121,7 +123,7 @@ export default function Profile() {
                 toast: true,
                 timer: 1900,
                 icon: 'success',
-                position: "top end",
+                position: "top-end",
                 showConfirmButton: false,
                 title: 'Data telah disimpan',
                 customClass: {
@@ -148,7 +150,7 @@ export default function Profile() {
     React.useEffect( () => {
         getUser()
         // eslint-disable-next-line
-    }, [])
+    }, [user])
 
     return (
         
@@ -183,7 +185,6 @@ export default function Profile() {
                                 input.label === "Email" ? <FormInput 
                                                             key={input.key}
                                                             classStar="hidden" 
-                                                            classInput="hidden" 
                                                             {...input}
                                                             defValue={e.email} 
                                                             onChange={onChange}/>

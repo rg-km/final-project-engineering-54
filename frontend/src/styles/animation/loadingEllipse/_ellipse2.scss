@@ -1,0 +1,18 @@
+@mixin ldsEllipsis2() {
+    @-webkit-keyframes ldsEllipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(24px, 0);
+      }    
+    }      
+    @keyframes ldsEllipsis2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(24px, 0);
+      }    
+    }      
+}

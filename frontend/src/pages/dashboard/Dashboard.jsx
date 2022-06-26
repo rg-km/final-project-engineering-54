@@ -61,7 +61,7 @@ export default function Dashboard({title, kw, desc, ogUrl, ogType, ogDesc, twitT
     React.useEffect(() => {
         getUser()
         // eslint-disable-next-line
-    }, [])
+    }, [user])
 
     if(!state.isAuthenticated) {
         return <Navigate to="/signin" replace/>  
