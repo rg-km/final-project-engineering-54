@@ -188,3 +188,27 @@ func (u *UsersSource) DeleteUser(id int64) (User, error) {
 
 	return user, nil
 }
+
+// create func count user who role user
+func (u *UsersSource) CountUser() (int64, error) {
+	var count int64
+
+	err := u.db.QueryRow("SELECT COUNT(id) FROM users WHERE role = 'user'").Scan(&count)
+	if err != nil {
+		return count, err
+	}
+
+	return count, nil
+}
+
+// create func count user who role mentor
+func (u *UsersSource) CountMentor() (int64, error) {
+	var count int64
+
+	err := u.db.QueryRow("SELECT COUNT(id) FROM users WHERE role = 'mentor'").Scan(&count)
+	if err != nil {
+		return count, err
+	}
+
+	return count, nil
+}

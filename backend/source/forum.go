@@ -169,6 +169,27 @@ func (f *ForumSource) FetchForumByID(id int64) (Forum, error) {
 	return forum, nil
 }
 
+// create func count forum
+func (f *ForumSource) CountForum() (int64, error) {
+	var sqlStatement string
+	var count int64
+
+	sqlStatement = `
+	SELECT
+		COUNT(id)
+	FROM 
+		forums
+	`
+
+	row := f.db.QueryRow(sqlStatement)
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
+}
+
 // create func for insert question on forums
 func (f *ForumSource) InsertQuestion(userID int64, CourseID int64, title string, question string, questionPhoto string, createdAt time.Time, updatedAt time.Time) (Forum, error) {
 	var sqlStatement string

@@ -201,3 +201,37 @@ func (api *API) deleteUsers(w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(res)
 	w.Write([]byte("Delete user success"))
 }
+
+// create func for count user who role user
+func (api *API) countUsers(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	count, err := api.usersSource.CountUser()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(getUsersError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(count)
+}
+
+// create func for count user who role mentor
+func (api *API) countMentor(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	count, err := api.usersSource.CountMentor()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(getUsersError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(count)
+}
