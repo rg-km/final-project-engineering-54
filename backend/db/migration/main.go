@@ -66,10 +66,10 @@ func main() {
 
 
 			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-			("admin@gmail.com", "Codeswer54-", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("user@gmail.com", "Codeswer54-", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor1@gmail.com", "Codeswer54-", "mentor1", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-			("mentor2@gmail.com", "Codeswer54-", "mentor2", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+			("admin@gmail.com", "Codeswer54_", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("user@gmail.com", "Codeswer54_", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor1@gmail.com", "Codeswer54_", "mentor1", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+			("mentor2@gmail.com", "Codeswer54_", "mentor2", "081234567890", "Jl. Raya", "default.svg", "mentor", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 			INSERT INTO courses (name, desc, created_at, updated_at) VALUES
 			("Go", "Go is a compiled language developed at Google", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
