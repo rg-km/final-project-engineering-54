@@ -8,8 +8,8 @@ import (
 )
 
 type listMentor struct {
-	UserID      int64     `json:"user_id"`
-	CourseID    int64     `json:"course_id"`
+	UserID      int64     `json:"users_id"`
+	CourseID    int64     `json:"courses_id"`
 	Email       string    `json:"email"`
 	Password    string    `json:"password"`
 	Name        string    `json:"name"`
@@ -128,4 +128,32 @@ func (api *API) getMentorByID(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	encoder.Encode(response)
+}
+
+// create function to add mentor
+func (api *API) addMentor(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	var userMentor listMentor
+	err := json.NewDecoder(r.Body).Decode(&userMentor)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(listMentorError{Error: err.Error()})
+		return
+	}
+	mentor, err := api.usersMentorSource.FetchUserMentorByID(userMentor.UserID)
+	if err != nil && mentor.UserID != 0 {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(listMentorError{Error: "User ID already exists"})
+		return
+	}
+	
+	res, err := api.usersMentorSource.InsertUserMentor(userMentor.Email, userMentor.Password, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, userMentor.Role, userMentor.Logedin, time.Now(), time.Now(), userMentor.About, userMentor.RatingSum, userMentor.RatingCount, userMentor.CourseID, userMentor.CourseName, userMentor.CourseDesc)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(listMentorError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(res)
 }

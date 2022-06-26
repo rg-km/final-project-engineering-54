@@ -2,6 +2,8 @@ package source
 
 import (
 	"database/sql"
+	"errors"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -128,4 +130,54 @@ func (u *UserMentorSource) FetchUserMentorByID(id int64) (UserMentor, error) {
 	}
 
 	return userMentor, nil
+}
+
+// create func insert user mentor using transaction
+func (u *UserMentorSource) InsertUserMentor(email string, password string, name string, phone string, address string, photo string, role string, logedin bool, createdAt time.Time, updatedAt time.Time, about string, ratingSum float64, ratingCount int64, courseID int64, courseName string, courseDesc string) (UserMentor, error) {
+	var sqlStatement string
+	var id int64
+	var userMentor UserMentor
+
+	sqlStatement = `
+	SELECT email FROM users WHERE email = ?`
+	row := u.db.QueryRow(sqlStatement, email)
+	err := row.Scan(&userMentor.Email)
+	if err == nil {
+		return userMentor, errors.New("Email already exist")
+	}
+
+	sqlStatement = `
+	INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`
+
+	stmt, err := u.db.Prepare(sqlStatement)
+	if err != nil {
+		return userMentor, err
+	}
+
+	res, err := stmt.Exec(email, password, name, phone, address, "default.png", "mentor", false, createdAt, updatedAt)
+	if err != nil {
+		return userMentor, err
+	}
+
+	id, err = res.LastInsertId()
+	if err != nil {
+		return userMentor, err
+	}
+
+	sqlStatement = `
+	INSERT INTO users_mentor (users_id, courses_id, about, rating_sum, rating_count) VALUES (?, ?, ?, ?, ?)
+	`
+
+	stmt, err = u.db.Prepare(sqlStatement)
+	if err != nil {
+		return userMentor, err
+	}
+
+	res, err = stmt.Exec(id, courseID, about, ratingSum, ratingCount)
+	if err != nil {
+		return userMentor, err
+	}
+
+	return UserMentor{Email: email, Password: password, Name: name, Phone: phone, Address: address, Photo: "default.png", Role: "mentor", Logedin: logedin, CreatedAt: createdAt, UpdatedAt: updatedAt, About: about, RatingSum: ratingSum, RatingCount: ratingCount, CourseID: courseID, CourseName: courseName, CourseDesc: courseDesc}, nil
 }

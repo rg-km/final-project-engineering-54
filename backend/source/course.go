@@ -53,7 +53,7 @@ func (c *CourseSource) FetchCourseByID(id int64) (Course, error) {
 func (c *CourseSource) FetchCourseByName(name string) (Course, error) {
 	var course Course
 
-	row := c.db.QueryRow("SELECT * FROM courses WHERE name = ?", name)
+	row := c.db.QueryRow("SELECT * FROM courses WHERE name LIKE ?", "%"+name+"%")
 	err := row.Scan(&course.ID, &course.Name, &course.Desc, &course.CreatedAt, &course.UpdatedAt)
 	if err != nil {
 		return course, err
@@ -79,7 +79,6 @@ func (c *CourseSource) NewCourse(name string, desc string, createdAt time.Time, 
 
 	return Course{Name: name, Desc: desc, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
 }
-	
 
 // create function for update course by id
 func (c *CourseSource) UpdateCourse(id int64, name string, desc string, updatedAt time.Time) (Course, error) {
