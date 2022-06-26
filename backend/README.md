@@ -17,6 +17,9 @@
 - `GET`: `/api/course`
 - `GET`: `/api/course/id`
 - `GET`: `/api/course/name`
+- `GET`: `/api/forum/count`
+- `GET`: `/api/user/count`
+- `GET`: `/api/mentor/count`
 
 ### Available APIs with AuthMiddleware (Must Login)
 - `GET`: `/api/user`
@@ -26,11 +29,15 @@
 - `GET`: `/api/mentor`
 - `GET`: `/api/mentor/id`
 - `GET`: `/api/forum`
+- `GET`: `/api/forum/id`
+- `POST`: `/api/forum/question`
 
 ### Available APIs with AuthMiddleware and MentorMiddleware (Must Login as Mentor or Admin)
 - `POST`: `/api/course/create`
 - `PUT`: `/api/course/update`
 - `DELETE`: `/api/course/delete`
+- `PUT`: `/api/forum/answer` 
+- `DELETE`: `/api/forum/delete`
 
 ### Available APIs with AuthMiddleware and AdminMiddleware (Must Login as Admin)
 - `DELETE`: `/api/user/delete`
