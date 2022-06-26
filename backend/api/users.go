@@ -8,15 +8,15 @@ import (
 )
 
 type getUsers struct {
-	ID        int64  `json:"id"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
-	Name      string `json:"name"`
-	Phone     string `json:"phone"`
-	Address   string `json:"address"`
-	Photo     string `json:"photo"`
-	Role      string `json:"role"`
-	Logedin   bool   `json:"logedin"`
+	ID        int64     `json:"id"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	Name      string    `json:"name"`
+	Phone     string    `json:"phone"`
+	Address   string    `json:"address"`
+	Photo     string    `json:"photo"`
+	Role      string    `json:"role"`
+	Logedin   bool      `json:"logedin"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -59,7 +59,7 @@ func (api *API) getUsers(w http.ResponseWriter, r *http.Request) {
 			Phone:     user.Phone,
 			Address:   user.Address,
 			Photo:     user.Photo,
-			// Role:      user.Role,
+			Role:      user.Role,
 			Logedin:   user.Logedin,
 			CreatedAt: user.CreatedAt,
 			UpdatedAt: user.UpdatedAt,
@@ -100,7 +100,7 @@ func (api *API) getUsersByID(w http.ResponseWriter, r *http.Request) {
 		Phone:     user.Phone,
 		Address:   user.Address,
 		Photo:     user.Photo,
-		// Role:      user.Role,
+		Role:      user.Role,
 		Logedin:   user.Logedin,
 		CreatedAt: user.CreatedAt,
 		UpdatedAt: user.UpdatedAt,
@@ -119,7 +119,7 @@ func (api *API) getUsersLogedin(w http.ResponseWriter, r *http.Request) {
 	response.Users = make([]getUsers, 0)
 
 	users, err := api.usersSource.FetchUserLogedin()
-	defer func() {	
+	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			encoder.Encode(getUsersError{Error: err.Error()})
@@ -140,7 +140,7 @@ func (api *API) getUsersLogedin(w http.ResponseWriter, r *http.Request) {
 			Phone:     user.Phone,
 			Address:   user.Address,
 			Photo:     user.Photo,
-			// Role:      user.Role,
+			Role:      user.Role,
 			Logedin:   user.Logedin,
 			CreatedAt: user.CreatedAt,
 			UpdatedAt: user.UpdatedAt,
@@ -165,7 +165,7 @@ func (api *API) updateUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := api.usersSource.UpdateUser(int64(id), user.Password, user.Name, user.Phone, user.Address, user.Photo, time.Now())
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -190,7 +190,7 @@ func (api *API) deleteUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res, err := api.usersSource.DeleteUser(int64(id))
-	
+
 	w.Header().Set("Content-Type", "application/json")
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)

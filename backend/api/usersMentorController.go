@@ -63,11 +63,11 @@ func (api *API) getMentor(w http.ResponseWriter, r *http.Request) {
 			CourseID: user.CourseID,
 			Email:    user.Email,
 			// Password:    user.Password,
-			Name:    user.Name,
-			Phone:   user.Phone,
-			Address: user.Address,
-			Photo:   user.Photo,
-			// Role:        user.Role,
+			Name:        user.Name,
+			Phone:       user.Phone,
+			Address:     user.Address,
+			Photo:       user.Photo,
+			Role:        user.Role,
 			Logedin:     user.Logedin,
 			CreatedAt:   user.CreatedAt,
 			UpdatedAt:   user.UpdatedAt,
@@ -111,11 +111,11 @@ func (api *API) getMentorByID(w http.ResponseWriter, r *http.Request) {
 		CourseID: mentor.CourseID,
 		Email:    mentor.Email,
 		// Password:    mentor.Password,
-		Name:    mentor.Name,
-		Phone:   mentor.Phone,
-		Address: mentor.Address,
-		Photo:   mentor.Photo,
-		// Role:        mentor.Role,
+		Name:        mentor.Name,
+		Phone:       mentor.Phone,
+		Address:     mentor.Address,
+		Photo:       mentor.Photo,
+		Role:        mentor.Role,
 		Logedin:     mentor.Logedin,
 		CreatedAt:   mentor.CreatedAt,
 		UpdatedAt:   mentor.UpdatedAt,
@@ -146,7 +146,7 @@ func (api *API) addMentor(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(listMentorError{Error: "User ID already exists"})
 		return
 	}
-	
+
 	res, err := api.usersMentorSource.InsertUserMentor(userMentor.Email, userMentor.Password, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, userMentor.Role, userMentor.Logedin, time.Now(), time.Now(), userMentor.About, userMentor.RatingSum, userMentor.RatingCount, userMentor.CourseID, userMentor.CourseName, userMentor.CourseDesc)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
