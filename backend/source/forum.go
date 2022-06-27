@@ -96,7 +96,6 @@ func (f *ForumSource) FetchForum() ([]Forum, error) {
 
 	return forums, nil
 }
-
 // create func fetch forum by id
 func (f *ForumSource) FetchForumByID(id int64) (Forum, error) {
 	var sqlStatement string
@@ -214,14 +213,7 @@ func (f *ForumSource) InsertQuestion(userID int64, CourseID int64, title string,
 		return forum, err
 	}
 
-	return Forum{
-		UserID:        userID,
-		CourseID:      CourseID,
-		Title:         title,
-		Question:      question,
-		QuestionPhoto: sql.NullString{String: questionPhoto, Valid: true},
-		CreatedAt:     createdAt,
-		UpdatedAt:     updatedAt}, nil
+	return Forum{UserID: userID, CourseID: CourseID, Title: title, Question: question, QuestionPhoto: questionPhoto, CreatedAt: createdAt, UpdatedAt: updatedAt}, nil
 }
 
 // create func for answer from question using update
@@ -238,11 +230,11 @@ func (f *ForumSource) AnswerQuestion(id int64, userMentorID int64, answer string
 	}
 
 	return Forum{
-		ID:           id,
-		UserMentorID: sql.NullInt64{Int64: userMentorID, Valid: true},
-		Answer:       sql.NullString{String: answer, Valid: true},
-		AnswerPhoto:  sql.NullString{String: answerPhoto, Valid: true},
-		UpdatedAt:    updatedAt}, nil
+		ID: id, 
+		UserMentorID: sql.NullInt64{Int64: userMentorID, Valid: true}, 
+		Answer: sql.NullString{String: answer, Valid: true},
+		AnswerPhoto: sql.NullString{String: answerPhoto, Valid: true},
+		UpdatedAt: updatedAt}, nil
 }
 
 // create func for delete forum

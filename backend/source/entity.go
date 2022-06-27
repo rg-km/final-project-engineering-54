@@ -56,7 +56,7 @@ type Forum struct {
 	CourseID      int64           `db:"courses_id" json:"courses_id"`
 	Title         string          `db:"title" json:"title"`
 	Question      string          `db:"question" json:"question"`
-	QuestionPhoto sql.NullString  `db:"question_photo" json:"question_photo"`
+	QuestionPhoto string          `db:"question_photo" json:"question_photo"`
 	Answer        sql.NullString  `db:"answer" json:"answer"`
 	AnswerPhoto   sql.NullString  `db:"answer_photo" json:"answer_photo"`
 	CreatedAt     time.Time       `db:"created_at" json:"created_at"`
