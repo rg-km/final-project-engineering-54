@@ -7,21 +7,35 @@ import "../../styles/dashboard/_mydash.scss";
 export default function Mydash() {
 
     const [user, setUser] = React.useState([])
+    const [forumCount, setForumCount] = React.useState([])
+
     const {state} = React.useContext(AuthContext);
 
-    const getUser = async () => {
+    const getUser = React.useCallback( async () => {
         const resp = await axios.get(`/user/id?id=${state.id}`, {
             withCredentials: true
         }).catch( er => {
             console.log(er)
         })
         setUser(resp.data.users)
-    }
+        // eslint-disable-next-line
+    }, [])
+    const getForumCount = React.useCallback(async () => {
+        await axios.get(`/forum/count`, {
+             withCredentials: true
+         }).then(res => {
+             setForumCount(res.data)
+         }).catch( er => {
+             console.log(er)
+         })
+     }, [])
+ 
 
     React.useEffect( () => {
         getUser()
+        getForumCount()
         // eslint-disable-next-line
-    }, [user])
+    }, [user, getUser, getForumCount])
 
     return (
         <div className="mydash-component">
@@ -46,7 +60,11 @@ export default function Mydash() {
                         </div>
                         <div className="value-items-total py-1">
                             <h1>
-                                <span className="number-value">0</span>
+                                <span className="number-value">
+                                    {
+                                        forumCount
+                                    }
+                                </span>
                                 <span className="text-value text-gray-500 text-[18px]">  Pertanyaan</span>
                             </h1>
                         </div>
