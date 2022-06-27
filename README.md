@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/rg-km/final-project-engineering-54">
-    <img src="./frontend/public/asset/img/logo-codeswer.png" alt="Logo" width="350" height="70">
+    <img src="./README.svg" alt="Logo" width="80%" height="100">
   </a>
 
 <h3 align="center">Pecahkan Masalah Pemrograman Bersama Ahlinya</h3>
