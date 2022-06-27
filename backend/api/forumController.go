@@ -173,7 +173,8 @@ func (api *API) countForumByID(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
 	encoder := json.NewEncoder(w)
 
-	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	id, err := strconv.Atoi(r.URL.Query().Get("users_id"))
+	// id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	count, err := api.forumSource.CountForumByID(int64(id))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
