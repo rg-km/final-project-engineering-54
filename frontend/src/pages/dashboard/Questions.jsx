@@ -1,9 +1,33 @@
+import React from "react"
+import axios from "../../api/axios";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../App";
 import BtnCustom from "../../components/BtnCustom";
 
 import "../../styles/dashboard/_questions.scss";
 
 export default function Mydash() {
+
+  const {state} = React.useContext(AuthContext);
+
+  const [questions, setQuestions] = React.useState([])
+
+  const getQuestions = React.useCallback( async () => {
+    await axios.get(`/forum/id?users_id=${state.id}`, {
+         withCredentials: true
+     }).then(res => {
+        // console.log(res.data)
+        setQuestions(res.data.forum)
+     }).catch( er => {
+         console.log(er)
+     })
+    // eslint-disable-next-line
+  }, [])
+
+  React.useEffect( () => {
+    getQuestions()
+  }, [getQuestions])
+
   return (
     <div className="questions-component">
       <div className="heading-questions inter">
@@ -15,17 +39,27 @@ export default function Mydash() {
       >
         <BtnCustom>Buat Pertanyaan</BtnCustom>
       </Link>
-      <div className="card-questions-list w-full mt-12">
-        <div className="card-questions-wrapper inter border border-solid border-gray-300">
-          <div className="card-questions-header mb-4">
-            <Link to="/dashboard/questions/:name">
-              <h2>Bagaimana cara membuat login dengan python</h2>
-            </Link>
-          </div>
-          <Link to="/dashboard/questions/:name">
-            <BtnCustom>Lihat Detail Pertanyaan</BtnCustom>
-          </Link>
-        </div>
+      <div className="card-questions-list w-full mt-12 space-y-5">
+      {
+        questions.map((e,i) => {
+          return (
+            <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
+              <div className="card-questions-header mb-4">
+                <Link to="/dashboard/questions/:name">
+                  <h2>
+                    {
+                      e.title
+                    }
+                  </h2>
+                </Link>
+              </div>
+              <Link to="/forum">
+                <BtnCustom>Lihat Detail Pertanyaan</BtnCustom>
+              </Link>
+            </div>
+          )
+        })
+      }
       </div>
     </div>
   );

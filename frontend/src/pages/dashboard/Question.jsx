@@ -2,6 +2,7 @@ import Swal from "sweetalert2"
 import axios from "../../api/axios"
 import React, { useRef } from "react"
 import { AuthContext } from "../../App";
+import { Navigate } from "react-router-dom";
 
 import "../../styles/dashboard/_question.scss";
 import { Editor } from '@tinymce/tinymce-react';
@@ -15,6 +16,7 @@ export default function Question() {
     question: ""
   });
 
+  const [redirect, setRedirect] = React.useState(false);
 
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
@@ -39,7 +41,8 @@ export default function Question() {
     const dataReq = {
       ...values,
       users_id: state.id,
-      course_id: courseId[Math.floor(Math.random() * courseId.length)]
+      // course_id: 2,
+      courses_id: courseId[Math.floor(Math.random() * courseId.length)]
     }
     await axios.post("/forum/question", dataReq, {
         withCredentials: true,
@@ -51,7 +54,7 @@ export default function Question() {
         // console.log(res.data)
         Swal.fire({
           toast: true,
-          timer: 2500,
+          timer: 3000,
           icon: 'success',
           position: "top-end",
           showConfirmButton: false,
@@ -64,6 +67,7 @@ export default function Question() {
           title: "",
           question: ""      
         })
+        setRedirect(true)
     })
     .catch( error => {
         Swal.fire({
@@ -77,8 +81,9 @@ export default function Question() {
             }
         })
     })
-    console.log(dataReq)
+    // console.log(dataReq)
   }
+  if (redirect) return <Navigate to="/questions" replace />;
 
   return (
     <main className="question-component">
