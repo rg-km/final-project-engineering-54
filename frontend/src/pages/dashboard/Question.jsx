@@ -1,15 +1,20 @@
+import Swal from "sweetalert2"
+import axios from "../../api/axios"
 import React, { useRef } from "react"
-import "../../styles/dashboard/_question.scss";
+import { AuthContext } from "../../App";
 
+import "../../styles/dashboard/_question.scss";
 import { Editor } from '@tinymce/tinymce-react';
 import BtnCustom from "../../components/BtnCustom";
 
 export default function Question() {
+  const {state} = React.useContext(AuthContext);
 
   const [values, setValues] = React.useState({
-    subject: "",
-    messages: ""
+    title: "",
+    question: ""
   });
+
 
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
@@ -21,23 +26,59 @@ export default function Question() {
       ...values,
       [e.target.name]: e.target.value
     })
-    console.log(values)
   }
 
   const editorRef = useRef(null);
 
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    log()
-    console.log(values)
+    // if (editorRef.current) {
+    //   setContent(editorRef.current.getContent());
+    // }
+    const courseId = [1,2];
+    const dataReq = {
+      ...values,
+      users_id: state.id,
+      course_id: courseId[Math.floor(Math.random() * courseId.length)]
+    }
+    await axios.post("/forum/question", dataReq, {
+        withCredentials: true,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        }
+    })
+    .then(res => {
+        // console.log(res.data)
+        Swal.fire({
+          toast: true,
+          timer: 2500,
+          icon: 'success',
+          position: "top-end",
+          showConfirmButton: false,
+          title: 'Pertanyaan berhasil dibuat',
+          customClass: {
+              container: 'poppins'
+          },  
+        })   
+        setValues({
+          title: "",
+          question: ""      
+        })
+    })
+    .catch( error => {
+        Swal.fire({
+            timer: 5000,
+            icon: 'error',
+            titleText: 'Coba lagi yuk',
+            showConfirmButton: false,
+            text: `${error.message}`,
+            customClass: {
+                container: 'poppins',
+            }
+        })
+    })
+    console.log(dataReq)
   }
-
 
   return (
     <main className="question-component">
@@ -47,15 +88,15 @@ export default function Question() {
       >
         <div className="title-question space-y-3">
           <h1 className="poppins">Judul Pertanyaan</h1>
-          <textarea className="field-title-question inter" name="subject" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,255}$"></textarea>
+          <textarea className="field-title-question inter" name="title" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,255}$"></textarea>
         </div>
         <div className="messages-question inter">
           <Editor 
             apiKey='j3akvdt0e6yupl1u6hcuj7w7v240k9feywwe2l9665xlvmv3'
-            textareaName="messages"
+            textareaName="question"
             initialValue="Mulai menulis disini" 
             onInit={(evt, editor) => editorRef.current = editor}
-            onEditorChange={ newValue => setValues({ ...values, messages: newValue }) }
+            onEditorChange={ newValue => setValues({ ...values, question: newValue }) }
             init={{
               plugins: [
                 'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',

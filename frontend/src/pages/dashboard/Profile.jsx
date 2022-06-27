@@ -77,7 +77,7 @@ export default function Profile() {
         },
     ]
 
-    const getUser = async () => {
+    const getUser = React.useCallback( async () => {
         const resp = await axios.get(`/user/id?id=${state.id}`, {
             withCredentials: true,
         }).catch( er => {
@@ -94,7 +94,8 @@ export default function Profile() {
             })
         })
         setUser(resp.data.users)
-    }
+        // eslint-disable-next-line
+    }, [])
 
     const onChange = (e) => {
         setValues({
@@ -148,7 +149,7 @@ export default function Profile() {
     React.useEffect( () => {
         getUser()
         // eslint-disable-next-line
-    }, [user])
+    }, [user, getUser])
 
     return (
         

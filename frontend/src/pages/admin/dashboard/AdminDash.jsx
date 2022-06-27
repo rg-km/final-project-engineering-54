@@ -12,7 +12,7 @@ export default function AdminDash() {
     const [userCount, setUserCount] = React.useState([])
     const [mentorCount, setMentorCount] = React.useState([])
 
-    const [searchKey, setSeacrhKey] = React.useState("");
+    // const [searchKey, setSeacrhKey] = React.useState("");
 
     const {state} = React.useContext(AuthContext);
 

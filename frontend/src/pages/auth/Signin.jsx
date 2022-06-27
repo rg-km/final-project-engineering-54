@@ -49,7 +49,6 @@ export default function Signin() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-
         await axios.post("/user/login", values, {
             withCredentials: true,
             headers: {
@@ -99,7 +98,6 @@ export default function Signin() {
                 }
             })
         })
-
     }
     
     if (redirect) return <Navigate to="/dashboard" replace />;
