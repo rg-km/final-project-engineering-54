@@ -191,7 +191,7 @@ func (f *ForumSource) CountForum() (int64, error) {
 	return count, nil
 }
 
-// create func count forum by id
+// create func count forum by users_id
 func (f *ForumSource) CountForumByID(id int64) (
 	int64, error) {
 	var sqlStatement string
@@ -203,7 +203,7 @@ func (f *ForumSource) CountForumByID(id int64) (
 	FROM 
 		forums
 	WHERE
-		id = ?
+		users_id = ?
 	`
 
 	row := f.db.QueryRow(sqlStatement, id)
