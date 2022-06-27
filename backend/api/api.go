@@ -32,6 +32,7 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/course/id", api.GET(http.HandlerFunc(api.getCourseByID)))
 	mux.Handle("/api/course/name", api.GET(http.HandlerFunc(api.getCourseByName)))
 	mux.Handle("/api/forum/count", api.GET(http.HandlerFunc(api.countForum)))
+	mux.Handle("/api/forum/count/id", api.GET(http.HandlerFunc(api.countForumByID)))
 	mux.Handle("/api/user/count", api.GET(http.HandlerFunc(api.countUsers)))
 	mux.Handle("/api/mentor/count", api.GET(http.HandlerFunc(api.countMentor)))
 

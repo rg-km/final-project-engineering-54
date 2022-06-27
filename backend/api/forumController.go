@@ -166,6 +166,24 @@ func (api *API) countForum(w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(count)
 }
 
+// create func count forum by id
+func (api *API) countForumByID(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	count, err := api.forumSource.CountForumByID(int64(id))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(count)
+}
+
 // create func to insert question
 func (api *API) addQuestion(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
