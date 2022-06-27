@@ -18,6 +18,7 @@
 - `GET`: `/api/course/id`
 - `GET`: `/api/course/name`
 - `GET`: `/api/forum/count`
+- `GET`: `/api/forum/count/id`
 - `GET`: `/api/user/count`
 - `GET`: `/api/mentor/count`
 
