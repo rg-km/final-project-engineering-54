@@ -21,15 +21,15 @@ export default function Mydash() {
         // eslint-disable-next-line
     }, [])
     const getForumCount = React.useCallback(async () => {
-        await axios.get(`/forum/count`, {
+        await axios.get(`/forum/count/id?users_id=${state.id}`, {
              withCredentials: true
          }).then(res => {
              setForumCount(res.data)
          }).catch( er => {
              console.log(er)
          })
+        // eslint-disable-next-line
      }, [])
- 
 
     React.useEffect( () => {
         getUser()
