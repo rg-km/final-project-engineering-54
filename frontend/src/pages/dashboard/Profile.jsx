@@ -20,7 +20,6 @@ export default function Profile() {
         password: "",
         address: "",
     });
-    const [isLoading, setIsLoading] = React.useState(false)
     
     const inputs = [
         {
@@ -32,7 +31,7 @@ export default function Profile() {
             errorMessage: "Name harus memiliki minimal 3-20 karakter tanpa special character!",
             forLabel: "name",
             classname: "mt-0",
-            pattern: "^[a-zA-Z0-9]{3,20}$",
+            pattern: "^[w a-zA-Z0-9]{3,50}$",
         },
         {
             key: 2,
@@ -95,7 +94,6 @@ export default function Profile() {
             })
         })
         setUser(resp.data.users)
-        setIsLoading(true)
     }
 
     const onChange = (e) => {

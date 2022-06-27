@@ -21,7 +21,7 @@ export default function Mydash() {
     React.useEffect( () => {
         getUser()
         // eslint-disable-next-line
-    }, [])
+    }, [user])
 
     return (
         <div className="mydash-component">

@@ -2,14 +2,14 @@ import React from "react"
 import Swal from "sweetalert2"
 import axios from "../../../api/axios"
 import { AuthContext } from "../../../App";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-import "../../../styles/auth/_signin.scss";
-import Codeswer from "../../../layouts/Codeswer";
+import Admin from "../../../layouts/Admin";
+import "../../../styles/admin/_adminsignin.scss";
 import BtnCustom from "../../../components/BtnCustom";
 import FormInput from "../../../components/auth/FormInput";
 
-export default function Login() {
+export default function AdminSignin() {
 
     const status = null;
 
@@ -102,7 +102,7 @@ export default function Login() {
 
     }
     
-    if (redirect) return <Navigate to="/dashboard" replace />;
+    if (redirect) return <Navigate to="/admin/dashboard" replace />;
     
     const onChange = (e) => {
         setValues({
@@ -112,10 +112,10 @@ export default function Login() {
     }
 
     return (
-        <Codeswer
-            title="Masuk - Codeswer"
-            kw="codeswer login, codeswer signin, codeswer masuk, codeswer id masuk, codeswer masuk indonesia"
-            desc="Sudah punya akun Codeswer? Yuk masuk untuk mengakses fitur Codeswer."
+        <Admin
+            title="Masuk - Admin Codeswer"
+            kw="admin codeswer login, admin codeswer signin, admin codeswer masuk, admin codeswer id masuk, admin codeswer masuk indonesia"
+            desc="Sudah punya akun admin Codeswer? Yuk masuk untuk mengakses fitur admin Codeswer."
             ogUrl={status}
             ogType={status}
             ogTitle={status}
@@ -123,11 +123,11 @@ export default function Login() {
             twitTitle={status}
         >
 
-        <article className="signin-component">
-            <section id="container_signin">
-                <h1 className="inter">Selamat Datang di Codeswer</h1>
+        <article className="signin-admin-component">
+            <section id="container_signin_admin">
+                <h1 className="inter">Selamat Datang Admin</h1>
                 <div id="container_card" className="poppins">
-                    <div id="card_signin" className="md:w-[30rem] w-full px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
+                    <div id="card_signin_admin" className="md:w-[30rem] w-full px-10 py-12 border-l border-y md:border-r-0 border-r border-gray-300">
                         <h2>Masuk</h2>
                         <form id="form_wrapper" 
                             onSubmit={handleSubmit}
@@ -145,13 +145,8 @@ export default function Login() {
                                 Masuk
                             </BtnCustom>
                         </form>
-                        <h3>
-                            Belom punya akun?
-                            <Link to="/signup"><span className="text-blue-code font-semibold"> Daftar di sini
-                            </span></Link>
-                        </h3>
                     </div>
-                    <div id="image_signin" className="bg-indigo-two-code md:block hidden rounded-r-[1.5rem] px-10 pt-12">
+                    <div id="image_signin_admin" className="bg-indigo-two-code md:block hidden rounded-r-[1.5rem] px-10 pt-12">
                         <img src="/asset/img/signin.webp" alt="signin Illustration" width={400}/>
                     </div>
                 </div>
@@ -159,6 +154,6 @@ export default function Login() {
             </section>
         </article>
 
-        </Codeswer>
+        </Admin>
     )
 }

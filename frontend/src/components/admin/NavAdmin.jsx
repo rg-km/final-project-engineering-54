@@ -1,18 +1,17 @@
 import React from "react"
 import Swal from "sweetalert2"
-import axios from "../api/axios";
-import AuthBtn from "./auth/AuthBtn";
-import { AuthContext } from "../App";
+import axios from "../../api/axios";
+import AuthBtn from "../auth/AuthBtn";
+import { AuthContext } from "../../App";
 
-import Image from "./Image";
-import NoAuthBtn from "./auth/NoAuthBtn";
-import { classes } from "../utils/Utils";
-import "../styles/component/_navbar.scss";
+import Image from "../Image";
+import "../../styles/admin/_navadmin.scss";
 import { NavLink } from 'react-router-dom';
+import { classes } from "../../utils/Utils";
+import NoAuthBtn from "../admin/AdminNoAuthBtn";
+import AdminPopupAuthBtn from "../admin/AdminPopupAuthBtn";
 
-import PopupAuthBtn from "./auth/PopupAuthBtn";
-
-export default function Navbar() {
+export default function NavAdmin() {
 
     const [isOpen, setIsOpen] = React.useState(false);
     const open = () => {
@@ -109,7 +108,7 @@ export default function Navbar() {
                                             )
                                         })
                                     }
-                                    <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
+                                    <AdminPopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
                                 </AuthBtn>
                                 :
                                 <NoAuthBtn classname="noauth-links" />
@@ -135,7 +134,7 @@ export default function Navbar() {
                                         }
                                     </AuthBtn>  
                                 }
-                                <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
+                                <AdminPopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "popauth-nav right-0 top-[3.25rem] " )}/>
                             </>
                             :
                             <NoAuthBtn classname={"noauth-nav"}/>

@@ -2,11 +2,14 @@ import React, { useReducer, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Terms from "./pages/Terms";
 import About from "./pages/About";
+import Forum from "./pages/Forum";
+import Terms from "./pages/Terms";
 import ScrollPage from "./components/ScrollPage";
 
-import AdminSignin from "./pages/auth/admin/Signin"
+import AdminSignin from "./pages/auth/admin/AdminSignin"
+import AdminDash from "./pages/admin/dashboard/AdminDash"
+import AdminDashboard from "./pages/admin/dashboard/AdminDashboard"
 
 import Blogs from "./pages/blog/Blogs";
 import ReadBlog from "./pages/blog/ReadBlog";
@@ -65,10 +68,12 @@ export default function App() {
     <AuthContext.Provider value={{ state, dispatch }}>
       <ScrollPage>
         <Routes>
-          <Route path="/terms" element={<Terms />} />
           <Route path="/about" element={<About />} />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
+
           {/* Student */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
@@ -78,8 +83,14 @@ export default function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/question" element={<Question />} />
           </Route>
+
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />
+          <Route element={<AdminDashboard />}>
+            <Route exact path="/admin/dashboard" element={<AdminDash />} />
+          </Route>
+
+
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

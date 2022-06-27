@@ -9,7 +9,7 @@ import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
 
-export default function Login() {
+export default function Signin() {
 
     const status = null;
 
