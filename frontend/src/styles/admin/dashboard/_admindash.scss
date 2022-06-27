@@ -1,0 +1,42 @@
+@import "../../base/variable";
+
+.admindash-component {
+    padding: 1.5rem;
+
+    .card-highlight {
+        border-radius: 10px;
+        background-color: $indigo-code;
+        padding: 1.5rem; 
+
+        .heading-admindash {
+            h1 {
+                text-transform: capitalize;
+                @include text-head($gray-100, 30px, 700);
+            }
+            h3 {
+                @include text-head($gray-100, 18px, 500);
+            }
+        }
+        .total-card {
+            border-radius: 10px;
+            padding: 1.75rem 1.5rem 1.5rem 1.5rem; 
+
+            .total-card-content {
+                .title-items-total {
+                    padding-bottom: 5px;
+                    h4 {
+                        @include text-head($gray-800, 18px, 400);
+                    }
+                }
+                .value-items-total {
+                    h1 {
+                        .number-value {
+                            @include text-head($orange-code, 3.5rem, 700);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
