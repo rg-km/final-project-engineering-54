@@ -104,7 +104,7 @@ func (api *API) getForumByID(w http.ResponseWriter, r *http.Request) {
 	response := listForumSuccess{}
 	response.Forum = make([]listForum, 0)
 
-	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	id, err := strconv.Atoi(r.URL.Query().Get("users_id"))
 	forum, err := api.forumSource.FetchForumByID(int64(id))
 	defer func() {
 		if err != nil {
@@ -119,30 +119,32 @@ func (api *API) getForumByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Forum = append(response.Forum, listForum{
-		ID:            forum.ID,
-		UserID:        forum.UserID,
-		UserMentorID:  forum.UserMentorID.Int64,
-		CourseID:      forum.CourseID,
-		Title:         forum.Title,
-		Question:      forum.Question,
-		QuestionPhoto: forum.QuestionPhoto.String,
-		Answer:        forum.Answer.String,
-		AnswerPhoto:   forum.AnswerPhoto.String,
-		CreatedAt:     forum.CreatedAt,
-		UpdatedAt:     forum.UpdatedAt,
-		Email:         forum.Email,
-		Name:          forum.Name.String,
-		Phone:         forum.Phone,
-		Address:       forum.Address,
-		Photo:         forum.Photo,
-		Role:          forum.Role,
-		About:         forum.About.String,
-		RatingSum:     forum.RatingSum.Float64,
-		RatingCount:   forum.RatingCount.Int64,
-		CourseName:    forum.CourseName.String,
-		CourseDesc:    forum.CourseDesc.String,
-	})
+	for _, f := range forum {
+		response.Forum = append(response.Forum, listForum{
+			ID:            f.ID,
+			UserID:        f.UserID,
+			UserMentorID:  f.UserMentorID.Int64,
+			CourseID:      f.CourseID,
+			Title:         f.Title,
+			Question:      f.Question,
+			QuestionPhoto: f.QuestionPhoto.String,
+			Answer:        f.Answer.String,
+			AnswerPhoto:   f.AnswerPhoto.String,
+			CreatedAt:     f.CreatedAt,
+			UpdatedAt:     f.UpdatedAt,
+			Email:         f.Email,
+			Name:          f.Name.String,
+			Phone:         f.Phone,
+			Address:       f.Address,
+			Photo:         f.Photo,
+			Role:          f.Role,
+			About:         f.About.String,
+			RatingSum:     f.RatingSum.Float64,
+			RatingCount:   f.RatingCount.Int64,
+			CourseName:    f.CourseName.String,
+			CourseDesc:    f.CourseDesc.String,
+		})
+	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -221,7 +223,7 @@ func (api *API) answerQuestion(w http.ResponseWriter, r *http.Request) {
 		encoder.Encode(listForumError{Error: err.Error()})
 		return
 	}
-	
+
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	res, err := api.forumSource.AnswerQuestion(int64(id), forum.UserMentorID, forum.Answer, forum.AnswerPhoto, time.Now())
 	if err != nil {

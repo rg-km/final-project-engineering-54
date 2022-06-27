@@ -98,9 +98,9 @@ func (f *ForumSource) FetchForum() ([]Forum, error) {
 }
 
 // create func fetch forum by id
-func (f *ForumSource) FetchForumByID(id int64) (Forum, error) {
+func (f *ForumSource) FetchForumByID(id int64) ([]Forum, error) {
 	var sqlStatement string
-	var forum Forum
+	var forums []Forum
 
 	sqlStatement = `
 	SELECT
@@ -135,39 +135,47 @@ func (f *ForumSource) FetchForumByID(id int64) (Forum, error) {
 	LEFT JOIN
 		courses c ON f.courses_id = c.id
 	WHERE
-		f.id = ?
+		f.users_id = ?
 	`
 
-	row := f.db.QueryRow(sqlStatement, id)
-	err := row.Scan(
-		&forum.UserID,
-		&forum.Email,
-		&forum.Name,
-		&forum.Phone,
-		&forum.Address,
-		&forum.Photo,
-		&forum.Role,
-		&forum.ID,
-		&forum.Title,
-		&forum.Question,
-		&forum.QuestionPhoto,
-		&forum.Answer,
-		&forum.AnswerPhoto,
-		&forum.CreatedAt,
-		&forum.UpdatedAt,
-		&forum.UserMentorID,
-		&forum.About,
-		&forum.RatingSum,
-		&forum.RatingCount,
-		&forum.CourseID,
-		&forum.CourseName,
-		&forum.CourseDesc,
-	)
+	rows, err := f.db.Query(sqlStatement, id)
 	if err != nil {
-		return forum, err
+		return nil, err
 	}
 
-	return forum, nil
+	for rows.Next() {
+		var forum Forum
+		err = rows.Scan(
+			&forum.UserID,
+			&forum.Email,
+			&forum.Name,
+			&forum.Phone,
+			&forum.Address,
+			&forum.Photo,
+			&forum.Role,
+			&forum.ID,
+			&forum.Title,
+			&forum.Question,
+			&forum.QuestionPhoto,
+			&forum.Answer,
+			&forum.AnswerPhoto,
+			&forum.CreatedAt,
+			&forum.UpdatedAt,
+			&forum.UserMentorID,
+			&forum.About,
+			&forum.RatingSum,
+			&forum.RatingCount,
+			&forum.CourseID,
+			&forum.CourseName,
+			&forum.CourseDesc,
+		)
+		if err != nil {
+			return nil, err
+		}
+		forums = append(forums, forum)
+	}
+
+	return forums, nil
 }
 
 // create func count forum
