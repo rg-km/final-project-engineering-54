@@ -6,11 +6,12 @@ import Footer from "../components/Footer";
 import BtnToTop from "../components/BtnToTop";
 import NavAdmin from "../components/admin/NavAdmin";
 
-export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
+export default function Admin({ title, key, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
 
     const location = useLocation();
     function getFooter() {
-        if(location.pathname === "/dashboard" || location.pathname === "/profile" || location.pathname === "/questions") return
+        const admin = "admin"
+        if(location.pathname === `/${admin}/dashboard` || location.pathname === `/${admin}/profile` || location.pathname === `/${admin}/questions`) return
         return <Footer />
     }
 
@@ -51,7 +52,7 @@ export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogD
     );
 }
 
-Codeswer.defaultProps = {
+Admin.defaultProps = {
     title: 'Admin Codeswer - Codeswer Data Management',
     key: 'admin codeswer, admin codeswer indonesia, admin codeswer id, admin codeswer programming, admin codeswer mentor, admin codeswer mentoring, admin codeswer forum',
     desc: 'Admin Codeswer. Website untuk memanagement data-data di codeswer.',

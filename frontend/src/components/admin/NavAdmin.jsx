@@ -3,6 +3,7 @@ import Swal from "sweetalert2"
 import axios from "../../api/axios";
 import AuthBtn from "../auth/AuthBtn";
 import { AuthContext } from "../../App";
+import { Dots } from 'loading-animations-react';
 
 import Image from "../Image";
 import "../../styles/admin/_navadmin.scss";
@@ -24,31 +25,35 @@ export default function NavAdmin() {
     }
     
     const [user, setUser] = React.useState([])
+    const [loading, setLoading] = React.useState(true)
     const {state} = React.useContext(AuthContext);
     
-    if(state.id !== null) {
-        const getUser = async () => {
-            const resp = await axios.get(`/user/id?id=${state.id}`, {
-                withCredentials: true,
-            }).catch( er => {
-                let errorMessage = er.response;
-                Swal.fire({
-                    timer: 5000,
-                    icon: 'error',
-                    titleText: 'Maaf, User tidak ada',
-                    showConfirmButton: false,
-                    text: `${errorMessage.data.er}`,
-                    customClass: {
-                        container: 'poppins',
-                    }
-                })
-            })
-            setUser(resp.data.users)
-        }
-        getUser()
-    }
     React.useEffect(() => {
-    }, [user])
+        if(state.id !== null) {
+            const getUser = async () => {
+                await axios.get(`/user/id?id=${state.id}`, {
+                    withCredentials: true,
+                }).then(res => { 
+                    setLoading(false)   
+                    setUser(res.data.users)
+                }).catch( er => {
+                    let errorMessage = er.response;
+                    Swal.fire({
+                        timer: 5000,
+                        icon: 'error',
+                        titleText: 'Maaf, Token Expired',
+                        showConfirmButton: false,
+                        text: `${errorMessage.data.er}`,
+                        customClass: {
+                            container: 'poppins',
+                        }
+                    })
+                })
+            }
+            getUser()
+        }
+        // eslint-disable-next-line
+    }, [])
     
     return (
         <header>
@@ -101,7 +106,9 @@ export default function NavAdmin() {
                             state.isAuthenticated ?
                                 <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
                                     {
-                                        user &&
+                                        loading ?
+                                        <Dots className="max-w-[5rem]" text=" " dotColors={['#4B5563']}/>
+                                        :
                                         user.map((e, i) => {
                                             return (
                                                 <h1 key={i} className="text-semibold text-[1rem] inline mr-2">{e.name}</h1>

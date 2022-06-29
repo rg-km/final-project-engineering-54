@@ -68,7 +68,7 @@ export default function AdminSignin() {
                     timer: 1000,
                     icon: 'success',
                     showConfirmButton: false,
-                    title: 'Login Berhasil',
+                    title: 'Berhasil Masuk',
                     text: 'Tunggu sebentar',
                     customClass: {
                         container: 'poppins'

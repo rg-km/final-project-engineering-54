@@ -1,12 +1,12 @@
 import React from "react";
 import Swal from "sweetalert2"
-import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 import ReactTooltip from 'react-tooltip';
 import { Navigate } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
+import axios from "../../api/axios";
+import { AuthContext } from "../../App";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";

@@ -64,7 +64,7 @@ export default function Signin() {
                     timer: 1000,
                     icon: 'success',
                     showConfirmButton: false,
-                    title: 'Signin Berhasil',
+                    title: 'Berhasil Masuk',
                     text: 'Tunggu sebentar',
                     customClass: {
                         container: 'poppins'

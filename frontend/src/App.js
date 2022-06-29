@@ -9,7 +9,6 @@ import ScrollPage from "./components/ScrollPage";
 
 import AdminSignin from "./pages/admin/auth/AdminSignin"
 import AdminDash from "./pages/admin/dashboard/AdminDash"
-import AdminDashboard from "./pages/admin/dashboard/AdminDashboard"
 
 import Blogs from "./pages/blog/Blogs";
 import ReadBlog from "./pages/blog/ReadBlog";
@@ -83,10 +82,7 @@ export default function App() {
 
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />
-          <Route element={<AdminDashboard />}>
-            <Route exact path="/admin/dashboard" element={<AdminDash />} />
-          </Route>
-
+          <Route path="/admin/dashboard" element={<AdminDash />} />
 
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
