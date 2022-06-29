@@ -3,6 +3,7 @@ import Swal from "sweetalert2"
 import axios from "../api/axios";
 import AuthBtn from "./auth/AuthBtn";
 import { AuthContext } from "../App";
+import { Dots } from 'loading-animations-react';
 
 import Image from "./Image";
 import NoAuthBtn from "./auth/NoAuthBtn";
@@ -14,42 +15,45 @@ import PopupAuthBtn from "./auth/PopupAuthBtn";
 
 export default function Navbar() {
 
+    const {state} = React.useContext(AuthContext);
     const [isOpen, setIsOpen] = React.useState(false);
     const open = () => {
         setIsOpen(!isOpen);
     }
-
     const [isPopup, setIsPopup] = React.useState(false);
     const openPopup = () => {
         setIsPopup(!isPopup);
     }
     
     const [user, setUser] = React.useState([])
-    const {state} = React.useContext(AuthContext);
+    const [loading, setLoading] = React.useState(true)
     
-    if(state.id !== null) {
-        const getUser = async () => {
-            const resp = await axios.get(`/user/id?id=${state.id}`, {
-                withCredentials: true,
-            }).catch( er => {
-                let errorMessage = er.response;
-                Swal.fire({
-                    timer: 5000,
-                    icon: 'error',
-                    titleText: 'Maaf, User tidak ada',
-                    showConfirmButton: false,
-                    text: `${errorMessage.data.er}`,
-                    customClass: {
-                        container: 'poppins',
-                    }
-                })
-            })
-            setUser(resp.data.users)
-        }
-        getUser()
-    }
     React.useEffect(() => {
-    }, [user])
+        if(state.id !== null) {
+            const getUser = async () => {
+                await axios.get(`/user/id?id=${state.id}`, {
+                    withCredentials: true,
+                }).then(res => { 
+                    setLoading(false)   
+                    setUser(res.data.users)
+                }).catch( er => {
+                    let errorMessage = er.response;
+                    Swal.fire({
+                        timer: 5000,
+                        icon: 'error',
+                        titleText: 'Maaf, Token Expired',
+                        showConfirmButton: false,
+                        text: `${errorMessage.data.er}`,
+                        customClass: {
+                            container: 'poppins',
+                        }
+                    })
+                })
+            }
+            getUser()
+        }
+        // eslint-disable-next-line
+    }, [])
     
     return (
         <header>
@@ -122,7 +126,9 @@ export default function Navbar() {
                         state.isAuthenticated ?
                             <>
                                 {
-                                    user &&
+                                    loading ?
+                                    <Dots className="max-w-[5rem]" text=" " dotColors={['#4B5563']}/>
+                                    :
                                     <AuthBtn classname={classes(isPopup ? "ring-offset-2 ring ring-indigo-code" : "", "rounded-[5px] auth-nav" )} onClick={openPopup}>
                                         {
                                             user.map((e, i) => {

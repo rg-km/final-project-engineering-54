@@ -3,6 +3,10 @@ import Swal from "sweetalert2"
 import axios from "../../api/axios";
 import { AuthContext } from "../../App";
 import ReactTooltip from 'react-tooltip';
+import { Navigate } from "react-router-dom"
+import { Dots } from 'loading-animations-react';
+
+import Dashboard from "./Dashboard";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
@@ -20,7 +24,9 @@ export default function Profile() {
         password: "",
         address: "",
     });
-    
+    const [loading, setLoading] = React.useState(true)
+    const [redirect, setRedirect] = React.useState(false)
+
     const inputs = [
         {
             key: 1,
@@ -77,25 +83,26 @@ export default function Profile() {
         },
     ]
 
-    const getUser = React.useCallback( async () => {
-        const resp = await axios.get(`/user/id?id=${state.id}`, {
+    const getUser = async () => {
+        await axios.get(`/user/id?id=${state.id}`, {
             withCredentials: true,
+        }).then(res => {
+            setLoading(false)
+            setUser(res.data.users)
         }).catch( er => {
-            let errorMessage = er.response;
+            setLoading(false)
             Swal.fire({
                 timer: 5000,
                 icon: 'error',
                 titleText: 'Maaf, User tidak ada',
                 showConfirmButton: false,
-                text: `${errorMessage.data.er}`,
+                text: `${er.message}`,
                 customClass: {
                     container: 'poppins',
                 }
             })
         })
-        setUser(resp.data.users)
-        // eslint-disable-next-line
-    }, [])
+    }
 
     const onChange = (e) => {
         setValues({
@@ -113,23 +120,25 @@ export default function Profile() {
 
     const handleEdit = async (e) => {
         e.preventDefault()
-
         const dataReq = {photo, ...values}
         await axios.put(`/user/update?id=${state.id}`,dataReq, {
-            withCredentials: true
+            withCredentials: true,
         }).then(res => {
-            Swal.fire({
-                toast: true,
-                timer: 1900,
-                icon: 'success',
-                position: "top-end",
-                showConfirmButton: false,
-                title: 'Data telah disimpan',
-                customClass: {
-                    container: 'poppins'
-                }    
-            // console.log(res.data + res.status)
-          }).catch( er => {
+            if(res.status === 200) {
+                Swal.fire({
+                    toast: true,
+                    timer: 1900,
+                    icon: 'success',
+                    position: "top-end",
+                    showConfirmButton: false,
+                    title: 'Data telah disimpan',
+                    customClass: {
+                        container: 'poppins'
+                    }
+                })
+                setRedirect(true)
+            }
+        }).catch( er => {
             Swal.fire({
                 timer: 3000,
                 icon: 'error',
@@ -141,76 +150,93 @@ export default function Profile() {
                 }
             })
         })
-        })
     }
 
-    // console.log(values)
-    
     React.useEffect( () => {
         getUser()
+
         // eslint-disable-next-line
-    }, [user, getUser])
+    }, [])
+
+    if(redirect) { 
+        return<Navigate to="/dashboard/my"/> 
+    }      
+    // console.log(values)
 
     return (
-        
-        <div className="profile-component">
-            <div className="heading-profile inter">
-                <h1>Detail Profile</h1>
-            </div>
-            <div className="avatar-wrapper w-[8rem] space-y-4">
-                <ReactTooltip place="right" type="dark" effect="solid" className="sm:block hidden"/>
-                <img data-tip='Preview Image' className="image-avatar object-cover rounded-full aspect-square" src={`${photoPrev}`} alt="User"/>
-                <input type="file" name="photo" id="photo" className="block poppins" onChange={changeInputImage}></input>
-            </div>
-            <form id="form_wrapper" className="poppins mt-8" onSubmit={handleEdit}>
-                { 
-                    inputs.map((input, i) => (
-                        user.map((e, i) => {
-                            return(
-                                input.label === "Name" ? <FormInput 
-                                                            key={input.key}
-                                                            classStar="hidden" 
-                                                            {...input}
-                                                            defValue={e.name} 
-                                                            onChange={onChange}/>
-                                :
-                                input.label === "Phone" ? <FormInput 
-                                                            key={input.key}
-                                                            classStar="hidden" 
-                                                            {...input}
-                                                            defValue={e.phone} 
-                                                            onChange={onChange}/>
-                                :
-                                input.label === "Email" ? <FormInput 
-                                                            key={input.key}
-                                                            classStar="hidden" 
-                                                            {...input}
-                                                            defValue={e.email} 
-                                                            onChange={onChange}/>
-                                :
-                                input.label === "Password" ? <FormInput 
+        <Dashboard
+            title="Dashboard | Codeswer"
+            kw="dashboard codeswer"
+            desc="Dashboard Codeswer"
+            ogUrl=""
+            ogType=""
+            ogTitle=""
+            ogDesc=""
+            twitTitle=""                
+        >
+
+            <div className="profile-component">
+                <div className="heading-profile inter">
+                    <h1>Detail Profile</h1>
+                </div>
+                <div className="avatar-wrapper w-[8rem] space-y-4">
+                    <ReactTooltip place="right" type="dark" effect="solid" className="sm:block hidden"/>
+                    <img data-tip='Preview Image' className="image-avatar object-cover rounded-full aspect-square" src={`${photoPrev}`} alt="User"/>
+                    <input type="file" name="photo" id="photo" className="block poppins" onChange={changeInputImage}></input>
+                </div>
+                <form id="form_wrapper" className="poppins mt-8" onSubmit={handleEdit}>
+                    { 
+                        loading ?
+                        <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+                        :
+                        inputs.map((input, i) => (
+                            user.map((e, i) => {
+                                return(
+                                    input.label === "Name" ? <FormInput 
                                                                 key={input.key}
                                                                 classStar="hidden" 
                                                                 {...input}
-                                                                defValue={e.password} 
+                                                                defValue={e.name} 
                                                                 onChange={onChange}/>
-                                :
-                                input.label === "Address" ? <FormInput 
+                                    :
+                                    input.label === "Phone" ? <FormInput 
                                                                 key={input.key}
                                                                 classStar="hidden" 
                                                                 {...input}
-                                                                defValue={e.address} 
+                                                                defValue={e.phone} 
                                                                 onChange={onChange}/>
-                                : "Student tidak memiliki hak akses"
+                                    :
+                                    input.label === "Email" ? <FormInput 
+                                                                key={input.key}
+                                                                classStar="hidden" 
+                                                                {...input}
+                                                                defValue={e.email} 
+                                                                onChange={onChange}/>
+                                    :
+                                    input.label === "Password" ? <FormInput 
+                                                                    key={input.key}
+                                                                    classStar="hidden" 
+                                                                    {...input}
+                                                                    defValue={e.password} 
+                                                                    onChange={onChange}/>
+                                    :
+                                    input.label === "Address" ? <FormInput 
+                                                                    key={input.key}
+                                                                    classStar="hidden" 
+                                                                    {...input}
+                                                                    defValue={e.address} 
+                                                                    onChange={onChange}/>
+                                    : "Student tidak memiliki hak akses"
+                                )
+                            })
                             )
-                        })
                         )
-                    )
-                }
-                <BtnCustom type="submit" classname="poppins mt-8 w-full">
-                    Simpan
-                </BtnCustom>
-            </form>
-        </div>
+                    }
+                    <BtnCustom type="submit" classname="poppins mt-8 w-full">
+                        Simpan
+                    </BtnCustom>
+                </form>
+            </div>
+        </Dashboard>
     )
 }

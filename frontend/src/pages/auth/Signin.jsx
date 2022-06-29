@@ -51,9 +51,6 @@ export default function Signin() {
         e.preventDefault();
         await axios.post("/user/login", values, {
             withCredentials: true,
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
         })
         .then(res => {
             // console.log(res.data)
@@ -67,7 +64,7 @@ export default function Signin() {
                     timer: 1000,
                     icon: 'success',
                     showConfirmButton: false,
-                    title: 'Login Berhasil',
+                    title: 'Signin Berhasil',
                     text: 'Tunggu sebentar',
                     customClass: {
                         container: 'poppins'
@@ -79,10 +76,10 @@ export default function Signin() {
                         clearInterval(timerInterval)
                       }
                     }).then((result) => {
-                      if (result.dismiss === Swal.DismissReason.timer) {
-                          setRedirect(true);                  
-                      }
-                })    
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            setRedirect(true);                  
+                        }
+                    })    
             }
         })
         .catch( error => {
@@ -100,7 +97,7 @@ export default function Signin() {
         })
     }
     
-    if (redirect) return <Navigate to="/dashboard" replace />;
+    if (redirect) return <Navigate to="/dashboard/my" replace />;
     
     const onChange = (e) => {
         setValues({

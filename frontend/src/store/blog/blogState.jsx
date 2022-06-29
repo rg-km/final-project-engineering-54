@@ -1,5 +1,5 @@
 import create from "zustand";
-import { blogStore } from "../store/blogStore";
+import { blogStore } from "../blog/blogStore";
 
 export const useBlogStore = create(set => ({
     blog: [],

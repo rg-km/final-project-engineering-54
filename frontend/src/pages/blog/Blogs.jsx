@@ -3,8 +3,8 @@ import "../../styles/blog/_blogs.scss";
 
 import ListBlogs from "../blog/ListBlogs" 
 import Codeswer from "../../layouts/Codeswer";
-import { useBlogStore } from "../../store/blogState";
-import SearchNotFound from "../../components/gif/SearchNotFound";
+import { useBlogStore } from "../../store/blog/blogState";
+import SearchNotFound from "../../components/404/SearchNotFound";
 
 export default function Blogs() {
 

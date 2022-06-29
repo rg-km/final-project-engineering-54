@@ -1,11 +1,9 @@
 @import "../base/variable.scss";
 @import "../component/btnCustom.scss";
-@import "../animation/loadingEllipse/ellipse1";
-@import "../animation/loadingEllipse/ellipse2";
-@import "../animation/loadingEllipse/ellipse3";
 
 .profile-component {
     padding: 1.5rem;
+    padding-bottom: 3rem;
     
     .heading-profile {
         margin-bottom: 1.5rem;
@@ -17,39 +15,6 @@
         margin-bottom: 1.5rem;
     }
     #form_wrapper {
-        .lds-ellipsis {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            display: inline-block;
-
-            > div {
-                top: 33px;
-                width: 13px;
-                height: 13px;
-                position: absolute;
-                border-radius: 50%;
-                background: #fff;
-                animation-timing-function: cubic-bezier(0, 1, 1, 0);
-
-                &:first-child {
-                    left: 8px;
-                    animation: ldsEllipsis1 0.6s infinite;
-                }
-                &:nth-child(2) {
-                    left: 8px;
-                    animation: ldsEllipsis2 0.6s infinite;
-                }
-                &:nth-child(3) {
-                    left: 32px;
-                    animation: ldsEllipsis2 0.6s infinite
-                }
-                &:nth-child(4) {
-                    left: 56px;
-                    animation: ldsEllipsis3 0.6s infinite;
-                }
-            }
-        }
         > button {
             @include btnCustom(.5rem, 1.25rem, .25rem, $indigo-code);
         }

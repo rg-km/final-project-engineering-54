@@ -7,7 +7,7 @@ import Forum from "./pages/Forum";
 import Terms from "./pages/Terms";
 import ScrollPage from "./components/ScrollPage";
 
-import AdminSignin from "./pages/auth/admin/AdminSignin"
+import AdminSignin from "./pages/admin/auth/AdminSignin"
 import AdminDash from "./pages/admin/dashboard/AdminDash"
 import AdminDashboard from "./pages/admin/dashboard/AdminDashboard"
 
@@ -21,7 +21,6 @@ import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
 import Question from "./pages/dashboard/Question";
 import Questions from "./pages/dashboard/Questions";
-import Dashboard from "./pages/dashboard/Dashboard";
 
 import NotFound from "./pages/NotFound";
 
@@ -77,12 +76,10 @@ export default function App() {
           {/* Student */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route element={<Dashboard />}>
-            <Route exact path="/dashboard" element={<Mydash />} />
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/question" element={<Question />} />
-          </Route>
+          <Route exact path="/dashboard/my" element={<Mydash />} />
+          <Route path="/dashboard/profile" element={<Profile />} />
+          <Route path="/dashboard/questions" element={<Questions />} />
+          <Route path="/question/create" element={<Question />} />
 
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />

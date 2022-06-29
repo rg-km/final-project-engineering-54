@@ -11,10 +11,10 @@ export default function PopupAuthBtn({classname}) {
             <nav>
                 <ul className="poppins font-medium">
                     <li>
-                        <Link to="/dashboard">Dashboard</Link>
+                        <Link to="/dashboard/my">Dashboard</Link>
                     </li>
                     <li>
-                        <Link to="/question">Tanya</Link>
+                        <Link to="/dashboard/question">Tanya</Link>
                     </li>
                     <li className="text-red-500 font-light">
                         <span className="outline-none"

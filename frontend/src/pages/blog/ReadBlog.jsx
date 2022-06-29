@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
-import { useBlogStore } from "../../store/blogState";
+import { useBlogStore } from "../../store/blog/blogState";
 
 import "../../styles/blog/_readblog.scss";
 import Codeswer from "../../layouts/Codeswer";
 import AuthorDetail from '../../components/AuthorDetail';
-import SearchNotFound from '../../components/gif/SearchNotFound';
+import SearchNotFound from '../../components/404/SearchNotFound';
 import BtnSosmedShare from '../../components/auth/BtnSosmedShare';
 
 export default function ReadBlog() {

@@ -10,7 +10,8 @@ export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogD
 
     const location = useLocation();
     function getFooter() {
-        if(location.pathname === "/dashboard" || location.pathname === "/profile" || location.pathname === "/questions") return
+        let dsb = "dashboard"
+        if(location.pathname === `/${dsb}/my` || location.pathname === `/${dsb}/profile` || location.pathname === `/${dsb}/questions`) return
         return <Footer />
     }
 
