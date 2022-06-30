@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import Codeswer from "../layouts/Codeswer";
 import BtnCustom from "../components/BtnCustom";
 import CardCustom from "../components/CardCustom";
-import ListLanpage2 from "../components/ListLanpage2";
+import ListCustom from "../components/ListCustom";
 
 export default function Home() {
 
@@ -50,15 +50,15 @@ export default function Home() {
                         <div id="two_right" className="space-y-9 md:items-start items-center">
                             <h2 className="md:text-start text-center">Forum mentoring dengan banyak mentor</h2>
                             <ul className="space-y-5">
-                                <ListLanpage2 text="Menambah wawasan dan pengalaman coding">
+                                <ListCustom text="Menambah wawasan dan pengalaman coding">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                                </ListLanpage2>
-                                <ListLanpage2 text="Selesaikan masalah kode dengan mentor berpengalaman">
+                                </ListCustom>
+                                <ListCustom text="Selesaikan masalah kode dengan mentor berpengalaman">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>                            
-                                </ListLanpage2>
-                                <ListLanpage2 text="Dapatkan jawaban dari permasalah yang kompleks dan rumit">
+                                </ListCustom>
+                                <ListCustom text="Dapatkan jawaban dari permasalah yang kompleks dan rumit">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
-                                </ListLanpage2>
+                                </ListCustom>
                             </ul>
                             <Link to="/signup">
                                 <BtnCustom classname="poppins mt-2">
