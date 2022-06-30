@@ -278,7 +278,7 @@ export default function AdminDash() {
                                                         </td>
                                                         <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                             <span
-                                                                className="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight cursor-pointer"
+                                                                className="relative inline-block px-3 py-1 font-semibold text-red-900 leading-tight cursor-pointer rounded-full hover:bg-red-400 transition-colors"
                                                                 onClick={()=> deleteUser(e.id)}
                                                                 >
                                                                 <span aria-hidden
