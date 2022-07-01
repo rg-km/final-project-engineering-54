@@ -50,7 +50,8 @@ export default function Mydash() {
           <BtnCustom>Buat Pertanyaan</BtnCustom>
         </Link>
         <div className="card-questions-list w-full mt-12 space-y-5">
-        {
+        { 
+          questions.length === null ?
           questions.map((e,i) => {
             return (
               <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
@@ -69,6 +70,11 @@ export default function Mydash() {
               </div>
             )
           })
+          :
+          <div className="flex flex-col items-center justify-center space-y-10">
+            <img className="max-w-[40%]" src="/asset/img/no-question.webp" alt='No Question' />
+            <h3 className="text-gray-800 text-[1.5rem] font-medium poppins">Yuk mulai tanya ke mentor,</h3>
+          </div>
         }
         </div>
       </div>

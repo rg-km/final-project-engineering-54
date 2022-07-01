@@ -10,6 +10,7 @@ import { AuthContext } from "../../App";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
+import Password from "../../components/auth/password/Password";
 
 export default function Profile() {
 
@@ -52,27 +53,6 @@ export default function Profile() {
         },
         {
             key: 3,
-            label: "Email",
-            type: "email",
-            name: "email",
-            id: "email",
-            errorMessage: "Email harus berupa alamat email yang valid!",
-            forLabel: "email",
-            classname: "mt-7",
-        },
-        {
-            key: 4,
-            label: "Password",
-            type: "password",
-            name: "password",
-            id: "password",
-            errorMessage: "Password harus memiliki minimal 8-25 karakter dan mengandung 1 huruf, 1 angka, dan 1 special character!",
-            forLabel: "password",
-            classname: "mt-7",
-            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*_])[a-zA-Z0-9!@#$%^&*_]{8,25}$",
-        },
-        {
-            key: 5,
             label: "Address",
             type: "text",
             name: "address",
@@ -81,6 +61,16 @@ export default function Profile() {
             forLabel: "address",
             classname: "mt-7",
         },
+        {
+            key: 4,
+            label: "Email",
+            type: "email",
+            name: "email",
+            id: "email",
+            errorMessage: "Email harus berupa alamat email yang valid!",
+            forLabel: "email",
+            classname: "mt-7",
+        }
     ]
 
     const getUser = async () => {
@@ -206,32 +196,29 @@ export default function Profile() {
                                                                 defValue={e.phone} 
                                                                 onChange={onChange}/>
                                     :
-                                    input.label === "Email" ? <FormInput 
-                                                                key={input.key}
-                                                                classStar="hidden" 
-                                                                {...input}
-                                                                defValue={e.email} 
-                                                                onChange={onChange}/>
-                                    :
-                                    input.label === "Password" ? <FormInput 
-                                                                    key={input.key}
-                                                                    classStar="hidden" 
-                                                                    {...input}
-                                                                    defValue={e.password} 
-                                                                    onChange={onChange}/>
-                                    :
                                     input.label === "Address" ? <FormInput 
                                                                     key={input.key}
                                                                     classStar="hidden" 
                                                                     {...input}
                                                                     defValue={e.address} 
                                                                     onChange={onChange}/>
+                                    :
+                                    input.label === "Email" ? <FormInput 
+                                                                key={input.key}
+                                                                classStar="hidden" 
+                                                                {...input}
+                                                                defValue={e.email} 
+                                                                onChange={onChange}/>
                                     : "Student tidak memiliki hak akses"
                                 )
                             })
                             )
                         )
                     }
+                    <Password 
+                        required={false}
+                        onChange={onChange}
+                    />
                     <BtnCustom type="submit" classname="poppins mt-8 w-full">
                         Simpan
                     </BtnCustom>

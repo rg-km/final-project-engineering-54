@@ -13,10 +13,10 @@ export default function Mydash() {
     const {state} = React.useContext(AuthContext);
 
     const getUser = async () => {
-        const resp = await axios.get(`/user/id?id=${state.id}`, {
+         await axios.get(`/user/id?id=${state.id}`, {
             withCredentials: true,
         }).then( res => {
-            setUser(resp.data.users)
+            setUser(res.data.users)
         }).catch( er => {
             console.log(er)
         })

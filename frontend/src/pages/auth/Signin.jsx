@@ -8,6 +8,7 @@ import "../../styles/auth/_signin.scss";
 import Codeswer from "../../layouts/Codeswer";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
+import Password from "../../components/auth/password/Password"
 
 export default function Signin() {
 
@@ -32,19 +33,7 @@ export default function Signin() {
             forLabel: "email",
             classname: "mt-7",
             required: true,
-        },
-        {
-            key: 2,
-            label: "Password",
-            type: "password",
-            name: "password",
-            id: "password",
-            errorMessage: "Minimal 8-25 karakter dan mengandung 1 huruf, 1 angka, dan 1 special character!",
-            forLabel: "password",
-            classname: "mt-7",
-            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*_])[a-zA-Z0-9!@#$%^&*_]{8,25}$",
-            required: true,
-        },
+        }
     ]
 
     const handleSubmit = async(e) => {
@@ -97,14 +86,14 @@ export default function Signin() {
         })
     }
     
-    if (redirect) return <Navigate to="/dashboard/my" replace />;
-    
     const onChange = (e) => {
         setValues({
             ...values,
             [e.target.name]: e.target.value
         })
+        // console.log(values)
     }
+    if (redirect) return <Navigate to="/dashboard/my" replace />;
 
     return (
         <Codeswer
@@ -136,6 +125,10 @@ export default function Signin() {
                                     onChange={onChange}
                                 />
                             ))}
+                            <Password 
+                                required="required"
+                                onChange={onChange}
+                            />
                             <BtnCustom type="submit" classname="poppins mt-8 w-full">
                                 Masuk
                             </BtnCustom>
