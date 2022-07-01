@@ -1,16 +1,10 @@
 import React from "react"
-import Swal from "sweetalert2"
 import { NavLink } from "react-router-dom"
 
-import axios from "../../../api/axios"
-import { AuthContext } from "../../../App";
-import Image from "../../../components/Image";
+import { classes } from "../../../utils/Utils"
 
-export default function NavSideAdmin() {
+export default function NavSideAdmin({isMinimize, setIsMinimize}) {
 
-    const {state} = React.useContext(AuthContext);
-
-    const [user, setUser] = React.useState([])
     const options = [
         {
             id: 1,
@@ -29,51 +23,18 @@ export default function NavSideAdmin() {
         }
     ]
     const [active, setActive] = React.useState(options[0].name);
+    
+    const fullscreen = ( () => {setIsMinimize(!isMinimize);});
 
     const handleClick = (e) => {
         setActive(e.target.innerText);
     }
 
-    const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
-            withCredentials: true,
-        }).then( res => {
-            setUser(res.data.users)
-        }).catch( er => {
-            let errorMessage = er.response;
-            Swal.fire({
-                timer: 5000,
-                icon: 'error',
-                titleText: 'Maaf, User tidak ada',
-                showConfirmButton: false,
-                text: `${errorMessage.data.er}`,
-                customClass: {
-                    container: 'poppins',
-                }
-            })
-        })
-    }
-
-    React.useEffect(() => {
-        getUser()
-        // eslint-disable-next-line
-    }, [])
-
     return (
-        <div className="left-content md:w-[25%] w-full sticky top-0 md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
+        <div className={ classes(isMinimize ? "md:w-0 overflow-hidden" : "md:w-[25%]", "left-content w-full sticky top-0 md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0")}>
             <div className="first-left flex-col md:flex hidden items-center">
-                <div className="avatar-wrapper w-[8rem]">
-                    {
-                        user &&
-                        user.map((e, i)=> {
-                            return (
-                                <span key={i}>
-                                    <Image path={`/asset/img/user/${e.photo}`}/>
-                                </span>
-                            )
-                        })
-
-                    }
+                <div className="avatar-wrapper w-[14rem]">
+                    <img src="/asset/img/logo-codeswer.png" alt="Codeswer"/>
                 </div>
             </div>
             <div className="second-left">
@@ -108,6 +69,13 @@ export default function NavSideAdmin() {
                         </li>
                     </ul>
                 </nav>
+            </div>
+            <div className={ classes(isMinimize ? "hidden" : "block" ,"three-left")}>
+                <div className="btn-minimize flex fixed bottom-5 left-[10rem] cursor-pointer" onClick={fullscreen}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-[2.25rem] w-[2.25rem] text-white bg-indigo-code p-2 rounded-full" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                </div>
             </div>
         </div>
 

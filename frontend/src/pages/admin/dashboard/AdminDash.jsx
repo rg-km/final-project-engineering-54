@@ -11,8 +11,8 @@ export default function AdminDash() {
 
     const [user, setUser] = React.useState([])
     const [users, setUsers] = React.useState([])
-    const [userCount, setUserCount] = React.useState([])
-    const [mentorCount, setMentorCount] = React.useState([])
+    // const [userCount, setUserCount] = React.useState([])
+    // const [mentorCount, setMentorCount] = React.useState([])
 
     const [loading, setLoading] = React.useState(true)
     const [searchUser, setSearchUser] = React.useState("")
@@ -76,30 +76,30 @@ export default function AdminDash() {
             console.log(er)
         })
     }
-    const getUsersCount = async () => {
-       await axios.get(`/user/count`, {
-            withCredentials: true
-        }).then(res => {
-            setUserCount(res.data)
-        }).catch( er => {
-            console.log(er)
-        })
-    }
-    const getMentorsCount = async () => {
-       await axios.get(`/mentor/count`, {
-            withCredentials: true
-        }).then(res => {
-            setMentorCount(res.data)
-        }).catch( er => {
-            console.log(er)
-        })
-    }
+    // const getUsersCount = async () => {
+    //    await axios.get(`/user/count`, {
+    //         withCredentials: true
+    //     }).then(res => {
+    //         setUserCount(res.data)
+    //     }).catch( er => {
+    //         console.log(er)
+    //     })
+    // }
+    // const getMentorsCount = async () => {
+    //    await axios.get(`/mentor/count`, {
+    //         withCredentials: true
+    //     }).then(res => {
+    //         setMentorCount(res.data)
+    //     }).catch( er => {
+    //         console.log(er)
+    //     })
+    // }
 
     React.useEffect( () => {
         getUser()
         getUsers()
-        getUsersCount()
-        getMentorsCount()
+        // getUsersCount()
+        // getMentorsCount()
 
         // eslint-disable-next-line
     }, [])
@@ -139,7 +139,9 @@ export default function AdminDash() {
                                 <h1>
                                     <span className="number-value">
                                         {
-                                            userCount
+                                            users.filter(e => {
+                                                return e.role === "user"
+                                            }).length
                                         }
                                     </span>
                                     <span className="text-value text-gray-500 text-[18px]">  Murid</span>
@@ -154,7 +156,9 @@ export default function AdminDash() {
                                 <h1>
                                     <span className="number-value">
                                         {
-                                            mentorCount
+                                            users.filter(e => {
+                                                return e.role === "mentor"
+                                            }).length
                                         }
                                     </span>
                                     <span className="text-value text-gray-500 text-[18px]">  Mentor</span>
@@ -199,8 +203,7 @@ export default function AdminDash() {
                                     </div>
                                 </div>
                             </div> */}
-                            {/* Next Feature */}
-                            <div className="block relative">
+                            <div className="block relative w-[30rem] max-w-full">
                                 <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                                     <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
                                         <path
