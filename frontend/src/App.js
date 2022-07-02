@@ -7,15 +7,21 @@ import Forum from "./pages/Forum";
 import Terms from "./pages/Terms";
 import ScrollPage from "./components/ScrollPage";
 
-import AdminSignin from "./pages/admin/auth/AdminSignin"
-import AdminDash from "./pages/admin/dashboard/AdminDash"
-
 import Blogs from "./pages/blog/Blogs";
 import ReadBlog from "./pages/blog/ReadBlog";
+
+/* Admin */
+import AdminSignin from "./pages/admin/auth/AdminSignin"
+import AdminDash from "./pages/admin/dashboard/AdminDash"
 
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
 
+/* Mentor */
+import MentorDash from "./pages/mentor/MentorDash"
+import MentorProfile from "./pages/mentor/MentorProfile"
+
+/* Student */
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
 import Question from "./pages/dashboard/Question";
@@ -30,6 +36,7 @@ const initialState = {
   id: null,
   email: null,
   token: null,
+  role: null,
 };
 
 const reducer = (state, action) => {
@@ -38,12 +45,14 @@ const reducer = (state, action) => {
       localStorage.setItem("id", action.payload.id);
       localStorage.setItem("email", action.payload.email);
       localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("role", action.payload.role);
       return {
         ...state,
         isAuthenticated: true,
         id: action.payload.id,
         email: action.payload.email,
         token: action.payload.token,
+        role: action.payload.role,
       };
     case "LOGOUT":
       localStorage.clear();
@@ -52,7 +61,8 @@ const reducer = (state, action) => {
         isAuthenticated: false,
         email: null,
         id: null,
-        token: null
+        token: null,
+        role: null,
       }
     default:
       return state;
@@ -71,14 +81,22 @@ export default function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
 
-          {/* Student */}
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route exact path="/dashboard/my" element={<Mydash />} />
+          
+          {/* Student */}
+          <Route path="/dashboard/my" element={<Mydash />} />
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/questions" element={<Questions />} />
           <Route path="/question/create" element={<Question />} />
           <Route path="/question/:id" element={<Forum />} />
+
+          {/* Student */}
+          <Route path="/mentor/dashboard" element={<MentorDash />} />
+          <Route path="/mentor/profile" element={<MentorProfile />} />
+          {/* <Route path="/dashboard/questions" element={<Questions />} />
+          <Route path="/question/create" element={<Question />} />
+          <Route path="/question/:id" element={<Forum />} /> */}
 
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />

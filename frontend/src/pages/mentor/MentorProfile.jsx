@@ -4,15 +4,15 @@ import ReactTooltip from 'react-tooltip';
 import { Navigate } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
-import Dashboard from "./Dashboard";
 import axios from "../../api/axios";
 import { AuthContext } from "../../App";
+import MentorDashboard from "./MentorDashboard";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
 import Password from "../../components/auth/password/Password";
 
-export default function Profile() {
+export default function MentorProfile() {
 
     const [user, setUser] = React.useState([])
     const {state} = React.useContext(AuthContext);
@@ -149,12 +149,12 @@ export default function Profile() {
     }, [])
 
     if(redirect) { 
-        return<Navigate to="/dashboard/my"/> 
+        return<Navigate to="/mentor/dashboard"/> 
     }      
     // console.log(values)
 
     return (
-        <Dashboard
+        <MentorDashboard
             title="Profile | Codeswer"
             kw="profile codeswer"
             desc="profile Codeswer"
@@ -224,6 +224,6 @@ export default function Profile() {
                     </BtnCustom>
                 </form>
             </div>
-        </Dashboard>
+        </MentorDashboard>
     )
 }

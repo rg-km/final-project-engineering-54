@@ -2,7 +2,7 @@ import React from "react"
 import Swal from "sweetalert2"
 import axios from "../../api/axios"
 import { AuthContext } from "../../App";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../styles/auth/_signin.scss";
 import Codeswer from "../../layouts/Codeswer";
@@ -15,12 +15,12 @@ export default function Signin() {
     const status = null;
 
     const { dispatch } = React.useContext(AuthContext)
+    const navigate = useNavigate ()
 
     const [values, setValues] = React.useState({
         email: "",
         password: "",
     });
-    const [redirect, setRedirect] = React.useState(false);
 
     const inputs = [
         {
@@ -43,32 +43,73 @@ export default function Signin() {
         })
         .then(res => {
             // console.log(res.data)
-            if(res.status === 200) {
-                dispatch({
-                    type: "LOGIN",
-                    payload: res.data
-                })
-                let timerInterval
+            if(res.data.role === "user") {
+                if(res.status === 200) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: res.data
+                    })
+                    let timerInterval
+                    Swal.fire({
+                        timer: 1000,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        title: 'Berhasil Masuk',
+                        text: 'Tunggu sebentar',
+                        customClass: {
+                            container: 'poppins'
+                        },
+                        didOpen: () => {
+                            Swal.showLoading()
+                          },
+                          willClose: () => {
+                            clearInterval(timerInterval)
+                          }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                navigate("/dashboard/my",{ replace: true })
+                            }
+                        })    
+                }
+            } else if(res.data.role === "mentor") {
+                if(res.status === 200) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: res.data
+                    })
+                    let timerInterval
+                    Swal.fire({
+                        timer: 1000,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        title: 'Berhasil Masuk',
+                        text: 'Tunggu sebentar',
+                        customClass: {
+                            container: 'poppins'
+                        },
+                        didOpen: () => {
+                            Swal.showLoading()
+                          },
+                          willClose: () => {
+                            clearInterval(timerInterval)
+                          }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                navigate("/mentor/dashboard",{ replace: true })
+                            }
+                        })    
+                }
+            } else {
                 Swal.fire({
-                    timer: 1000,
-                    icon: 'success',
+                    timer: 5000,
+                    icon: 'error',
+                    titleText: 'Role Salah',
                     showConfirmButton: false,
-                    title: 'Berhasil Masuk',
-                    text: 'Tunggu sebentar',
+                    text: `Anda tidak punya kode role tepat untuk akses fitur ini.`,
                     customClass: {
-                        container: 'poppins'
-                    },
-                    didOpen: () => {
-                        Swal.showLoading()
-                      },
-                      willClose: () => {
-                        clearInterval(timerInterval)
-                      }
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            setRedirect(true);                  
-                        }
-                    })    
+                        container: 'poppins',
+                    }
+                })    
             }
         })
         .catch( error => {
@@ -93,7 +134,6 @@ export default function Signin() {
         })
         // console.log(values)
     }
-    if (redirect) return <Navigate to="/dashboard/my" replace />;
 
     return (
         <Codeswer

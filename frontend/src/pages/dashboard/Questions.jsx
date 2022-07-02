@@ -15,7 +15,7 @@ export default function Mydash() {
   const [loading, setLoading] = React.useState(true)
 
   const getQuestions = async () => {
-    await axios.get(`/forum/id?users_id=${state.id}`, {
+    await axios.get(`/forum/users_id?users_id=${state.id}`, {
       withCredentials: true,
     }).then(res => {
        setLoading(false)

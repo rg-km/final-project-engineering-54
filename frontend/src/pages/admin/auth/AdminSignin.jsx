@@ -1,17 +1,19 @@
 import React from "react"
 import Swal from "sweetalert2"
+import { useNavigate } from "react-router-dom";
+
 import axios from "../../../api/axios"
 import { AuthContext } from "../../../App";
-import { Navigate } from "react-router-dom";
-
 import Admin from "../../../layouts/Admin";
 import "../../../styles/admin/_adminsignin.scss";
 import BtnCustom from "../../../components/BtnCustom";
 import FormInput from "../../../components/auth/FormInput";
+import Password from "../../../components/auth/password/Password"
 
 export default function AdminSignin() {
 
     const status = null;
+    const navigate = useNavigate()
 
     const { dispatch } = React.useContext(AuthContext)
 
@@ -19,7 +21,6 @@ export default function AdminSignin() {
         email: "",
         password: "",
     });
-    const [redirect, setRedirect] = React.useState(false);
 
     const inputs = [
         {
@@ -31,18 +32,6 @@ export default function AdminSignin() {
             errorMessage: "Email harus berupa alamat email yang valid!",
             forLabel: "email",
             classname: "mt-7",
-            required: true,
-        },
-        {
-            key: 2,
-            label: "Password",
-            type: "password",
-            name: "password",
-            id: "password",
-            errorMessage: "Minimal 8-25 karakter dan mengandung 1 huruf, 1 angka, dan 1 special character!",
-            forLabel: "password",
-            classname: "mt-7",
-            pattern: "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*_])[a-zA-Z0-9!@#$%^&*_]{8,25}$",
             required: true,
         },
     ]
@@ -58,31 +47,44 @@ export default function AdminSignin() {
         })
         .then(res => {
             // console.log(res.data)
-            if(res.status === 200) {
-                dispatch({
-                    type: "LOGIN",
-                    payload: res.data
-                })
-                let timerInterval
+            if(res.data.role === "admin") {
+                if(res.status === 200) {
+                    dispatch({
+                        type: "LOGIN",
+                        payload: res.data
+                    })
+                    let timerInterval
+                    Swal.fire({
+                        timer: 1000,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        title: 'Berhasil Masuk',
+                        text: 'Tunggu sebentar',
+                        customClass: {
+                            container: 'poppins'
+                        },
+                        didOpen: () => {
+                            Swal.showLoading()
+                          },
+                          willClose: () => {
+                            clearInterval(timerInterval)
+                          }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                navigate("/admin/dashboard",{ replace: true })
+                            }
+                    })    
+                }
+            } else {
                 Swal.fire({
-                    timer: 1000,
-                    icon: 'success',
+                    timer: 5000,
+                    icon: 'error',
+                    titleText: 'Role Salah',
                     showConfirmButton: false,
-                    title: 'Berhasil Masuk',
-                    text: 'Tunggu sebentar',
+                    text: `Anda tidak punya akses untuk fitur ini.`,
                     customClass: {
-                        container: 'poppins'
-                    },
-                    didOpen: () => {
-                        Swal.showLoading()
-                      },
-                      willClose: () => {
-                        clearInterval(timerInterval)
-                      }
-                    }).then((result) => {
-                      if (result.dismiss === Swal.DismissReason.timer) {
-                          setRedirect(true);                  
-                      }
+                        container: 'poppins',
+                    }
                 })    
             }
         })
@@ -101,9 +103,7 @@ export default function AdminSignin() {
         })
 
     }
-    
-    if (redirect) return <Navigate to="/admin/dashboard" replace />;
-    
+        
     const onChange = (e) => {
         setValues({
             ...values,
@@ -141,6 +141,10 @@ export default function AdminSignin() {
                                     onChange={onChange}
                                 />
                             ))}
+                            <Password 
+                                required="required"
+                                onChange={onChange}
+                            />
                             <BtnCustom type="submit" classname="poppins mt-8 w-full">
                                 Masuk
                             </BtnCustom>
