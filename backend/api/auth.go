@@ -28,6 +28,7 @@ type LoginSuccess struct {
 	Id    int64  `json:"id"`
 	Email string `json:"email"`
 	Name  string `json:"name"`
+	Role  string `json:"role"`
 	Token string `json:"token"`
 }
 
@@ -105,6 +106,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 		Id:    res.ID,
 		Email: res.Email,
 		Name:  res.Name,
+		Role:  *userRole,
 		Token: tokenString})
 }
 
