@@ -98,7 +98,80 @@ func (f *ForumSource) FetchForum() ([]Forum, error) {
 }
 
 // create func fetch forum by id
-func (f *ForumSource) FetchForumByID(id int64) ([]Forum, error) {
+func (f *ForumSource) FetchForumByID(id int64) (Forum, error) {
+	var sqlStatement string
+	var forum Forum
+
+	sqlStatement = `
+	SELECT
+		u.id,
+		u.email,
+		u.name,
+		u.phone,
+		u.address,
+		u.photo,
+		u.role,
+		f.id,
+		f.title,
+		f.question,
+		f.question_photo,
+		f.answer,
+		f.answer_photo,
+		f.created_at,
+		f.updated_at,
+		f.users_mentor_id,
+		um.about,
+		um.rating_sum,
+		um.rating_count,
+		c.id,
+		c.name,
+		c.desc
+	FROM 
+		forums f
+	LEFT JOIN
+		users u ON f.users_id = u.id
+	LEFT JOIN
+		users_mentor um ON f.users_mentor_id = um.users_id
+	LEFT JOIN
+		courses c ON f.courses_id = c.id
+	WHERE
+		f.id = ?
+	`
+
+	row := f.db.QueryRow(sqlStatement, id)
+	err := row.Scan(
+		&forum.UserID,
+		&forum.Email,
+		&forum.Name,
+		&forum.Phone,
+		&forum.Address,
+		&forum.Photo,
+		&forum.Role,
+		&forum.ID,
+		&forum.Title,
+		&forum.Question,
+		&forum.QuestionPhoto,
+		&forum.Answer,
+		&forum.AnswerPhoto,
+		&forum.CreatedAt,
+		&forum.UpdatedAt,
+		&forum.UserMentorID,
+		&forum.About,
+		&forum.RatingSum,
+		&forum.RatingCount,
+		&forum.CourseID,
+		&forum.CourseName,
+		&forum.CourseDesc,
+	)
+	if err != nil {
+		return forum, err
+	}
+
+	return forum, nil
+}
+
+// create func fetch forum by users_id
+func (f *ForumSource) FetchForumByUserID(id int64) ([]Forum, error) {
 	var sqlStatement string
 	var forums []Forum
 

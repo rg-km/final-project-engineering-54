@@ -104,8 +104,62 @@ func (api *API) getForumByID(w http.ResponseWriter, r *http.Request) {
 	response := listForumSuccess{}
 	response.Forum = make([]listForum, 0)
 
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	forum, err := api.forumSource.FetchForumByID((int64(id)))
+	defer func() {
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(listForumError{Error: err.Error()})
+		}
+	}()
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	response.Forum = append(response.Forum, listForum{
+		ID:            forum.ID,
+		UserID:        forum.UserID,
+		UserMentorID:  forum.UserMentorID.Int64,
+		CourseID:      forum.CourseID,
+		Title:         forum.Title,
+		Question:      forum.Question,
+		QuestionPhoto: forum.QuestionPhoto.String,
+		Answer:        forum.Answer.String,
+		AnswerPhoto:   forum.AnswerPhoto.String,
+		CreatedAt:     forum.CreatedAt,
+		UpdatedAt:     forum.UpdatedAt,
+		Email:         forum.Email,
+		Name:          forum.Name.String,
+		Phone:         forum.Phone,
+		Address:       forum.Address,
+		Photo:         forum.Photo,
+		Role:          forum.Role,
+		About:         forum.About.String,
+		RatingSum:     forum.RatingSum.Float64,
+		RatingCount:   forum.RatingCount.Int64,
+		CourseName:    forum.CourseName.String,
+		CourseDesc:    forum.CourseDesc.String,
+	})
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(response)
+}
+
+
+// create func to get list forum by userid
+func (api *API) getForumByUserID(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	response := listForumSuccess{}
+	response.Forum = make([]listForum, 0)
+
 	id, err := strconv.Atoi(r.URL.Query().Get("users_id"))
-	forum, err := api.forumSource.FetchForumByID(int64(id))
+	forum, err := api.forumSource.FetchForumByUserID(int64(id))
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
