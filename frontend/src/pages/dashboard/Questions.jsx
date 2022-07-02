@@ -2,6 +2,7 @@ import React from "react"
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../App";
+import { Dots } from 'loading-animations-react';
 import BtnCustom from "../../components/BtnCustom";
 
 import Dashboard from "./Dashboard"
@@ -11,11 +12,13 @@ export default function Mydash() {
 
   const {state} = React.useContext(AuthContext);
   const [questions, setQuestions] = React.useState([])
+  const [loading, setLoading] = React.useState(true)
 
   const getQuestions = async () => {
     await axios.get(`/forum/id?users_id=${state.id}`, {
-        withCredentials: true,
-     }).then(res => {
+      withCredentials: true,
+    }).then(res => {
+       setLoading(false)
         // console.log(res.data)
         setQuestions(res.data.forum)
      }).catch( er => {
@@ -44,37 +47,40 @@ export default function Mydash() {
           <h1>Pertanyaan Saya</h1>
         </div>
         <Link
-          to="/dashboard/question"
+          to="/question/create"
           className="questions-create poppins"
         >
           <BtnCustom>Buat Pertanyaan</BtnCustom>
         </Link>
         <div className="card-questions-list w-full mt-12 space-y-5">
-        { 
-          questions.length === null ?
-          questions.map((e,i) => {
-            return (
-              <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
-                <div className="card-questions-header mb-4">
-                  <Link to="/dashboard/questions/:name">
-                    <h2>
-                      {
-                        e.title
-                      }
-                    </h2>
-                  </Link>
-                </div>
-                <Link to="/forum">
-                  <BtnCustom>Lihat Detail Pertanyaan</BtnCustom>
-                </Link>
+        {
+          loading ?
+            <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+            :
+              questions.length > 0 ?
+              questions.map((e,i) => {
+                return (
+                  <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
+                    <div className="card-questions-header mb-4">
+                      <Link to="/dashboard/questions/:name">
+                        <h2>
+                          {
+                            e.title
+                          }
+                        </h2>
+                      </Link>
+                    </div>
+                    <Link to={`/question/${e.id}`}>
+                      <BtnCustom>Lihat Detail Pertanyaan</BtnCustom>
+                    </Link>
+                  </div>
+                )
+              })
+              :
+              <div className="flex flex-col items-center justify-center space-y-10">
+                <img className="max-w-[40%]" src="/asset/img/no-question.webp" alt='No Question' />
+                <h3 className="text-gray-800 text-[1.5rem] font-medium poppins">Yuk mulai tanya ke mentor,</h3>
               </div>
-            )
-          })
-          :
-          <div className="flex flex-col items-center justify-center space-y-10">
-            <img className="max-w-[40%]" src="/asset/img/no-question.webp" alt='No Question' />
-            <h3 className="text-gray-800 text-[1.5rem] font-medium poppins">Yuk mulai tanya ke mentor,</h3>
-          </div>
         }
         </div>
       </div>

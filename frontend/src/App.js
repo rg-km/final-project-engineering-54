@@ -67,7 +67,6 @@ export default function App() {
       <ScrollPage>
         <Routes>
           <Route path="/about" element={<About />} />
-          <Route path="/forum" element={<Forum />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blog/:slugCategory/:slug" element={<ReadBlog />} />
@@ -79,6 +78,7 @@ export default function App() {
           <Route path="/dashboard/profile" element={<Profile />} />
           <Route path="/dashboard/questions" element={<Questions />} />
           <Route path="/question/create" element={<Question />} />
+          <Route path="/question/:id" element={<Forum />} />
 
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />

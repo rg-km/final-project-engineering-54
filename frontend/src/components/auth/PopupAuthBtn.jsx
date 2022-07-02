@@ -14,7 +14,7 @@ export default function PopupAuthBtn({classname}) {
                         <Link to="/dashboard/my">Dashboard</Link>
                     </li>
                     <li>
-                        <Link to="/dashboard/question">Tanya</Link>
+                        <Link to="/question/create">Tanya</Link>
                     </li>
                     <li className="text-red-500 font-light">
                         <span className="outline-none"

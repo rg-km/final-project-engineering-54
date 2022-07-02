@@ -4,6 +4,7 @@ import React, { useRef } from "react"
 import { AuthContext } from "../../App";
 import { Navigate } from "react-router-dom";
 
+import Dashboard from "./Dashboard";
 import "../../styles/dashboard/_question.scss";
 import { Editor } from '@tinymce/tinymce-react';
 import BtnCustom from "../../components/BtnCustom";
@@ -83,43 +84,55 @@ export default function Question() {
     })
     // console.log(dataReq)
   }
-  if (redirect) return <Navigate to="/questions" replace />;
+  if (redirect) return <Navigate to="/dashboard/questions" replace />;
 
   return (
-    <main className="question-component">
-      <form className="box-question w-full space-y-4" 
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <div className="title-question space-y-3">
-          <h1 className="poppins">Judul Pertanyaan</h1>
-          <textarea className="field-title-question inter" name="title" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,255}$"></textarea>
-        </div>
-        <div className="messages-question inter">
-          <Editor 
-            apiKey='j3akvdt0e6yupl1u6hcuj7w7v240k9feywwe2l9665xlvmv3'
-            textareaName="question"
-            initialValue="Mulai menulis disini" 
-            onInit={(evt, editor) => editorRef.current = editor}
-            onEditorChange={ newValue => setValues({ ...values, question: newValue }) }
-            init={{
-              plugins: [
-                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
-              ],
-              toolbar: 'undo redo | blocks | ' +
-                'bold italic forecolor | alignleft aligncenter ' +
-                'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | help',
-            }}
-            cloudChannel='6'
-          />
-        </div>
-        <BtnCustom type="submit" classname="poppins mt-8 w-full">
-          Kirim
-        </BtnCustom>
-      </form>
-    </main>
+    <Dashboard
+      title="Buat Pertanyaan | Codeswer"
+      kw="pertanyaan codeswer"
+      desc="Buat Pertanyan Saya Codeswer"
+      ogUrl=""
+      ogType=""
+      ogTitle=""
+      ogDesc=""
+      twitTitle=""                
+    >
+      <main className="question-component">
+        <form className="box-question w-full space-y-4" 
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <div className="title-question space-y-3">
+            <h1 className="poppins">Judul Pertanyaan</h1>
+            <textarea className="field-title-question inter" name="title" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,255}$"></textarea>
+          </div>
+          <div className="messages-question inter">
+            <Editor 
+              scriptLoading={{ async: true }}
+              apiKey='j3akvdt0e6yupl1u6hcuj7w7v240k9feywwe2l9665xlvmv3'
+              textareaName="question"
+              initialValue="Mulai menulis disini" 
+              onInit={(evt, editor) => editorRef.current = editor}
+              onEditorChange={ newValue => setValues({ ...values, question: newValue }) }
+              init={{
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
+              }}
+              cloudChannel='6'
+            />
+          </div>
+          <BtnCustom type="submit" classname="poppins mt-8 w-full">
+            Kirim
+          </BtnCustom>
+        </form>
+      </main>
+    </Dashboard>
   );
 }
