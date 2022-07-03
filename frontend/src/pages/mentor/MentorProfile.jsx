@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
 import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 import MentorDashboard from "./MentorDashboard";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
@@ -14,8 +13,7 @@ import Password from "../../components/auth/password/Password";
 
 export default function MentorProfile() {
 
-    const [user, setUser] = React.useState([])
-    const {state} = React.useContext(AuthContext);
+    const [mentor, setMentor] = React.useState([])
 
     const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
     const [photo, setPhoto] = React.useState(null)
@@ -74,11 +72,11 @@ export default function MentorProfile() {
     ]
 
     const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
+        await axios.get(`/mentor/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then(res => {
             setLoading(false)
-            setUser(res.data.users)
+            setMentor(res.data.user_mentor)
         }).catch( er => {
             setLoading(false)
             Swal.fire({
@@ -111,7 +109,7 @@ export default function MentorProfile() {
     const handleEdit = async (e) => {
         e.preventDefault()
         const dataReq = {photo, ...values}
-        await axios.put(`/user/update?id=${state.id}`,dataReq, {
+        await axios.put(`/user/update?id=${localStorage.id}`,dataReq, {
             withCredentials: true,
         }).then(res => {
             if(res.status === 200) {
@@ -180,7 +178,7 @@ export default function MentorProfile() {
                         <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
                         :
                         inputs.map((input, i) => (
-                            user.map((e, i) => {
+                            mentor.map((e, i) => {
                                 return(
                                     input.label === "Name" ? <FormInput 
                                                                 key={input.key}

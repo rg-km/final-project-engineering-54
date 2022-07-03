@@ -11,7 +11,8 @@ export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogD
     const location = useLocation();
     function getFooter() {
         let dsb = "dashboard"
-        if(location.pathname === `/${dsb}/my` || location.pathname === `/${dsb}/profile` || location.pathname === `/${dsb}/questions`) return
+        let mentor = "mentor"
+        if(location.pathname === `/${dsb}/my` || location.pathname === `/${dsb}/profile` || location.pathname === `/${dsb}/questions` || location.pathname === `/${mentor}/dashboard` || location.pathname === `/${mentor}/profile` || location.pathname === `/${mentor}/questions`) return
         return <Footer />
     }
 
