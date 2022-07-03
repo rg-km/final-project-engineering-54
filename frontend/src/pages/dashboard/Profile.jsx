@@ -6,7 +6,6 @@ import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
 import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 import "../../styles/dashboard/_profile.scss";
 import BtnCustom from "../../components/BtnCustom";
 import FormInput from "../../components/auth/FormInput";
@@ -15,7 +14,6 @@ import Password from "../../components/auth/password/Password";
 export default function Profile() {
 
     const [user, setUser] = React.useState([])
-    const {state} = React.useContext(AuthContext);
 
     const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
     const [photo, setPhoto] = React.useState(null)
@@ -74,7 +72,7 @@ export default function Profile() {
     ]
 
     const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
+        await axios.get(`/user/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then(res => {
             setLoading(false)
@@ -111,7 +109,7 @@ export default function Profile() {
     const handleEdit = async (e) => {
         e.preventDefault()
         const dataReq = {photo, ...values}
-        await axios.put(`/user/update?id=${state.id}`,dataReq, {
+        await axios.put(`/user/update?id=${localStorage.id}`,dataReq, {
             withCredentials: true,
         }).then(res => {
             if(res.status === 200) {

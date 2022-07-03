@@ -1,7 +1,6 @@
 import React from "react"
 import Swal from "sweetalert2"
 import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 import { NavLink } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
@@ -10,7 +9,6 @@ import Image from "../../components/Image";
 export default function NavDash() {
 
     const [user, setUser] = React.useState([])
-    const {state} = React.useContext(AuthContext);
     const [loading, setLoading] = React.useState(true)
     const options = [
         {
@@ -36,7 +34,7 @@ export default function NavDash() {
     }
 
     const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
+        await axios.get(`/user/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then(res => {
             setLoading(false)

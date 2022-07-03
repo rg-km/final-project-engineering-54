@@ -53,12 +53,6 @@ export default function Footer() {
                 className="space-y-4 text-gray-200 font-light"
               >
                 <li>
-                  <Link to="/questions">Pertanyaan</Link>
-                </li>
-                <li>
-                  <Link to="/question">Tanya Jawab</Link>
-                </li>
-                <li>
                   <Link to="/terms">Syarat dan Ketentuan</Link>
                 </li>
               </ul>

@@ -1,5 +1,4 @@
 import React from "react"
-import { AuthContext } from "../../App";
 import { Navigate } from "react-router-dom"
 
 import NavDash from "../dashboard/NavDash"
@@ -9,9 +8,7 @@ import "../../styles/dashboard/_dashboard.scss";
 
 export default function Dashboard({title, kw, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
 
-    const {state} = React.useContext(AuthContext);
-
-    if(!state.isAuthenticated) {
+    if(!localStorage.id) {
         return <Navigate to="/signin" replace/>  
     }
 

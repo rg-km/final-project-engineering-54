@@ -20,6 +20,7 @@ import Signup from "./pages/auth/Signup";
 /* Mentor */
 import MentorDash from "./pages/mentor/MentorDash"
 import MentorProfile from "./pages/mentor/MentorProfile"
+import MentorQuestions from "./pages/mentor/MentorQuestions"
 
 /* Student */
 import Mydash from "./pages/dashboard/Mydash";
@@ -94,8 +95,8 @@ export default function App() {
           {/* Student */}
           <Route path="/mentor/dashboard" element={<MentorDash />} />
           <Route path="/mentor/profile" element={<MentorProfile />} />
-          {/* <Route path="/dashboard/questions" element={<Questions />} />
-          <Route path="/question/create" element={<Question />} />
+          <Route path="/mentor/questions" element={<MentorQuestions />} />
+          {/* <Route path="/question/create" element={<Question />} />
           <Route path="/question/:id" element={<Forum />} /> */}
 
           {/* Admin */}

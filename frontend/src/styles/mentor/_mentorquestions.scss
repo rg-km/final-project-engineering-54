@@ -1,7 +1,7 @@
 @import "../base/variable.scss";
 @import "../component/btnCustom.scss";
 
-.questions-component {
+.mentorquestions-component {
     padding: 1.5rem;
 
     .heading-questions {
@@ -26,12 +26,9 @@
 
                 }
             }
-            .card-questions-footer {
-
-                > a {button {
-                    @include btnCustom(.5rem, 1.25rem, .25rem, $blue-code);
-                }}
-            }
+            > a {button {
+                @include btnCustom(.5rem, 1.25rem, .25rem, $blue-code);
+            }}
         }
     }
 }

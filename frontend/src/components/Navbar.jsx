@@ -2,7 +2,6 @@ import React from "react"
 import Swal from "sweetalert2"
 import axios from "../api/axios";
 import AuthBtn from "./auth/AuthBtn";
-import { AuthContext } from "../App";
 import { Dots } from 'loading-animations-react';
 
 import Image from "./Image";
@@ -15,7 +14,6 @@ import PopupAuthBtn from "./auth/PopupAuthBtn";
 
 export default function Navbar() {
 
-    const {state} = React.useContext(AuthContext);
     const [isOpen, setIsOpen] = React.useState(false);
     const open = () => {
         setIsOpen(!isOpen);
@@ -29,9 +27,9 @@ export default function Navbar() {
     const [loading, setLoading] = React.useState(true)
     
     React.useEffect(() => {
-        if(state.id !== null) {
+        if(localStorage.id) {
             const getUser = async () => {
-                await axios.get(`/user/id?id=${state.id}`, {
+                await axios.get(`/user/id?id=${localStorage.id}`, {
                     withCredentials: true,
                 }).then(res => { 
                     setLoading(false)   
@@ -103,7 +101,10 @@ export default function Navbar() {
                             </NavLink>
                         </li>
                         {
-                            state.isAuthenticated ?
+                            loading ?
+                            <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+                            :
+                            localStorage.id ?
                                 <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
                                     {
                                         user &&
@@ -123,7 +124,7 @@ export default function Navbar() {
 
                 <div id="nav_autentikasi">
                     {
-                        state.isAuthenticated ?
+                        localStorage.id ?
                             <>
                                 {
                                     loading ?

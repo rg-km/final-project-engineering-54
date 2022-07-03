@@ -3,7 +3,6 @@ import { Dots } from 'loading-animations-react';
 import { useParams, Navigate } from "react-router-dom"
 
 import axios from "../api/axios";
-import { AuthContext } from "../App";
 import Codeswer from "../layouts/Codeswer";
 import AuthorDetail from "../components/AuthorDetail"
 
@@ -12,8 +11,6 @@ import "../styles/_forum.scss"
 export default function Forum() {
 
     const { id } = useParams()
-
-    const {state} = React.useContext(AuthContext);
 
     const [questions, setQuestions] = React.useState([])
     const [loading, setLoading] = React.useState(true)
@@ -37,7 +34,7 @@ export default function Forum() {
         //eslint-disable-next-line
     }, [id]);
     
-    if(!state.isAuthenticated) {
+    if(!localStorage.id) {
         return <Navigate to="/signin" replace/>  
     }
 

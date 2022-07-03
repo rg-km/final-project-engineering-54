@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 
 import MentorDashboard from "./MentorDashboard";
 import "../../styles/mentor/_mentordash.scss";
@@ -10,10 +9,8 @@ export default function MentorDash() {
     const [user, setUser] = React.useState([])
     const [forumCount, setForumCount] = React.useState([])
 
-    const {state} = React.useContext(AuthContext);
-
     const getUser = async () => {
-         await axios.get(`/user/id?id=${state.id}`, {
+         await axios.get(`/user/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then( res => {
             setUser(res.data.users)
@@ -22,7 +19,7 @@ export default function MentorDash() {
         })
     }
     const getForumCount = async () => {
-        await axios.get(`/forum/count/id?users_id=${state.id}`, {
+        await axios.get(`/forum/count`, {
              withCredentials: true,
          }).then(res => {
              setForumCount(res.data)

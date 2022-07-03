@@ -4,13 +4,11 @@ import { NavLink } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
 import axios from "../../api/axios";
-import { AuthContext } from "../../App";
 import Image from "../../components/Image";
 
 export default function NavSideMentor() {
 
     const [user, setUser] = React.useState([])
-    const {state} = React.useContext(AuthContext);
     const [loading, setLoading] = React.useState(true)
     const options = [
         {
@@ -36,11 +34,11 @@ export default function NavSideMentor() {
     }
 
     const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
+        await axios.get(`/mentor/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then(res => {
             setLoading(false)
-            setUser(res.data.users)
+            setUser(res.data.user_mentor)
         }).catch( er => {
             Swal.fire({
                 timer: 5000,
@@ -125,7 +123,7 @@ export default function NavSideMentor() {
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                                 </svg>
-                                <h3>Pertanyaan Saya</h3>
+                                <h3>Daftar Pertanyaan</h3>
                             </NavLink>
                         </li>
                     </ul>
