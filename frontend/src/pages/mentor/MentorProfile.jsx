@@ -14,10 +14,10 @@ import Password from "../../components/auth/password/Password";
 export default function MentorProfile() {
 
     const [mentor, setMentor] = React.useState([])
-
     const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
     const [photo, setPhoto] = React.useState(null)
     const [values, setValues] = React.useState({
+        about: "",
         name: "",
         phone: "",
         password: "",
@@ -106,10 +106,10 @@ export default function MentorProfile() {
         // console.log(image)
     }
 
+    const dataReq = {photo, ...values}
     const handleEdit = async (e) => {
         e.preventDefault()
-        const dataReq = {photo, ...values}
-        await axios.put(`/user/update?id=${localStorage.id}`,dataReq, {
+        await axios.put(`/mentor/update?id=${localStorage.id}`,dataReq, {
             withCredentials: true,
         }).then(res => {
             if(res.status === 200) {
@@ -147,7 +147,7 @@ export default function MentorProfile() {
     }, [])
 
     if(redirect) { 
-        return<Navigate to="/mentor/dashboard"/> 
+        return <Navigate to="/mentor/dashboard"/> 
     }      
     // console.log(values)
 
@@ -177,46 +177,60 @@ export default function MentorProfile() {
                         loading ?
                         <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
                         :
-                        inputs.map((input, i) => (
-                            mentor.map((e, i) => {
-                                return(
-                                    input.label === "Name" ? <FormInput 
-                                                                key={input.key}
-                                                                classStar="hidden" 
-                                                                {...input}
-                                                                defValue={e.name} 
-                                                                onChange={onChange}/>
-                                    :
-                                    input.label === "Phone" ? <FormInput 
-                                                                key={input.key}
-                                                                classStar="hidden" 
-                                                                {...input}
-                                                                defValue={e.phone} 
-                                                                onChange={onChange}/>
-                                    :
-                                    input.label === "Address" ? <FormInput 
-                                                                    key={input.key}
-                                                                    classStar="hidden" 
-                                                                    {...input}
-                                                                    defValue={e.address} 
-                                                                    onChange={onChange}/>
-                                    :
-                                    input.label === "Email" ? <FormInput 
-                                                                key={input.key}
-                                                                classStar="hidden" 
-                                                                {...input}
-                                                                defValue={e.email} 
-                                                                onChange={onChange}/>
-                                    : "Student tidak memiliki hak akses"
+                        <>
+                            {
+                                mentor.map((e,i) => {
+                                    return (
+                                        <div key={i} className="about-wrapper mb-8 space-y-2">
+                                            <label htmlFor="about" className="text-gray-800 font-medium">About</label>
+                                            <textarea name="about" id="about" className="w-[55%] max-w-full p-1 block border border-gray-400" defaultValue={e.about} onChange={onChange}></textarea>
+                                        </div>
+                                    )
+                                })
+                            }
+                            {
+                                inputs.map((input, i) => (
+                                    mentor.map((e, i) => {
+                                        return(
+                                            input.label === "Name" ? <FormInput 
+                                                                        key={input.key}
+                                                                        classStar="hidden" 
+                                                                        {...input}
+                                                                        defValue={e.name} 
+                                                                        onChange={onChange}/>
+                                            :
+                                            input.label === "Phone" ? <FormInput 
+                                                                        key={input.key}
+                                                                        classStar="hidden" 
+                                                                        {...input}
+                                                                        defValue={e.phone} 
+                                                                        onChange={onChange}/>
+                                            :
+                                            input.label === "Address" ? <FormInput 
+                                                                            key={input.key}
+                                                                            classStar="hidden" 
+                                                                            {...input}
+                                                                            defValue={e.address} 
+                                                                            onChange={onChange}/>
+                                            :
+                                            input.label === "Email" ? <FormInput 
+                                                                        key={input.key}
+                                                                        classStar="hidden" 
+                                                                        {...input}
+                                                                        defValue={e.email} 
+                                                                        onChange={onChange}/>
+                                            : "Student tidak memiliki hak akses"
+                                        )
+                                    })
+                                    )
                                 )
-                            })
-                            )
-                        )
+                            }
+                            <Password 
+                                required={false}
+                                onChange={onChange}
+                            />
+                        </>
                     }
-                    <Password 
-                        required={false}
-                        onChange={onChange}
-                    />
                     <BtnCustom type="submit" classname="poppins mt-8 w-full">
                         Simpan
                     </BtnCustom>

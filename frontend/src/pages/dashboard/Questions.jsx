@@ -96,12 +96,17 @@ export default function Mydash() {
               questions.map((e,i) => {
                 return (
                   <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
-                    <div className="card-questions-header mb-4">
+                    <div className="card-questions-header mb-4 flex justify-between">
                       <h2>
                         {
                           e.title
                         }
                       </h2>
+                      <div className="mentor-forum-course flex items-center">
+                        <h3 className="p-2 bg-blue-500/30 rounded-[0.75rem]">
+                            {e.course_name}
+                        </h3>
+                      </div>
                     </div>
                     <div className="card-questions-footer flex justify-between items-end">
                       <Link to={`/question/${e.id}`}>

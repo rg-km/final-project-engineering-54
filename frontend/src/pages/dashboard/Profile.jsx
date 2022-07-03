@@ -147,7 +147,7 @@ export default function Profile() {
     }, [])
 
     if(redirect) { 
-        return<Navigate to="/dashboard/my"/> 
+        return <Navigate to="/dashboard/my"/> 
     }      
     // console.log(values)
 
