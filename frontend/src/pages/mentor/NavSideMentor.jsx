@@ -23,7 +23,7 @@ export default function NavSideMentor() {
         },
         {
             id: 3,
-            name: "Pertanyaan Saya",
+            name: "Daftar Pertanyaan",
             link: "/mentor/questions",
         }
     ]

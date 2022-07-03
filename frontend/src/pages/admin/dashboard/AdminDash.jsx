@@ -3,7 +3,6 @@ import Swal from "sweetalert2"
 import { Dots } from 'loading-animations-react';
 
 import axios from "../../../api/axios";
-import { AuthContext } from "../../../App";
 import AdminDashboard from "./AdminDashboard";
 import "../../../styles/admin/dashboard/_admindash.scss";
 
@@ -16,7 +15,6 @@ export default function AdminDash() {
 
     const [loading, setLoading] = React.useState(true)
     const [searchUser, setSearchUser] = React.useState("")
-    const {state} = React.useContext(AuthContext);
 
     const handleChange = (e) => {
         setSearchUser(e.target.value)
@@ -57,7 +55,7 @@ export default function AdminDash() {
             })
     }    
     const getUser = async () => {
-        await axios.get(`/user/id?id=${state.id}`, {
+        await axios.get(`/user/id?id=${localStorage.id}`, {
             withCredentials: true
         }).then(res => {
             setLoading(false)

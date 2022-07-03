@@ -1,16 +1,14 @@
-import React from "react"
+import React from "react";
 import Swal from "sweetalert2"
-import axios from "../../api/axios"
+import { Navigate } from "react-router-dom"
 
-import "../../styles/auth/_signup.scss";
-import Codeswer from "../../layouts/Codeswer";
-import BtnCustom from "../../components/BtnCustom";
-import { NavLink, Navigate } from "react-router-dom";
-import FormInput from "../../components/auth/FormInput";
+import axios from "../../../api/axios";
+import AdminDashboard from "./AdminDashboard";
+import BtnCustom from "../../../components/BtnCustom";
+import FormInput from "../../../components/auth/FormInput";
+import "../../../styles/admin/dashboard/_admincreatementor.scss";
 
-export default function Signup() {
-
-    const status = null;
+export default function AdminCreateMentor() {
 
     const [values, setValues] = React.useState({
         name: "",
@@ -20,8 +18,7 @@ export default function Signup() {
         password: "",
         confirmPassword: "",
     });
-    
-    const [redirect, setRedirect] = React.useState(false);
+    const [redirect, setRedirect] = React.useState(false)
 
     const inputs = [
         {
@@ -95,18 +92,20 @@ export default function Signup() {
             required: true,
         },
     ]
-    
-    const handleSubmit = async (e) => {
+
+    const submitNewMentor = async (e) => {
         e.preventDefault();
-        await axios.post("/user/register", values)
+        await axios.post("/mentor/create", values, {
+            withCredentials: true,
+        })
         .then( res => {
             let timerInterval
             Swal.fire({
                 timer: 2000,
                 icon: 'success',
                 showConfirmButton: false,
-                title: 'Daftar Berhasil',
-                text: 'Silahkan masuk ke Codeswer',
+                title: 'Daftarin Mentor Berhasil',
+                text: 'Selamat menjalakan tugas, Admin !',
                 customClass: {
                     container: 'poppins'
                 },
@@ -141,61 +140,54 @@ export default function Signup() {
         });
     }
 
-    if (redirect) return <Navigate to="/signin" />;
+    if (redirect) return <Navigate to="/admin/dashboard" />;
 
     const onChange = (e) => {
         setValues({
             ...values,
             [e.target.name]: e.target.value
         })
+        // console.log(values)
     }
 
+
+    if(redirect) { 
+        return <Navigate to="/admin/dashboard"/> 
+    }      
+    // console.log(values)
+
     return (
-        <Codeswer
-            title="Daftar - Codeswer"
-            kw="codeswer signup, codeswer daftar, codeswer id daftar, codeswer daftar indonesia"
-            desc="Belom punya akun Codeswer? Yuk daftar untuk masuk ke Codeswer."
-            ogUrl={status}
-            ogType={status}
-            ogTitle={status}
-            ogDesc={status}
-            twitTitle={status}
+        <AdminDashboard
+            title=" Buat Akun Mentor | Admin Codeswer"
+            kw="create mentor by admin codeswer"
+            desc="create mentor by admin Codeswer"
+            ogUrl=""
+            ogType=""
+            ogTitle=""
+            ogDesc=""
+            twitTitle=""                
         >
 
-        <article className="signup-component">
-            <section id="container_signup">
-                <h1 className="inter">Selamat Datang di Codeswer</h1>
-                <div id="container_card" className="poppins">
-                    <div id="card_signup" className="md:[w-30rem] px-10 pt-12 border-l border-y md:border-r-0 border-r border-gray-300">
-                        <h2>Daftar</h2>
-                        <form id="form_wrapper" onSubmit={handleSubmit}
-                            encType="multipart/form-data"
-                        >
-                            {inputs.map(input => (
-                                <FormInput 
-                                    key={input.key} 
-                                    {...input} 
-                                    value={values[input.name]} 
-                                    onChange={onChange}/>
-                            ))}
-                            <BtnCustom type="submit" classname="poppins mt-8 w-full">
-                                Daftar
-                            </BtnCustom>
-                        </form>
-                        <h3>
-                            Sudah punya akun?
-                            <NavLink to="/signup"><span className="text-blue-code font-semibold"> Masuk di sini
-                            </span></NavLink>
-                        </h3>
-                    </div>
-                    <div id="image_signup" className="bg-indigo-two-code md:block hidden rounded-r-[1.5rem] px-10 pt-12">
-                        <img src="/asset/img/signup.webp" alt="signin Illustration" width={400}/>
-                    </div>
+            <div className="create-mentor-component">
+                <div className="heading-create-mentor inter">
+                    <h1>Buat Akun Mentor</h1>
                 </div>
-
-            </section>
-        </article>
-
-        </Codeswer>
+                <form id="form_wrapper" className="poppins mt-8" onSubmit={submitNewMentor}>
+                    { 
+                        inputs.map(input => (
+                            <FormInput 
+                                key={input.key} 
+                                {...input} 
+                                value={values[input.name]} 
+                                onChange={onChange}/>
+                        ))
+                        
+                    }
+                    <BtnCustom type="submit" classname="poppins mt-8 w-full">
+                        Buat
+                    </BtnCustom>
+                </form>
+            </div>
+        </AdminDashboard>
     )
 }

@@ -12,6 +12,7 @@ import ReadBlog from "./pages/blog/ReadBlog";
 /* Admin */
 import AdminSignin from "./pages/admin/auth/AdminSignin"
 import AdminDash from "./pages/admin/dashboard/AdminDash"
+import AdminCreateMentor from "./pages/admin/dashboard/AdminCreateMentor"
 
 import Signin from "./pages/auth/Signin";
 import Signup from "./pages/auth/Signup";
@@ -104,6 +105,7 @@ export default function App() {
           {/* Admin */}
           <Route path="/admin/signin" element={<AdminSignin />} />
           <Route path="/admin/dashboard" element={<AdminDash />} />
+          <Route path="/admin/mentor/create" element={<AdminCreateMentor />} />
 
           <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />

@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { AuthContext } from "../../../App";
 import { Navigate } from "react-router-dom"
 
 import Admin from "../../../layouts/Admin";
@@ -10,11 +9,10 @@ import NavSideAdmin from "../../../components/admin/dashboard/NavSideAdmin"
 
 export default function Dashboard({title, kw, desc, ogUrl, ogType, ogTitle, ogDesc, twitTitle, children}) {
 
-    const {state} = React.useContext(AuthContext);
     const [isMinimize, setIsMinimize] = useState(false)
     const fullscreen = ( () => {setIsMinimize(!isMinimize);});
 
-    if(!state.isAuthenticated) {
+    if(!localStorage.id) {
         return <Navigate to="/admin/signin" replace/>  
     }
 

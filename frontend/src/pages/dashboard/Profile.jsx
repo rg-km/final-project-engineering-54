@@ -33,7 +33,7 @@ export default function Profile() {
             type: "text",
             name: "name",
             id: "name",
-            errorMessage: "Name harus memiliki minimal 3-20 karakter tanpa special character!",
+            errorMessage: "Nama harus memiliki minimal 3-20 karakter tanpa special character!",
             forLabel: "name",
             classname: "mt-0",
             pattern: "^[w a-zA-Z0-9]{3,50}$",

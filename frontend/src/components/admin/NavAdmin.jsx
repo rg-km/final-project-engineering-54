@@ -1,13 +1,12 @@
 import React from "react"
 import Swal from "sweetalert2"
-import axios from "../../api/axios";
-import AuthBtn from "../auth/AuthBtn";
-import { AuthContext } from "../../App";
+import { NavLink } from 'react-router-dom';
 import { Dots } from 'loading-animations-react';
 
 import Image from "../Image";
+import axios from "../../api/axios";
+import AuthBtn from "../auth/AuthBtn";
 import "../../styles/admin/_navadmin.scss";
-import { NavLink } from 'react-router-dom';
 import { classes } from "../../utils/Utils";
 import NoAuthBtn from "../admin/AdminNoAuthBtn";
 import AdminPopupAuthBtn from "../admin/AdminPopupAuthBtn";
@@ -26,12 +25,11 @@ export default function NavAdmin() {
     
     const [user, setUser] = React.useState([])
     const [loading, setLoading] = React.useState(true)
-    const {state} = React.useContext(AuthContext);
     
     React.useEffect(() => {
-        if(state.id !== null) {
+        if(localStorage.id) {
             const getUser = async () => {
-                await axios.get(`/user/id?id=${state.id}`, {
+                await axios.get(`/user/id?id=${localStorage.id}`, {
                     withCredentials: true,
                 }).then(res => { 
                     setLoading(false)   
@@ -103,7 +101,7 @@ export default function NavAdmin() {
                             </NavLink>
                         </li>
                         {
-                            state.isAuthenticated ?
+                            localStorage.id ?
                                 <AuthBtn classname={classes(isPopup ? "underline underline-offset-8" : "", "rounded-[5px] auth-links")} onClick={openPopup}>
                                     {
                                         loading ?
@@ -125,7 +123,7 @@ export default function NavAdmin() {
 
                 <div id="nav_autentikasi">
                     {
-                        state.isAuthenticated ?
+                        localStorage.id ?
                             <>
                                 {
                                     user &&
