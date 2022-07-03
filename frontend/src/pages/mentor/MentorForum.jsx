@@ -209,36 +209,46 @@ export default function MentorForum() {
                                                 }}
                                             />
                                             <div className="answer-box space-y-4">
-                                                <div className="title-answer mb-5">
-                                                    <h1 className="poppins">Jawaban</h1>
-                                                </div>
                                                 {
-                                                    loading ?
-                                                    <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+                                                    e.answer === '' ?
+                                                    <div className="flex flex-col items-center justify-center space-y-10">
+                                                        <img className="max-w-[25%]" src="/asset/img/no-question.webp" alt='No Question' />
+                                                        <h3 className="text-gray-800 text-[1.5rem] font-medium poppins">Masih menunggu jawaban nih,</h3>
+                                                    </div>
                                                     :
-                                                    mentor.map((e,i) => {
-                                                        return (
-                                                            <span key={i}>
-                                                                <AuthorDetail 
-                                                                    classImage="w-[3.5rem]"
-                                                                    path={`/asset/img/user/${e.photo}`}
-                                                                    text1="Author" 
-                                                                    text2={e.name} 
-                                                                    classname="flex items-center space-x-3 w-full" 
-                                                                    classname2="text-[#8A8888] text-[1.25rem] text-extralight" 
-                                                                    classname3="text-gray-800 text-[1.10rem] font-medium "
-                                                                    >
-                                                                </AuthorDetail>
-                                                            </span>
-                                                        )
-                                                    })
+                                                    <>
+                                                    <div className="title-answer mb-5">
+                                                        <h1 className="poppins">Jawaban</h1>
+                                                    </div>
+                                                    {
+                                                        loading ?
+                                                        <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+                                                        :
+                                                        mentor.map((e,i) => {
+                                                            return (
+                                                                <span key={i}>
+                                                                    <AuthorDetail 
+                                                                        classImage="w-[3.5rem]"
+                                                                        path={`/asset/img/user/${e.photo}`}
+                                                                        text1="Author" 
+                                                                        text2={e.name} 
+                                                                        classname="flex items-center space-x-3 w-full" 
+                                                                        classname2="text-[#8A8888] text-[1.25rem] text-extralight" 
+                                                                        classname3="text-gray-800 text-[1.10rem] font-medium "
+                                                                        >
+                                                                    </AuthorDetail>
+                                                                </span>
+                                                            )
+                                                        })
+                                                    }
+                                                    <div className="messages-question inter">
+                                                        <p 
+                                                            dangerouslySetInnerHTML={{ __html: e.answer }}
+                                                            className="whitespace-pre-line align-bottom leading-[2rem] text-[18px] bg-indigo-two-code inter p-[1rem]">
+                                                        </p>
+                                                    </div>
+                                                    </>
                                                 }
-                                                <div className="messages-question inter">
-                                                    <p 
-                                                        dangerouslySetInnerHTML={{ __html: e.answer }}
-                                                        className="whitespace-pre-line align-bottom leading-[2rem] text-[18px] bg-indigo-two-code inter p-[1rem]">
-                                                    </p>
-                                                </div>
                                             </div>
                                         </div>
                                     </section>
@@ -247,5 +257,6 @@ export default function MentorForum() {
                         </div>
                     )
                 })
+
     )
 }
