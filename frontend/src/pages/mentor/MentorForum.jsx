@@ -209,6 +209,9 @@ export default function MentorForum() {
                                                 }}
                                             />
                                             <div className="answer-box space-y-4">
+                                                <div className="title-answer mb-5">
+                                                    <h1 className="poppins">Jawaban</h1>
+                                                </div>
                                                 {
                                                     e.answer === '' ?
                                                     <div className="flex flex-col items-center justify-center space-y-10">
@@ -217,9 +220,6 @@ export default function MentorForum() {
                                                     </div>
                                                     :
                                                     <>
-                                                    <div className="title-answer mb-5">
-                                                        <h1 className="poppins">Jawaban</h1>
-                                                    </div>
                                                     {
                                                         loading ?
                                                         <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
