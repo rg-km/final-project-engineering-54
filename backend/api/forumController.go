@@ -149,7 +149,6 @@ func (api *API) getForumByID(w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(response)
 }
 
-
 // create func to get list forum by userid
 func (api *API) getForumByUserID(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
@@ -304,7 +303,14 @@ func (api *API) deleteForum(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = api.forumSource.DeleteForum(int64(id))
+	userID, err := strconv.Atoi(r.URL.Query().Get("users_id"))
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listForumError{Error: err.Error()})
+		return
+	}
+
+	err = api.forumSource.DeleteForum(int64(id), int64(userID))
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		encoder.Encode(listForumError{Error: err.Error()})

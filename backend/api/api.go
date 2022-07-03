@@ -47,13 +47,13 @@ func NewAPI(usersSource source.UsersSource, courseSource source.CourseSource, us
 	mux.Handle("/api/forum/id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getForumByID))))
 	mux.Handle("/api/forum/users_id", api.GET(api.AuthMiddleware(http.HandlerFunc(api.getForumByUserID))))
 	mux.Handle("/api/forum/question", api.POST(api.AuthMiddleware(http.HandlerFunc(api.addQuestion))))
+	mux.Handle("/api/forum/delete", api.DELETE(api.AuthMiddleware(http.HandlerFunc(api.deleteForum))))
 
 	// API with AuthMiddleware and MentorMiddleware
 	mux.Handle("/api/course/create", api.POST(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.addCourse)))))
 	mux.Handle("/api/course/update", api.PUT(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.updateCourse)))))
 	mux.Handle("/api/course/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteCourse)))))
 	mux.Handle("/api/forum/answer", api.PUT(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.answerQuestion)))))
-	mux.Handle("/api/forum/delete", api.DELETE(api.AuthMiddleware(api.MentorMiddleware(http.HandlerFunc(api.deleteForum)))))
 
 	// API with AuthMiddleware and AdminMiddleware
 	mux.Handle("/api/mentor/create", api.POST(api.AuthMiddleware(api.AdminMiddleware(http.HandlerFunc(api.addMentor)))))

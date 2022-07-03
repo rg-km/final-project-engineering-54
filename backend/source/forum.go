@@ -209,6 +209,8 @@ func (f *ForumSource) FetchForumByUserID(id int64) ([]Forum, error) {
 		courses c ON f.courses_id = c.id
 	WHERE
 		f.users_id = ?
+	ORDER BY
+		f.id DESC
 	`
 
 	rows, err := f.db.Query(sqlStatement, id)
@@ -351,14 +353,13 @@ func (f *ForumSource) AnswerQuestion(id int64, userMentorID int64, answer string
 }
 
 // create func for delete forum
-func (f *ForumSource) DeleteForum(id int64) error {
+func (f *ForumSource) DeleteForum(id int64, userID int64) error {
 	var sqlStatement string
 
 	sqlStatement = `
-	DELETE FROM forums WHERE id = ?
+	DELETE FROM forums WHERE id = ? AND users_id = ?
 	`
-
-	_, err := f.db.Exec(sqlStatement, id)
+	_, err := f.db.Exec(sqlStatement, id, userID)
 	if err != nil {
 		return err
 	}
