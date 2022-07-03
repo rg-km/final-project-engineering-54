@@ -157,3 +157,28 @@ func (api *API) addMentor(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
 }
+
+// create func update user mentor by id
+func (api *API) updateMentor(w http.ResponseWriter, r *http.Request) {
+	api.AllowOrigin(w, r)
+	encoder := json.NewEncoder(w)
+
+	var userMentor listMentor
+	err := json.NewDecoder(r.Body).Decode(&userMentor)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listMentorError{Error: err.Error()})
+		return
+	}
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	res, err := api.usersMentorSource.UpdateUserMentor(int64(id), userMentor.Password, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, time.Now(), userMentor.About)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(listMentorError{Error: err.Error()})
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	encoder.Encode(res)
+}
