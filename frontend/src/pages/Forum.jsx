@@ -1,6 +1,6 @@
 import React from "react";
-import { useParams, Navigate } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
+import { useParams, Navigate } from "react-router-dom"
 
 import axios from "../api/axios";
 import { AuthContext } from "../App";
@@ -33,6 +33,8 @@ export default function Forum() {
     React.useEffect(() => {
         if(id)
         getQuestions()
+        console.log(questions)
+        //eslint-disable-next-line
     }, [id]);
     
     if(!state.isAuthenticated) {
@@ -40,55 +42,63 @@ export default function Forum() {
     }
 
     return (
-        <Codeswer
-            title="Pecahkan Masalah Pemrograman Bersama Mentor Berpengalaman"
-            kw="codeswer home, codeswer beranda, codeswer id home, codeswer beranda indonesia"
-            desc="Codeswer. Website yang menyediakan layanan forum bersama mentor yang berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu."
-            ogUrl={""}
-            ogType={""}
-            ogTitle={""}
-            ogDesc={""}
-            twitTitle={""}
-        >
-            <article className="forum-component">
-                <section id="container_forum">
-                    <div className="forum-heading inter">
-                        <AuthorDetail 
-                            classImage="w-[3.5rem]"
-                            path="/asset/img/user/default.svg" 
-                            text1="Author" 
-                            text2="Aditya" 
-                            classname="flex items-center space-x-3 w-full" 
-                            classname2="text-[#8A8888] text-[1.25rem] text-extralight" 
-                            classname3="text-gray-800 text-[1.10rem] font-medium "
+       
+            loading ? 
+                <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
+            :
+                questions &&
+                questions.map((e, i) => {
+                    return (
+                        <div key={i}>
+                            <Codeswer
+                                title={e.title}
+                                kw={`${e.course_name} codeswer`}
+                                desc={`${e.course_desc} - ${e.course_name}`}
+                                ogUrl={""}
+                                ogType={""}
+                                ogTitle={""}
+                                ogDesc={""}
+                                twitTitle={""}
                             >
-                        </AuthorDetail>
-                    </div>
-                    <div className="forum-detail mt-10 space-y-4">
-                        {   
-                            loading ? 
-                                <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
-                            :
-                                questions &&
-                                questions.map((e, i) => {
-                                    return (
-                                        <>
+                                <article className="forum-component">
+                                    <section id="container_forum">
+                                        <div className="forum-heading inter">
+                                            <>
+                                                <AuthorDetail 
+                                                    classImage="w-[3.5rem]"
+                                                    path={`/asset/img/user/${e.photo}`}
+                                                    text1="Author" 
+                                                    text2={e.name} 
+                                                    classname="flex items-center space-x-3 w-full" 
+                                                    classname2="text-[#8A8888] text-[1.25rem] text-extralight" 
+                                                    classname3="text-gray-800 text-[1.10rem] font-medium "
+                                                    >
+                                                </AuthorDetail>
+                                                <div className="forum-course flex items-center mt-7">
+                                                    <h3 className="p-2 bg-blue-500/30 rounded-[0.75rem]">
+                                                        {e.course_name}
+                                                    </h3>
+                                                </div>
+                                            </>
+                                        </div>
+                                        <div className="forum-detail mt-10 space-y-4">
                                             <div className="title-forum">
-                                                <h1 className="poppins">Judul Pertanyaan</h1>
+                                                <h1 className="poppins">
+                                                    {e.title}
+                                                </h1>
                                             </div>
                                             <div className="messages-question inter">
                                                 <p 
+                                                    dangerouslySetInnerHTML={{ __html: e.question }}
                                                     className="whitespace-pre-line align-bottom text-[1.2rem] leading-[2rem] ">
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vel diam vel ligula dignissim ornare. Integer a lacus vitae nulla varius ultricies. Vestibulum ac nisi ut ex cursus egestas at nec elit. Cras non porta augue, vestibulum faucibus diam. Mauris pretium auctor ex, id sodales sapien imperdiet in. Etiam pharetra, arcu convallis rutrum lacinia, ligula dui semper nulla, vitae consequat nibh turpis nec lectus. Fusce vel metus vel eros gravida congue at quis ante. Pellentesque vitae sapien ac eros fermentum bibendum. Curabitur tellus ante, bibendum eu risus id, elementum interdum lectus. Donec erat libero, semper in molestie faucibus, vestibulum nec nibh. Pellentesque ipsum mauris, malesuada id egestas et, malesuada ut velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras leo nulla, faucibus eu massa vel, ultricies pretium nulla. Morbi ac condimentum nunc.
-
-                                                    Morbi massa purus, hendrerit sit amet orci eget, pretium volutpat arcu. Etiam varius, dolor vel vulputate semper, massa massa tempus est, in dignissim ex velit non libero. Vestibulum metus ante, euismod eget nibh a, venenatis gravida mauris. Quisque pulvinar ex sed leo sodales, eget porta velit ullamcorper. In hac habitasse platea dictumst. Quisque consectetur tempor sem ut mollis. In non lorem arcu. Proin lorem mauris, fringilla ut dictum in, rutrum eget nibh. Ut dapibus ante eros, ac vulputate odio placerat vel. Sed vitae enim nec ex laoreet blandit sed at ante. Donec ex lectus, consectetur quis urna in, dignissim vehicula lectus. Proin venenatis varius sem, vitae tempor erat pretium ut. Sed placerat auctor metus eget euismod. Donec turpis est, bibendum at condimentum ut, dignissim nec ex. Vestibulum at commodo eros.
+                                                    
                                                 </p>
                                             </div>
                                             <div className="comment-box">
                                                 <div className="max-w-lg rounded-lg shadow-md">
                                                     <form action="" className="w-full p-4 inter">
                                                         <label className="block mb-2">
-                                                            <span className="text-gray-600">Add a comment</span>
+                                                            <span className="text-gray-600">Add a reply</span>
                                                             <textarea className="w-full mt-2 h-20 p-2 border rounded focus:outline-none focus:ring-gray-300 focus:ring-1" rows="3"></textarea>
                                                         </label>
                                                         <button className="px-3 py-2 text-sm text-blue-100 bg-blue-600 rounded">Comment</button>
@@ -117,15 +127,12 @@ export default function Forum() {
                                                     </p>
                                                 </div>
                                             </div>
-                                        </>
-                                    )
-                                })
-                        }
-
-                    </div>
-                </section>
-            </article>
-        </Codeswer>
-
+                                        </div>
+                                    </section>
+                                </article>
+                            </Codeswer>
+                        </div>
+                    )
+                })
     )
 }

@@ -1,10 +1,11 @@
 import Swal from "sweetalert2"
 import axios from "../../api/axios"
 import React, { useRef } from "react"
-import { AuthContext } from "../../App";
 import { Navigate } from "react-router-dom";
+// import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
+import { AuthContext } from "../../App";
 import "../../styles/dashboard/_question.scss";
 import { Editor } from '@tinymce/tinymce-react';
 import BtnCustom from "../../components/BtnCustom";
@@ -14,15 +15,40 @@ export default function Question() {
 
   const [values, setValues] = React.useState({
     title: "",
-    question: ""
+    question: "",
   });
-
   const [redirect, setRedirect] = React.useState(false);
+  const [selected, setSelected] = React.useState(null)
+  const editorRef = useRef(null);
+
+  const options = [
+    {
+      id: 0,
+      value: null, 
+      name: "Pilih Topik",
+    },
+    {
+      id: 1,
+      value: 1, 
+      name: "Go",
+    },
+    {
+      id: 2,
+      value: 2, 
+      name: "React JS",
+    }
+  ]
 
   const handleKeyDown = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+  const dataReq = {
+    ...values,
+    users_id: state.id,
+    courses_id: parseInt(selected)
+  }
 
   const handleChange = (e) => {
     setValues({
@@ -31,20 +57,8 @@ export default function Question() {
     })
   }
 
-  const editorRef = useRef(null);
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // if (editorRef.current) {
-    //   setContent(editorRef.current.getContent());
-    // }
-    const courseId = [1,2];
-    const dataReq = {
-      ...values,
-      users_id: state.id,
-      // course_id: 2,
-      courses_id: courseId[Math.floor(Math.random() * courseId.length)]
-    }
     await axios.post("/forum/question", dataReq, {
         withCredentials: true,
         headers: {
@@ -84,6 +98,7 @@ export default function Question() {
     })
     // console.log(dataReq)
   }
+
   if (redirect) return <Navigate to="/dashboard/questions" replace />;
 
   return (
@@ -98,35 +113,83 @@ export default function Question() {
       twitTitle=""                
     >
       <main className="question-component">
-        <form className="box-question w-full space-y-4" 
+        <form className="box-question w-full space-y-7" 
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
           <div className="title-question space-y-3">
             <h1 className="poppins">Judul Pertanyaan</h1>
-            <textarea className="field-title-question inter" name="title" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,255}$"></textarea>
+            <textarea className="field-title-question inter" name="title" placeholder="Untitled" onKeyDown={handleKeyDown} onChange={handleChange} pattern="^[\s\S]{0,3000}$"></textarea>
+          </div>
+          <div className="course-question space-y-3">
+            <h1 className="poppins">Topik Materi</h1>
+            <select
+              id="course"
+              name="course"
+              defaultValue={selected}
+              onChange={e => {
+                setSelected(e.target.value)
+                // console.log(e.target.value)
+              }}
+              className="p-2 border border-gray-400 border-solid rounded-[0.25rem] poppins"
+            >
+              {
+                options.map((e, i) => {
+                  return (
+                    <option key={i} value={e.value}>
+                      {e.name}
+                    </option>
+                  )
+                })
+              }
+            </select>
           </div>
           <div className="messages-question inter">
-            <Editor 
-              scriptLoading={{ async: true }}
-              apiKey='j3akvdt0e6yupl1u6hcuj7w7v240k9feywwe2l9665xlvmv3'
-              textareaName="question"
-              initialValue="Mulai menulis disini" 
-              onInit={(evt, editor) => editorRef.current = editor}
-              onEditorChange={ newValue => setValues({ ...values, question: newValue }) }
-              init={{
-                plugins: [
-                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                  'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount',
-                ],
-                toolbar: 'undo redo | blocks | ' +
-                  'bold italic forecolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | help',
-              }}
-              cloudChannel='6'
-            />
+              {
+                <Editor 
+                  scriptLoading={{ async: true }}
+                  apiKey='j3akvdt0e6yupl1u6hcuj7w7v240k9feywwe2l9665xlvmv3'
+                  textareaName="question"
+                  initialValue="Mulai menulis disini" 
+                  onInit={(evt, editor) => editorRef.current = editor}
+                  onEditorChange={ newValue => setValues({ ...values, question: newValue }) }
+                  init={{
+                    plugins: 'tinydrive print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+                    menubar: 'file edit view insert format tools table help',
+                    toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | image media template link anchor codesample | ltr rtl',
+                    toolbar_sticky: true,
+                    autosave_ask_before_unload: true,
+                    autosave_restore_when_empty: false,
+                    image_advtab: true,
+                    importcss_append: true,
+                    images_file_types: 'jpg,svg,webp',
+                    file_picker_types: 'image file media',
+                    file_picker_callback: function (callback, value, meta) {
+                        if (meta.filetype === 'image') {
+                            var input = document.createElement('input');
+                            input.setAttribute('type', 'file');
+                            input.setAttribute('accept', '.jpg, .jpeg, .webp, .svg');
+                            input.click();
+                            input.onchange = function () {
+                                var file = input.files[0];
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    callback(e.target.result, {
+                                        alt: file.name
+                                    });
+                                };
+                                reader.readAsDataURL(file);
+                            };
+                        }
+                    },
+                    image_caption: true,
+                    quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+                    toolbar_mode: 'sliding',
+                    contextmenu: 'link image imagetools table',
+                  }}
+                  cloudChannel='6'
+                />
+              }
           </div>
           <BtnCustom type="submit" classname="poppins mt-8 w-full">
             Kirim
