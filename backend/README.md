@@ -31,14 +31,15 @@
 - `GET`: `/api/mentor/id`
 - `GET`: `/api/forum`
 - `GET`: `/api/forum/id`
+- `GET`: `/api/forum/users_id`
 - `POST`: `/api/forum/question`
+- `DELETE`: `/api/forum/delete`
 
 ### Available APIs with AuthMiddleware and MentorMiddleware (Must Login as Mentor or Admin)
 - `POST`: `/api/course/create`
 - `PUT`: `/api/course/update`
 - `DELETE`: `/api/course/delete`
 - `PUT`: `/api/forum/answer` 
-- `DELETE`: `/api/forum/delete`
 
 ### Available APIs with AuthMiddleware and AdminMiddleware (Must Login as Admin)
 - `DELETE`: `/api/user/delete`
