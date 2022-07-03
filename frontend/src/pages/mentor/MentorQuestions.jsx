@@ -5,7 +5,7 @@ import { Dots } from 'loading-animations-react';
 import BtnCustom from "../../components/BtnCustom";
 
 import MentorDashboard from "./MentorDashboard"
-import "../../styles/dashboard/_questions.scss";
+import "../../styles/mentor/_mentorquestions.scss";
 
 export default function MentorQuestion() {
 
@@ -18,8 +18,8 @@ export default function MentorQuestion() {
       withCredentials: true,
     }).then(res => {
        setLoading(false)
-        console.log(res)
-        setQuestions(res.data)
+        // console.log(res)
+        setQuestions(res.data.forum)
      }).catch( er => {
          console.log(er)
      })
@@ -61,7 +61,7 @@ export default function MentorQuestion() {
             name="search"
             />
         </div>
-        <div className="card-questions-list w-full mt-12 space-y-5">
+        <div className="card-questions-list w-full mt-12 space-y-7">
         {
           loading ?
             <Dots className="max-w-[10rem]" text=" " dotColors={['#3A39B4', '#656EE3']}/>
@@ -78,15 +78,13 @@ export default function MentorQuestion() {
                 return (
                   <div key={i} className="card-questions-wrapper inter border border-solid border-gray-300">
                     <div className="card-questions-header mb-4">
-                      <Link to="/Mentor/questions/:name">
-                        <h2>
-                          {
-                            e.title
-                          }
-                        </h2>
-                      </Link>
+                      <h2>
+                        {
+                          e.title
+                        }
+                      </h2>
                     </div>
-                    <Link to={`/question/${e.id}`}>
+                    <Link to={`/answer/question/${e.id}`}>
                       <BtnCustom>Lihat Detail Pertanyaan</BtnCustom>
                     </Link>
                   </div>

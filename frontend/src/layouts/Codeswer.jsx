@@ -12,7 +12,7 @@ export default function Codeswer({ title, key, desc, ogUrl, ogType, ogTitle, ogD
     function getFooter() {
         let dsb = "dashboard"
         let mentor = "mentor"
-        if(location.pathname === `/${dsb}/my` || location.pathname === `/${dsb}/profile` || location.pathname === `/${dsb}/questions` || location.pathname === `/${mentor}/dashboard` || location.pathname === `/${mentor}/profile` || location.pathname === `/${mentor}/questions`) return
+        if(location.pathname === `/${dsb}/my` || location.pathname === `/${dsb}/profile` || location.pathname === `/${dsb}/questions` || location.pathname === `/question/create` || location.pathname === `/${mentor}/dashboard` || location.pathname === `/${mentor}/profile` || location.pathname === `/${mentor}/questions`) return
         return <Footer />
     }
 

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Forum from "./pages/Forum";
 import Terms from "./pages/Terms";
 import ScrollPage from "./components/ScrollPage";
 
@@ -19,10 +18,12 @@ import Signup from "./pages/auth/Signup";
 
 /* Mentor */
 import MentorDash from "./pages/mentor/MentorDash"
+import MentorForum from "./pages/mentor/MentorForum"
 import MentorProfile from "./pages/mentor/MentorProfile"
 import MentorQuestions from "./pages/mentor/MentorQuestions"
 
 /* Student */
+import Forum from "./pages/Forum";
 import Mydash from "./pages/dashboard/Mydash";
 import Profile from "./pages/dashboard/Profile";
 import Question from "./pages/dashboard/Question";
@@ -92,10 +93,11 @@ export default function App() {
           <Route path="/question/create" element={<Question />} />
           <Route path="/question/:id" element={<Forum />} />
 
-          {/* Student */}
+          {/* Mentor */}
           <Route path="/mentor/dashboard" element={<MentorDash />} />
           <Route path="/mentor/profile" element={<MentorProfile />} />
           <Route path="/mentor/questions" element={<MentorQuestions />} />
+          <Route path="/answer/question/:id" element={<MentorForum />} />
           {/* <Route path="/question/create" element={<Question />} />
           <Route path="/question/:id" element={<Forum />} /> */}
 
