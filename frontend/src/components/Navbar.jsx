@@ -59,8 +59,7 @@ export default function Navbar() {
                 <div id="nav_brand">
                     <h1 className="poppins">
                         <NavLink to="/">
-                            Codeswer
-                            {/* <img src="../assets/images/brand-ori.png" width="60" alt="logo" /> */}
+                            <img src="/asset/img/logo-codeswer.png" width={180} alt="logo" />
                         </NavLink>        
                     </h1>
                 </div>

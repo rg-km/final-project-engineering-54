@@ -14,7 +14,7 @@ export default function Footer() {
             <h1 className="poppins 5xs:text-center">
               <Link to="/">
                 Codeswer
-                {/* <img src="../assets/images/brand-ori.png" width="60" alt="logo" /> */}
+                {/* <img src="/asset/img/logo-codeswer.png" width={180} alt="logo" /> */}
               </Link>
             </h1>
             <h4 className="poppins text-gray-200 font-light mt-2 leading-8 5xs:text-center">
