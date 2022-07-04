@@ -9,11 +9,11 @@
         padding: 1.5rem; 
 
         .heading-mentordash {
-            h1 {
+            > h1 {
                 text-transform: capitalize;
                 @include text-head($gray-100, 30px, 700);
             }
-            h3 {
+            > h3 {
                 @include text-head($gray-100, 18px, 500);
             }
         }

@@ -19,7 +19,7 @@ export default function AdminCreateMentor() {
         confirmPassword: "",
     });
     const [redirect, setRedirect] = React.useState(false)
-
+    const [selected, setSelected] = React.useState(null)
     const inputs = [
         {
             key: 1,
@@ -92,13 +92,36 @@ export default function AdminCreateMentor() {
             required: true,
         },
     ]
-
+    const options = [
+        {
+          id: 0,
+          value: null, 
+          name: "Pilih Materi",
+        },
+        {
+          id: 1,
+          value: 1, 
+          name: "Go",
+        },
+        {
+          id: 2,
+          value: 2, 
+          name: "React JS",
+        }
+    ]   
+    
+    const dataReq = {
+        ...values,
+        courses_id: parseInt(selected)
+    }
+    
     const submitNewMentor = async (e) => {
         e.preventDefault();
-        await axios.post("/mentor/create", values, {
+        await axios.post("/mentor/create", dataReq, {
             withCredentials: true,
         })
         .then( res => {
+            console.log(res.data)
             let timerInterval
             Swal.fire({
                 timer: 2000,
@@ -140,8 +163,6 @@ export default function AdminCreateMentor() {
         });
     }
 
-    if (redirect) return <Navigate to="/admin/dashboard" />;
-
     const onChange = (e) => {
         setValues({
             ...values,
@@ -150,10 +171,8 @@ export default function AdminCreateMentor() {
         // console.log(values)
     }
 
+    if (redirect) return <Navigate to="/admin/dashboard" />;
 
-    if(redirect) { 
-        return <Navigate to="/admin/dashboard"/> 
-    }      
     // console.log(values)
 
     return (
@@ -173,6 +192,26 @@ export default function AdminCreateMentor() {
                     <h1>Buat Akun Mentor</h1>
                 </div>
                 <form id="form_wrapper" className="poppins mt-8" onSubmit={submitNewMentor}>
+                    <select
+                        id="course"
+                        name="course"
+                        defaultValue={selected}
+                        onChange={e => {
+                            setSelected(e.target.value)
+                            // console.log(e.target.value)
+                        }}
+                        className="p-2 border border-gray-400 border-solid rounded-[0.25rem] poppins mb-8"
+                        >
+                        {
+                            options.map((e, i) => {
+                                return (
+                                    <option key={i} value={e.value}>
+                                    {e.name}
+                                    </option>
+                                )
+                            })
+                        }
+                    </select>
                     { 
                         inputs.map(input => (
                             <FormInput 

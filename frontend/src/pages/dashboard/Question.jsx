@@ -5,13 +5,11 @@ import { Navigate } from "react-router-dom";
 // import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
-import { AuthContext } from "../../App";
 import "../../styles/dashboard/_question.scss";
 import { Editor } from '@tinymce/tinymce-react';
 import BtnCustom from "../../components/BtnCustom";
 
 export default function Question() {
-  const {state} = React.useContext(AuthContext);
 
   const [values, setValues] = React.useState({
     title: "",
@@ -46,7 +44,7 @@ export default function Question() {
 
   const dataReq = {
     ...values,
-    users_id: state.id,
+    users_id: localStorage.id,
     courses_id: parseInt(selected)
   }
 

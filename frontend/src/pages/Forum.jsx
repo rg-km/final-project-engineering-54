@@ -137,7 +137,7 @@ export default function Forum() {
                                                                         classImage="w-[3.5rem]"
                                                                         path={`/asset/img/user/${e.photo}`}
                                                                         text1="Author" 
-                                                                        text2={e.name} 
+                                                                        text2="Mentor Codeswer" 
                                                                         classname="flex items-center space-x-3 w-full" 
                                                                         classname2="text-[#8A8888] text-[1.25rem] text-extralight" 
                                                                         classname3="text-gray-800 text-[1.10rem] font-medium "

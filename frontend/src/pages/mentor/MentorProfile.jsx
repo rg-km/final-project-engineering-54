@@ -13,9 +13,13 @@ import Password from "../../components/auth/password/Password";
 
 export default function MentorProfile() {
 
+    // eslint-disable-next-line no-unused-vars
+    const [selected, setSelected] = React.useState(null)
     const [mentor, setMentor] = React.useState([])
     const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
     const [photo, setPhoto] = React.useState(null)
+    const [loading, setLoading] = React.useState(true)
+    const [redirect, setRedirect] = React.useState(false)
     const [values, setValues] = React.useState({
         about: "",
         name: "",
@@ -23,9 +27,23 @@ export default function MentorProfile() {
         password: "",
         address: "",
     });
-    const [loading, setLoading] = React.useState(true)
-    const [redirect, setRedirect] = React.useState(false)
-
+    const options = [
+        {
+          id: 0,
+          value: null, 
+          name: "Pilih Materi",
+        },
+        {
+          id: 1,
+          value: 1, 
+          name: "Go",
+        },
+        {
+          id: 2,
+          value: 2, 
+          name: "React JS",
+        }
+    ]   
     const inputs = [
         {
             key: 1,
@@ -71,11 +89,12 @@ export default function MentorProfile() {
         }
     ]
 
-    const getUser = async () => {
+    const getMentor = async () => {
         await axios.get(`/mentor/id?id=${localStorage.id}`, {
             withCredentials: true,
         }).then(res => {
             setLoading(false)
+            // console.log(res.data)
             setMentor(res.data.user_mentor)
         }).catch( er => {
             setLoading(false)
@@ -112,6 +131,7 @@ export default function MentorProfile() {
         await axios.put(`/mentor/update?id=${localStorage.id}`,dataReq, {
             withCredentials: true,
         }).then(res => {
+            console.log(res.data)
             if(res.status === 200) {
                 Swal.fire({
                     toast: true,
@@ -141,7 +161,7 @@ export default function MentorProfile() {
     }
 
     React.useEffect( () => {
-        getUser()
+        getMentor()
 
         // eslint-disable-next-line
     }, [])
@@ -181,10 +201,32 @@ export default function MentorProfile() {
                             {
                                 mentor.map((e,i) => {
                                     return (
-                                        <div key={i} className="about-wrapper mb-8 space-y-2">
-                                            <label htmlFor="about" className="text-gray-800 font-medium">About</label>
-                                            <textarea name="about" id="about" className="w-[55%] max-w-full p-1 block border border-gray-400" defaultValue={e.about} onChange={onChange}></textarea>
-                                        </div>
+                                        <span key={i}>
+                                            <select
+                                                id="course"
+                                                name="course"
+                                                defaultValue={e.course_id}
+                                                onChange={e => {
+                                                    setSelected(e.target.value)
+                                                    // console.log(e.target.value)
+                                                }}
+                                                className="p-2 border border-gray-400 border-solid rounded-[0.25rem] poppins mb-8"
+                                                >
+                                                {
+                                                    options.map((e, i) => {
+                                                        return (
+                                                            <option key={i} value={e.value}>
+                                                            {e.name}
+                                                            </option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
+                                            <div key={i} className="about-wrapper mb-8 space-y-2">
+                                                <label htmlFor="about" className="text-gray-800 font-medium">About</label>
+                                                <textarea name="about" id="about" className="w-[55%] max-w-full p-1 block border border-gray-400" defaultValue={e.about} onChange={onChange}></textarea>
+                                            </div>
+                                        </span>
                                     )
                                 })
                             }

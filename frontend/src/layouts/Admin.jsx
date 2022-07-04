@@ -11,7 +11,7 @@ export default function Admin({ title, key, desc, ogUrl, ogType, ogTitle, ogDesc
     const location = useLocation();
     function getFooter() {
         const admin = "admin"
-        if(location.pathname === `/${admin}/dashboard` || location.pathname === `/${admin}/profile` || location.pathname === `/${admin}/questions`) return
+        if(location.pathname === `/${admin}/dashboard` || location.pathname === `/${admin}/mentor/create`) return
         return <Footer />
     }
 

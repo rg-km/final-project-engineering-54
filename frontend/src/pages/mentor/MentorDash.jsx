@@ -1,4 +1,5 @@
 import React from "react";
+import Swal from "sweetalert2"
 import axios from "../../api/axios";
 
 import MentorDashboard from "./MentorDashboard";
@@ -6,16 +7,26 @@ import "../../styles/mentor/_mentordash.scss";
 
 export default function MentorDash() {
 
-    const [user, setUser] = React.useState([])
+    const [mentor, setMentor] = React.useState([])
     const [forumCount, setForumCount] = React.useState([])
 
-    const getUser = async () => {
-         await axios.get(`/user/id?id=${localStorage.id}`, {
+    const getMentor = async () => {
+        await axios.get(`/mentor/id?id=${localStorage.id}`, {
             withCredentials: true,
-        }).then( res => {
-            setUser(res.data.users)
+        }).then(res => {
+            // console.log(res.data)
+            setMentor(res.data.user_mentor)
         }).catch( er => {
-            console.log(er)
+            Swal.fire({
+                timer: 5000,
+                icon: 'error',
+                titleText: 'Maaf, User tidak ada',
+                showConfirmButton: false,
+                text: `${er.message}`,
+                customClass: {
+                    container: 'poppins',
+                }
+            })
         })
     }
     const getForumCount = async () => {
@@ -29,7 +40,7 @@ export default function MentorDash() {
     }
 
     React.useEffect( () => {
-        getUser()
+        getMentor()
         getForumCount()
         // eslint-disable-next-line
     }, [])
@@ -49,21 +60,21 @@ export default function MentorDash() {
                 <div className="card-highlight w-full space-y-6">
                     <div className="heading-mentordash inter space-y-2">
                         {
-                            user ? (
-                                user.map((e, i) => {
+                            mentor ? (
+                                mentor.map((e, i) => {
                                     return (
-                                        <h1 key={i}>Halo, {e.name}</h1>
+                                        <h1 key={i}>Halo, Mentor {e.name}</h1>
                                     )
                                 })
                             )
                             : "Student tidak memiliki hak akses"
                         }
-                        <h3>Tanya lagi yuk, bebas tanya apapun ke mentor.</h3>
+                        <h3>Yuk mentor, jawab semua pertanyaan dari murid.</h3>
                     </div>
                     <div className="total-card bg-white">
                         <div className="total-card-content inter">
                             <div className="title-items-total border-b border-solid border-gray-300">
-                                <h4>Total Pertanyaan</h4>
+                                <h4>Total Pertanyaan Murid</h4>
                             </div>
                             <div className="value-items-total py-1">
                                 <h1>
