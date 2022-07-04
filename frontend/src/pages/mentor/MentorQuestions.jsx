@@ -46,6 +46,9 @@ export default function MentorQuestion() {
       twitTitle=""                
     >
       <div className="mentorquestions-component">
+        <div className="heading-questions inter">
+          <h1>Daftar Pertanyaan Murid</h1>
+        </div>
         <div className="block relative w-[30rem] max-w-full">
           <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
               <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
@@ -54,7 +57,7 @@ export default function MentorQuestion() {
                   </path>
               </svg>
           </span>
-          <input placeholder="Search"
+          <input placeholder="Cari Pertanyaan"
             className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" 
             onChange={handleChange}
             id="search"

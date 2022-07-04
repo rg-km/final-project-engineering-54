@@ -189,7 +189,7 @@ export default function Signup() {
                         </h3>
                     </div>
                     <div id="image_signup" className="bg-indigo-two-code md:block hidden rounded-r-[1.5rem] px-10 pt-12">
-                        <img src="/asset/img/signup.webp" alt="signin Illustration" width={400}/>
+                        <img src="/asset/img/signup.webp" alt="signup Illustration" width={400}/>
                     </div>
                 </div>
 
