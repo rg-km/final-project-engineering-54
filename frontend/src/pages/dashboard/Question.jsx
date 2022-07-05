@@ -44,7 +44,7 @@ export default function Question() {
 
   const dataReq = {
     ...values,
-    users_id: localStorage.id,
+    users_id: parseInt(localStorage.id),
     courses_id: parseInt(selected)
   }
 
@@ -57,7 +57,7 @@ export default function Question() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await axios.post("/forum/question", dataReq, {
+    await axios.post(`/forum/question`, dataReq, {
         withCredentials: true,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
