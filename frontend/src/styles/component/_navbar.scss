@@ -1,15 +1,17 @@
 @import "../base/_variable.scss";
 
-  #navbar_component {
-    top: 0;
+header {
+  top: 0;
+  z-index: 10;
+  position: sticky;
+  > #navbar_component {
     width: 100%;
-    z-index: 10;
-    height: 5.5rem;
     display: flex;
+    height: 5.5rem;
     padding: 0 2.5rem;
-    position: sticky;
     align-items: center;
     background-color: #fff;
+    position: -webkit-sticky;
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
     @include transition(box-shadow, .3s);
@@ -198,3 +200,4 @@
       }
     }
   }
+}
