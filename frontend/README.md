@@ -1,16 +1,12 @@
-# Getting Started with Create React App
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2da969bf-4a29-476b-b776-d545c6af0feb/deploy-status)](https://app.netlify.com/sites/codeswer-app/deploys)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Available Scripts For You
 
-## Available Scripts
-## Masuk ke folder "frontend"
-
-Jika pertama kali menggunakan frontend, ketik perintah
 ### `yarn install` 
 
-Ketik perintah tersebut di terminal powershell atau gitbash dan didalam folder frontend.
+For the first time, Ketik perintah tersebut di terminal favorit kalian dan lakukan didalam folder frontend.
 
-Setelah di yarn terinstall, jalankan program dengan perintah:
+Maka otomatis yarn akan terinstall, lalu jalankan aplikasi dengan perintah:
 
 ### `yarn start`
 
