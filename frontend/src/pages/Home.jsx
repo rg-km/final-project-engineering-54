@@ -9,18 +9,16 @@ import ListCustom from "../components/ListCustom";
 
 export default function Home() {
 
-    const status = null;
-
     return (
         <Codeswer
             title="Pecahkan Masalah Pemrograman Bersama Mentor Berpengalaman"
             kw="codeswer home, codeswer beranda, codeswer id home, codeswer beranda indonesia"
             desc="Codeswer. Website yang menyediakan layanan forum bersama mentor yang berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu."
-            ogUrl={status}
-            ogType={status}
-            ogTitle={status}
-            ogDesc={status}
-            twitTitle={status}
+            ogUrl={""}
+            ogType={""}
+            ogTitle={""}
+            ogDesc={""}
+            twitTitle={""}
         >
 
         <article className="home-component">
@@ -31,11 +29,42 @@ export default function Home() {
                         <h3>
                             Tanyakan dan konseling bersama mentor-mentor yang sudah ahlinya dan berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu.
                         </h3>
-                        <Link to="/question">
-                            <BtnCustom classname="poppins mt-2">
-                                    Mulai Sekarang
-                            </BtnCustom>
-                        </Link>
+                        {
+                            localStorage.id ?
+                                localStorage.role === "mentor" ?
+                                    <Link to="/mentor/dashboard">
+                                        <BtnCustom classname="poppins mt-2">
+                                                Mulai Jawab
+                                        </BtnCustom>
+                                    </Link>
+                                :
+                                localStorage.role === "admin" ?
+                                    <Link to="/admin/dashboard">
+                                        <BtnCustom classname="poppins mt-2">
+                                                Mulai Pantau
+                                        </BtnCustom>
+                                    </Link>
+                                :
+                                    localStorage.role === "user" ?
+                                        <Link to="/dashboard/questions">
+                                            <BtnCustom classname="poppins mt-2">
+                                                    Mulai Sekarang
+                                            </BtnCustom>
+                                        </Link>
+                                :
+                                        <Link to="/question/create">
+                                            <BtnCustom classname="poppins mt-2">
+                                                    Mulai Sekarang
+                                            </BtnCustom>
+                                        </Link>
+                            :
+                                <Link to="/signin">
+                                    <BtnCustom classname="poppins mt-2">
+                                            Mulai Sekarang
+                                    </BtnCustom>
+                                </Link>
+
+                        }
                     </div>
                     <div id="one_right" className="md:w-[45%] w-full">
                         <img src="/asset/img/lanpage3.1.webp" width={400} alt="Landing Page 1" />
@@ -60,11 +89,37 @@ export default function Home() {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg>
                                 </ListCustom>
                             </ul>
-                            <Link to="/signup">
-                                <BtnCustom classname="poppins mt-2">
-                                    Daftar yuk
-                                </BtnCustom>
-                            </Link>
+                            {
+                                localStorage.id ?
+                                    localStorage.role === "mentor" ?
+                                        <Link to="/mentor/questions">
+                                            <BtnCustom classname="poppins mt-2">
+                                                Jawab yuk
+                                            </BtnCustom>
+                                        </Link>
+                                    :
+                                    localStorage.role === "admin" ?
+                                        <Link to="/admin/dashboard">
+                                            <BtnCustom classname="poppins mt-2">
+                                                Pantau yuk
+                                            </BtnCustom>
+                                        </Link>
+                                    :
+                                    localStorage.role === "user" ?
+                                        <Link to="/question/create">
+                                            <BtnCustom classname="poppins mt-2">
+                                                Tanya yuk
+                                            </BtnCustom>
+                                        </Link>
+                                    :
+                                        false
+                                :
+                                    <Link to="/signup">
+                                            <BtnCustom classname="poppins mt-2">
+                                                Daftar yuk
+                                            </BtnCustom>
+                                    </Link>
+                            }
                         </div>
                     </div>
                 </article>
