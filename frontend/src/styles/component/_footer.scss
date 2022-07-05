@@ -39,9 +39,14 @@ footer {
             }
             #nav_links {
                 .nav-links-list {
-                    h1 {
-                        line-height: 2.75rem;
+                    > h1 {
+                        line-height: 2.15rem;
                         @include text-head;
+                    }
+                    > ul {
+                        > li {
+                            line-height: 1.75rem;
+                        }
                     }
                 }
             }
