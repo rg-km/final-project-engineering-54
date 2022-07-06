@@ -2,18 +2,18 @@
 package api
 
 import (
-	"net/http"
-	"encoding/json"
 	"context"
+	"encoding/json"
+	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
 )
 
 // creat func for allow origin
 func (api *API) AllowOrigin(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Origin", "https://codeswer.netlify.app")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 

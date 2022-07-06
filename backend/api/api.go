@@ -72,7 +72,7 @@ func (api *API) Start() {
 	fmt.Println("Server started on port 8080")
 	fmt.Println("http://localhost:8080")
 	corsMiddleware := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins:   []string{"http://localhost:3000", "https://codeswer.netlify.app"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
