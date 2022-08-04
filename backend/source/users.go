@@ -157,6 +157,9 @@ func (u *UsersSource) Logout(email string) (*string, error) {
 func (u *UsersSource) UpdateUser(id int64, password string, name string, phone string, address string, photo string, updatedAt time.Time) (User, error) {
 	var user User
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return user, err
+	}
 
 	err = u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
