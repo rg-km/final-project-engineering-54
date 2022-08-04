@@ -59,10 +59,10 @@ func (api *API) getMentor(w http.ResponseWriter, r *http.Request) {
 
 	for _, user := range mentor {
 		response.UserMentor = append(response.UserMentor, listMentor{
-			UserID:   user.UserID,
-			CourseID: user.CourseID,
-			Email:    user.Email,
-			// Password:    user.Password,
+			UserID:      user.UserID,
+			CourseID:    user.CourseID,
+			Email:       user.Email,
+			Password:    user.Password,
 			Name:        user.Name,
 			Phone:       user.Phone,
 			Address:     user.Address,
@@ -107,10 +107,10 @@ func (api *API) getMentorByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.UserMentor = append(response.UserMentor, listMentor{
-		UserID:   mentor.UserID,
-		CourseID: mentor.CourseID,
-		Email:    mentor.Email,
-		// Password:    mentor.Password,
+		UserID:      mentor.UserID,
+		CourseID:    mentor.CourseID,
+		Email:       mentor.Email,
+		Password:    mentor.Password,
 		Name:        mentor.Name,
 		Phone:       mentor.Phone,
 		Address:     mentor.Address,

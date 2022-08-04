@@ -6,6 +6,7 @@ import (
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserMentorSource struct {
@@ -138,10 +139,15 @@ func (u *UserMentorSource) InsertUserMentor(email string, password string, name 
 	var id int64
 	var userMentor UserMentor
 
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return userMentor, err
+	}
+
 	sqlStatement = `
 	SELECT email FROM users WHERE email = ?`
 	row := u.db.QueryRow(sqlStatement, email)
-	err := row.Scan(&userMentor.Email)
+	err = row.Scan(&userMentor.Email)
 	if err == nil {
 		return userMentor, errors.New("Email already exist")
 	}
@@ -155,7 +161,7 @@ func (u *UserMentorSource) InsertUserMentor(email string, password string, name 
 		return userMentor, err
 	}
 
-	res, err := stmt.Exec(email, password, name, phone, address, "default.svg", "mentor", false, createdAt, updatedAt)
+	res, err := stmt.Exec(email, hashedPassword, name, phone, address, "default.svg", "mentor", false, createdAt, updatedAt)
 	if err != nil {
 		return userMentor, err
 	}
@@ -187,6 +193,11 @@ func (u *UserMentorSource) UpdateUserMentor(id int64, password string, name stri
 	var sqlStatement string
 	var userMentor UserMentor
 
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return userMentor, err
+	}
+
 	sqlStatement = `
 	SELECT
 		u.id,
@@ -214,7 +225,7 @@ func (u *UserMentorSource) UpdateUserMentor(id int64, password string, name stri
 	`
 
 	row := u.db.QueryRow(sqlStatement, id)
-	err := row.Scan(
+	err = row.Scan(
 		&userMentor.UserID,
 		&userMentor.Email,
 		&userMentor.Password,
@@ -263,7 +274,7 @@ func (u *UserMentorSource) UpdateUserMentor(id int64, password string, name stri
 		return userMentor, err
 	}
 
-	_, err = stmt.Exec(userMentor.Password, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, userMentor.UpdatedAt, id)
+	_, err = stmt.Exec(hashedPassword, userMentor.Name, userMentor.Phone, userMentor.Address, userMentor.Photo, userMentor.UpdatedAt, id)
 	if err != nil {
 		return userMentor, err
 	}
