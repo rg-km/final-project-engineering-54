@@ -156,8 +156,9 @@ func (u *UsersSource) Logout(email string) (*string, error) {
 // create function for update user by id
 func (u *UsersSource) UpdateUser(id int64, password string, name string, phone string, address string, photo string, updatedAt time.Time) (User, error) {
 	var user User
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
-	err := u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
+	err = u.db.QueryRow("SELECT * FROM users WHERE id = ?", id).Scan(&user.ID, &user.Email, &user.Password, &user.Name, &user.Phone, &user.Address, &user.Photo, &user.Role, &user.Logedin, &user.CreatedAt, &user.UpdatedAt)
 	if err != nil {
 		return user, err
 	}
@@ -180,7 +181,7 @@ func (u *UsersSource) UpdateUser(id int64, password string, name string, phone s
 
 	user.UpdatedAt = updatedAt
 
-	_, err = u.db.Exec("UPDATE users SET password = ?, name = ?, phone = ?, address = ?, photo = ?, updated_at = ? WHERE id = ?", user.Password, user.Name, user.Phone, user.Address, user.Photo, user.UpdatedAt, id)
+	_, err = u.db.Exec("UPDATE users SET password = ?, name = ?, phone = ?, address = ?, photo = ?, updated_at = ? WHERE id = ?", hashedPassword, user.Name, user.Phone, user.Address, user.Photo, user.UpdatedAt, id)
 	if err != nil {
 		return user, err
 	}
