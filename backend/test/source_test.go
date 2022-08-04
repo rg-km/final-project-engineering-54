@@ -42,8 +42,8 @@ var _ = Describe("Source Test", func() {
 		);
 
 		INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
-		("admin@gmail.com", "Codeswer54_", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
-		("user@gmail.com", "Codeswer54_", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+		("admin@gmail.com", "$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
+		("user@gmail.com", "$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00");
 
 		
 
@@ -78,7 +78,7 @@ var _ = Describe("Source Test", func() {
 				Expect(err).ToNot(HaveOccurred())
 
 				Expect(usersList[0].Email).To(Equal("admin@gmail.com"))
-				Expect(usersList[0].Password).To(Equal("Codeswer54_"))
+				Expect(usersList[0].Password).To(Equal("$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO"))
 				Expect(usersList[0].Name).To(Equal("admin"))
 				Expect(usersList[0].Phone).To(Equal("081234567890"))
 				Expect(usersList[0].Address).To(Equal("Jl. Raya"))
@@ -86,7 +86,7 @@ var _ = Describe("Source Test", func() {
 				Expect(usersList[0].Role).To(Equal("admin"))
 				Expect(usersList[0].Logedin).To(Equal(false))
 				Expect(usersList[1].Email).To(Equal("user@gmail.com"))
-				Expect(usersList[1].Password).To(Equal("Codeswer54_"))
+				Expect(usersList[1].Password).To(Equal("$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO"))
 				Expect(usersList[1].Name).To(Equal("user"))
 				Expect(usersList[1].Phone).To(Equal("081234567890"))
 				Expect(usersList[1].Address).To(Equal("Jl. Raya"))
@@ -104,7 +104,7 @@ var _ = Describe("Source Test", func() {
 				Expect(err).ToNot(HaveOccurred())
 
 				Expect(user.Email).To(Equal("admin@gmail.com"))
-				Expect(user.Password).To(Equal("Codeswer54_"))
+				Expect(user.Password).To(Equal("$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO"))
 				Expect(user.Name).To(Equal("admin"))
 				Expect(user.Phone).To(Equal("081234567890"))
 				Expect(user.Address).To(Equal("Jl. Raya"))

@@ -93,7 +93,7 @@ func (u *UsersSource) Login(email, password string) (User, error) {
 
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return user, err
+		return user, errors.New("Email or password is incorrect")
 	}
 
 	sqlStatement = "UPDATE users SET logedin = ? WHERE email = ?"
