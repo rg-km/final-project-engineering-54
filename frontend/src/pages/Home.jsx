@@ -98,17 +98,17 @@ export default function Home() {
                                             </BtnCustom>
                                         </Link>
                                     :
-                                    localStorage.role === "admin" ?
-                                        <Link to="/admin/dashboard">
-                                            <BtnCustom classname="poppins mt-2">
-                                                Pantau yuk
-                                            </BtnCustom>
-                                        </Link>
-                                    :
                                     localStorage.role === "user" ?
                                         <Link to="/question/create">
                                             <BtnCustom classname="poppins mt-2">
                                                 Tanya yuk
+                                            </BtnCustom>
+                                        </Link>
+                                    :
+                                    localStorage.role === "admin" ?
+                                        <Link to="/admin/dashboard">
+                                            <BtnCustom classname="poppins mt-2">
+                                                Pantau yuk
                                             </BtnCustom>
                                         </Link>
                                     :

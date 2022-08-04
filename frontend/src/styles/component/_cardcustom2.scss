@@ -1,0 +1,22 @@
+@import "../base/variable";
+
+@mixin text-head($color, $size, $weight) {
+    color: $color;
+    font-size: $size;
+    font-weight: $weight;
+  }
+  
+.wrapper-card {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    .icon-title {
+        h2 {
+            @include text-head($gray-800, 1.15rem, 600);
+        }
+    }
+    .detail-card {
+        h4 {
+            font-weight: 400;
+            line-height: 1.75rem;
+        }
+    }
+}
