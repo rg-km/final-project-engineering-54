@@ -2,8 +2,8 @@ import React from "react";
 import Swal from "sweetalert2"
 import axios from "../../api/axios";
 
-import MentorDashboard from "./MentorDashboard";
 import "../../styles/mentor/_mentordash.scss";
+import MentorDashboard from "./MentorDashboard";
 
 export default function MentorDash() {
 

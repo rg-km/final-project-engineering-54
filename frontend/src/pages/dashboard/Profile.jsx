@@ -213,10 +213,18 @@ export default function Profile() {
                             )
                         )
                     }
-                    <Password 
-                        required={false}
-                        onChange={onChange}
-                    />
+                    {
+                        user.map((e, i) => {
+                            return (
+                                <Password 
+                                    required={false}
+                                    onChange={onChange}
+                                    defValue={e.password}
+                                    classStar="hidden"
+                                />
+                            )
+                        })
+                    }
                     <BtnCustom type="submit" classname="poppins mt-8 w-full">
                         Simpan
                     </BtnCustom>

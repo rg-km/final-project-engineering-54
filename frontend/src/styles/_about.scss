@@ -21,6 +21,10 @@
         @include text-head(auto, 4rem, 700);
         -webkit-text-fill-color: transparent;
         background-image: linear-gradient(to right, $purple-code, $indigo-code, #9595bb);
+        @media only screen and (max-width: 540px) {
+          font-size: 9vw;
+          line-height: 13vw;
+        }
       }
     }
     .card-about {

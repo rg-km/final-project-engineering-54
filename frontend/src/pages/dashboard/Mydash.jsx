@@ -58,7 +58,7 @@ export default function Mydash() {
                             )
                             : "Student tidak memiliki hak akses"
                         }
-                        <h3>Tanya lagi yuk, bebas tanya apapun ke mentor.</h3>
+                        <h3>Tanya yuk, bebas tanya apapun ke mentor.</h3>
                     </div>
                     <div className="total-card bg-white">
                         <div className="total-card-content inter">

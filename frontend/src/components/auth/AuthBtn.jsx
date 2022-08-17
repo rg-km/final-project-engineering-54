@@ -1,6 +1,7 @@
 // import "../../styles/component/auth/_authbtn.scss"
 
-export default function NoAuthBtn({classname, children, onClick}) {
+export default function NoAuthBtn({classname, children, onClick }) {
+
     return (
         <ul id="nav_auth_item" className={ `${classname} poppins space-x-8`} onClick={onClick}>
             <li>

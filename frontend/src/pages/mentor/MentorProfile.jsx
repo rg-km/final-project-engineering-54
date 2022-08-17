@@ -267,10 +267,18 @@ export default function MentorProfile() {
                                     )
                                 )
                             }
-                            <Password 
-                                required={false}
-                                onChange={onChange}
-                            />
+                            {
+                                mentor.map((e, i) => {
+                                    return (
+                                        <Password 
+                                            required={false}
+                                            onChange={onChange}
+                                            defValue={e.password}
+                                            classStar="hidden"
+                                        />
+                                    )
+                                })
+                            }
                         </>
                     }
                     <BtnCustom type="submit" classname="poppins mt-8 w-full">

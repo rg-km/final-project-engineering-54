@@ -113,7 +113,10 @@ export default function Navbar() {
                                             )
                                         })
                                     }
-                                    <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem] " )}/>
+                                    <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem]" )} show={isPopup} onClickOutside={() => {setIsPopup(false)}}/>
+                                    
+                                    {/* Dengan Outside Click */}
+                                    {/* <PopupAuthBtn classname={classes(isPopup ? "active-popup py-2" : "py-0", "right-[4.65rem] top-[13.5rem]" )} show={isPopup} onClickOutside={() => {setIsPopup(false)}}/> */}
                                 </AuthBtn>
                                 :
                                 <NoAuthBtn classname="noauth-links" />
