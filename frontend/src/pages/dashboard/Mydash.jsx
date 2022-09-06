@@ -1,38 +1,16 @@
+import useSWR from 'swr'
 import React from "react";
 import axios from "../../api/axios";
+import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
 import "../../styles/dashboard/_mydash.scss";
 
 export default function Mydash() {
+    
+    const { data: user } = useSWR( `http://localhost:8080/api/user/id?id=${localStorage.id}`, async url => await axios.get(url, { withCredentials: true }).then( res => res.data.users))
 
-    const [user, setUser] = React.useState([])
-    const [forumCount, setForumCount] = React.useState([])
-
-    const getUser = async () => {
-         await axios.get(`/user/id?id=${localStorage.id}`, {
-            withCredentials: true,
-        }).then( res => {
-            setUser(res.data.users)
-        }).catch( er => {
-            console.log(er)
-        })
-    }
-    const getForumCount = async () => {
-        await axios.get(`/forum/count/id?users_id=${localStorage.id}`, {
-             withCredentials: true,
-         }).then(res => {
-             setForumCount(res.data)
-         }).catch( er => {
-             console.log(er)
-         })
-    }
-
-    React.useEffect( () => {
-        getUser()
-        getForumCount()
-        // eslint-disable-next-line
-    }, [])
+    const { data: forumLength } = useSWR(`http://localhost:8080/api/forum/count/id?users_id=${localStorage.id}`, async url => await axios.get(url, { withCredentials: true }).then( res => res.data))
 
     return (
         <Dashboard
@@ -49,14 +27,14 @@ export default function Mydash() {
                 <div className="card-highlight w-full space-y-6">
                     <div className="heading-mydash inter space-y-2">
                         {
-                            user ? (
+                            user ?
                                 user.map((e, i) => {
                                     return (
                                         <h1 key={i}>Halo, {e.name}</h1>
                                     )
                                 })
-                            )
-                            : "Student tidak memiliki hak akses"
+                            :
+                            <Dots className="max-w-[8rem]" text=" " dotColors={['#ffff']}/>
                         }
                         <h3>Tanya yuk, bebas tanya apapun ke mentor.</h3>
                     </div>
@@ -69,7 +47,7 @@ export default function Mydash() {
                                 <h1>
                                     <span className="number-value">
                                         {
-                                            forumCount
+                                            forumLength
                                         }
                                     </span>
                                     <span className="text-value text-gray-500 text-[18px]">  Pertanyaan</span>

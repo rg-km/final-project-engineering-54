@@ -1,3 +1,4 @@
+import useSWR from 'swr'
 import React from "react"
 import Swal from "sweetalert2"
 import axios from "../../api/axios";
@@ -8,8 +9,6 @@ import Image from "../../components/Image";
 
 export default function NavDash() {
 
-    const [user, setUser] = React.useState([])
-    const [loading, setLoading] = React.useState(true)
     const options = [
         {
             id: 1,
@@ -33,39 +32,25 @@ export default function NavDash() {
         setActive(e.target.innerText);
     }
 
-    const getUser = async () => {
-        await axios.get(`/user/id?id=${localStorage.id}`, {
-            withCredentials: true,
-        }).then(res => {
-            setLoading(false)
-            setUser(res.data.users)
-        }).catch( er => {
-            Swal.fire({
-                timer: 5000,
-                icon: 'error',
-                titleText: 'Maaf, User tidak ada',
-                showConfirmButton: false,
-                text: `${er.message}`,
-                customClass: {
-                    container: 'poppins',
-                }
-            })
+    const { data: user } = useSWR( `http://localhost:8080/api/user/id?id=${localStorage.id}`, async url => await axios.get(url, { withCredentials: true }).then( res => res.data.users).catch( er => {
+        Swal.fire({
+            timer: 5000,
+            icon: 'error',
+            titleText: 'Maaf, User tidak ada',
+            showConfirmButton: false,
+            text: `${er.message}`,
+            customClass: {
+                container: 'poppins',
+            }
         })
-    }
-
-    React.useEffect(() => {
-        getUser()   
-        // eslint-disable-next-line
-    }, [])
+    }))
 
     return (
         <div className="left-content md:w-[25%] w-full sticky top-0 md:h-screen h-auto bg-indigo-two-code md:space-y-8 space-y-0">
             <div className="first-left flex-col md:flex hidden items-center">
                 <div className="avatar-wrapper w-[8rem]">
                     {
-                        loading ?
-                        <Dots className="max-w-[8rem]" text=" " dotColors={['#656EE3']}/>
-                        :
+                        user ?
                         user.map((e, i)=> {
                             return (
                                 <span key={i}>
@@ -73,7 +58,8 @@ export default function NavDash() {
                                 </span>
                             )
                         })
-
+                        :
+                        <Dots className="max-w-[8rem]" text=" " dotColors={['#656EE3']}/>
                     }
                 </div>
             </div>

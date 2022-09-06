@@ -1,7 +1,7 @@
 import React from "react";
+import useSWR,{ mutate } from "swr";
 import Swal from "sweetalert2"
 import ReactTooltip from 'react-tooltip';
-import { Navigate } from "react-router-dom"
 import { Dots } from 'loading-animations-react';
 
 import Dashboard from "./Dashboard";
@@ -13,8 +13,6 @@ import Password from "../../components/auth/password/Password";
 
 export default function Profile() {
 
-    const [user, setUser] = React.useState([])
-
     const [photoPrev, setPhotoPrev] = React.useState("/asset/img/user/default.svg")
     const [photo, setPhoto] = React.useState(null)
     const [values, setValues] = React.useState({
@@ -23,8 +21,8 @@ export default function Profile() {
         password: "",
         address: "",
     });
-    const [loading, setLoading] = React.useState(true)
-    const [redirect, setRedirect] = React.useState(false)
+    // const [loading, setLoading] = React.useState(true)
+    // const [redirect, setRedirect] = React.useState(false)
 
     const inputs = [
         {
@@ -71,26 +69,18 @@ export default function Profile() {
         }
     ]
 
-    const getUser = async () => {
-        await axios.get(`/user/id?id=${localStorage.id}`, {
-            withCredentials: true,
-        }).then(res => {
-            setLoading(false)
-            setUser(res.data.users)
-        }).catch( er => {
-            setLoading(false)
-            Swal.fire({
-                timer: 5000,
-                icon: 'error',
-                titleText: 'Maaf, User tidak ada',
-                showConfirmButton: false,
-                text: `${er.message}`,
-                customClass: {
-                    container: 'poppins',
-                }
-            })
+    const { data: user } = useSWR(`http://localhost:8080/user/id?id=${localStorage.id}`, async url => await axios.get(url, { withCredentials: true }).then( res => res.data.users).catch( er => {
+        Swal.fire({
+            timer: 5000,
+            icon: 'error',
+            titleText: 'Maaf, User tidak ada',
+            showConfirmButton: false,
+            text: `${er.message}`,
+            customClass: {
+                container: 'poppins',
+            }
         })
-    }
+    }))
 
     const onChange = (e) => {
         setValues({
@@ -107,8 +97,9 @@ export default function Profile() {
     }
 
     const handleEdit = async (e) => {
-        e.preventDefault()
         const dataReq = {photo, ...values}
+        mutate(`http://localhost:8080/user/update?id=${localStorage.id}`, [dataReq], false)
+        e.preventDefault()
         await axios.put(`/user/update?id=${localStorage.id}`,dataReq, {
             withCredentials: true,
         }).then(res => {
@@ -124,7 +115,7 @@ export default function Profile() {
                         container: 'poppins'
                     }
                 })
-                setRedirect(true)
+                // setRedirect(true)
             }
         }).catch( er => {
             Swal.fire({
@@ -140,15 +131,9 @@ export default function Profile() {
         })
     }
 
-    React.useEffect( () => {
-        getUser()
-
-        // eslint-disable-next-line
-    }, [])
-
-    if(redirect) { 
-        return <Navigate to="/dashboard/my"/> 
-    }      
+    // if(redirect) { 
+    //     return <Navigate to="/dashboard/my"/> 
+    // }      
     // console.log(values)
 
     return (
@@ -216,12 +201,14 @@ export default function Profile() {
                     {
                         user.map((e, i) => {
                             return (
-                                <Password 
-                                    required={false}
-                                    onChange={onChange}
-                                    defValue={e.password}
-                                    classStar="hidden"
-                                />
+                                <span key={i}>
+                                    <Password 
+                                        required={false}
+                                        onChange={onChange}
+                                        defValue={e.password}
+                                        classStar="hidden"
+                                    />
+                                </span>
                             )
                         })
                     }
