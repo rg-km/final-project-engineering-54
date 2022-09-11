@@ -53,9 +53,9 @@ func (api *API) getUsers(w http.ResponseWriter, r *http.Request) {
 
 	for _, user := range users {
 		response.Users = append(response.Users, getUsers{
-			ID:        user.ID,
-			Email:     user.Email,
-			Password:  user.Password,
+			ID:    user.ID,
+			Email: user.Email,
+			// Password:  user.Password,
 			Name:      user.Name,
 			Phone:     user.Phone,
 			Address:   user.Address,
@@ -95,9 +95,9 @@ func (api *API) getUsersByID(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.Users = append(response.Users, getUsers{
-		ID:        user.ID,
-		Email:     user.Email,
-		Password:  user.Password,
+		ID:    user.ID,
+		Email: user.Email,
+		// Password:  user.Password,
 		Name:      user.Name,
 		Phone:     user.Phone,
 		Address:   user.Address,
@@ -136,9 +136,9 @@ func (api *API) getUsersLogedin(w http.ResponseWriter, r *http.Request) {
 
 	for _, user := range users {
 		response.Users = append(response.Users, getUsers{
-			ID:        user.ID,
-			Email:     user.Email,
-			Password:  user.Password,
+			ID:    user.ID,
+			Email: user.Email,
+			// Password:  user.Password,
 			Name:      user.Name,
 			Phone:     user.Phone,
 			Address:   user.Address,
