@@ -1,20 +1,18 @@
 package main
 
 import (
-	"database/sql"
-
-	"github.com/rg-km/final-project-engineering-54/backend/source"
 	"github.com/rg-km/final-project-engineering-54/backend/api"
+	"github.com/rg-km/final-project-engineering-54/backend/db/koneksi"
+	"github.com/rg-km/final-project-engineering-54/backend/db/migration"
+	"github.com/rg-km/final-project-engineering-54/backend/source"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 // create func main for openning the database and starting the server
 func main() {
-	db, err := sql.Open("sqlite3", "backend/db/codeswer.db")
-	if err != nil {
-		panic(err)
-	}
+	migration.Migrate()
+	db := koneksi.GetConnection()
 
 	users := source.NewUsersSource(db)
 	courses := source.NewCoursesSource(db)
