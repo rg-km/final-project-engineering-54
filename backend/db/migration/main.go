@@ -1,5 +1,5 @@
 // create migration database with sqlite3
-package main
+package migration
 
 import (
 	"database/sql"
@@ -7,11 +7,12 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
+func Migrate() {
 	db, err := sql.Open("sqlite3", "backend/db/codeswer.db")
 	if err != nil {
 		panic(err)
 	}
+	defer db.Close()
 
 	_, err = db.Exec(`
 			CREATE TABLE IF NOT EXISTS users (
