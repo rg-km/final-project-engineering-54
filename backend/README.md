@@ -46,15 +46,11 @@
 - `POST`: `/api/mentor/create`
 
 ## How to run service
-1. Migration: run `main.go` inside directory `backend/db/migration/` for Migration database SQLite
-```
-go run backend/db/migration/main.go  
-```
-2. Main: run `main.go` inside directory `backend/` to running main Service
+1. Main: run `main.go` inside directory `backend/` to running main Service
 ```
 go run backend/main.go
 ```
-3. Test Case: run `course_test.go` & `course_suite_test.go` inside directory
+2. Test Case: run `course_test.go` & `course_suite_test.go` inside directory
 `backend/test` with `go test` or `ginkgo`
 ```
 go test backend/test
