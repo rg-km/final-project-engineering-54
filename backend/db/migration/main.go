@@ -14,6 +14,9 @@ func Migrate() {
 	}
 	defer db.Close()
 
+	// enable for rollback the schema
+	// RollbackMigrations(db)
+
 	_, err = db.Exec(`
 			CREATE TABLE IF NOT EXISTS users (
 				id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -64,8 +67,19 @@ func Migrate() {
 				FOREIGN KEY (users_mentor_id) REFERENCES users_mentor(id),
 				FOREIGN KEY (courses_id) REFERENCES courses(id)
 			);
+		`)
+	if err != nil {
+		panic(err)
+	}
 
+	var count int
+	err = db.QueryRow("SELECT COUNT(*) FROM users").Scan(&count)
+	if err != nil {
+		panic(err)
+	}
 
+	if count == 0 {
+		_, err = db.Exec(`
 			INSERT INTO users (email, password, name, phone, address, photo, role, logedin, created_at, updated_at) VALUES 
 			("admin@gmail.com", "$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO", "admin", "081234567890", "Jl. Raya", "default.svg", "admin", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
 			("user@gmail.com", "$2a$10$43G5XILdx/TnbNBjdpqkEOlO.V4KOZMrT2NSg8C0PvJyg7vZgAjPO", "user", "081234567890", "Jl. Raya", "default.svg", "user", false, "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
@@ -86,7 +100,19 @@ func Migrate() {
 			(2, 3, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.svg", "I will teach you how to start with Go", "default.svg", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
 			(2, null, 2, "How to start with React?", "I want to start with React, but I don't know how to start", "default.svg", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00"),
 			(1, null, 1, "How to start with Go?", "I want to start with Go, but I don't know how to start", "default.svg", "", "", "2020-01-01 00:00:00", "2020-01-01 00:00:00");
+		`)
+		if err != nil {
+			panic(err)
+		}
+	}
+}
 
+func RollbackMigrations(db *sql.DB) {
+	_, err := db.Exec(`
+			DROP TABLE IF EXISTS forums;
+			DROP TABLE IF EXISTS users_mentor;
+			DROP TABLE IF EXISTS courses;
+			DROP TABLE IF EXISTS users;
 		`)
 
 	if err != nil {
