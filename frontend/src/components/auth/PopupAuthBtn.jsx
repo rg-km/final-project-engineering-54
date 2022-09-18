@@ -28,12 +28,40 @@ export default function PopupAuthBtn({classname, onClickOutside, show}) {
         <aside className={`${classname} popup-auth-btn absolute`}>
             <nav>
                 <ul className="poppins font-medium">
-                    <li>
-                        <Link to="/dashboard/my">Dashboard</Link>
-                    </li>
-                    <li>
-                        <Link to="/question/create">Tanya</Link>
-                    </li>
+                    {
+                        localStorage.role === "mentor" ?
+                        <li>
+                            <Link to="/mentor/dashboard">Dashboard</Link>
+                        </li>
+                        :
+                        localStorage.role === "user" ?
+                        <li>
+                            <Link to="/dashboard/my">Dashboard</Link>
+                        </li>
+                        :
+                        null
+                    }
+                    {
+                        localStorage.role === "mentor" ?
+                        <li>
+                            <Link to="/mentor/questions">Pertanyaan</Link>
+                        </li>
+                        :
+                        localStorage.role === "user" ?
+                        <li>
+                            <Link to="/question/create">Tanya</Link>
+                        </li>
+                        :
+                        null
+                    }
+                    {
+                        localStorage.role === "admin" ?
+                        <li>
+                            <Link to="/admin/dashboard">Dashboard</Link>
+                        </li>
+                        :
+                        null
+                    }
                     <li className="text-red-500 font-light">
                         <span className="outline-none"
                             onClick={() =>

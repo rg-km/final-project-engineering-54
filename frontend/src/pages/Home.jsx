@@ -11,7 +11,7 @@ export default function Home() {
 
     return (
         <Codeswer
-            title="Pecahkan Masalah Pemrograman Bersama Mentor Berpengalaman"
+            title="Codeswer | Dapatkan Bantuan Pemrograman Dari Ahlinya"
             kw="codeswer home, codeswer beranda, codeswer id home, codeswer beranda indonesia"
             desc="Codeswer. Website yang menyediakan layanan forum bersama mentor yang berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu."
             ogUrl={""}
@@ -25,9 +25,9 @@ export default function Home() {
             <section id="container_home">
                 <article id="part_one" className="section-child bg-blue-code md:gap-x-3 gap-x-0 md:gap-y-0 gap-y-20 md:flex-row flex-col">
                     <div id="one_left" className="flex-col md:items-start items-center md:text-left text-center space-y-7 poppins md:w-[55%] w-full">
-                        <h1>Belajar Bahasa Programming Kapan Saja dan Menjawab Semua Masalah Kodingmu</h1>
+                        <h1>Dapatkan Bantuan Pemrograman Dari Ahlinya</h1>
                         <h3>
-                            Tanyakan dan konseling bersama mentor-mentor yang sudah ahlinya dan berpengalaman secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu.
+                            Tanyakan dan konseling bersama mentor-mentor yang sudah ahlinya dibidangnya, tanya jawab secara privasi untuk membantumu menyelesaikan masalah pemrogramanmu.
                         </h3>
                         {
                             localStorage.id ?
